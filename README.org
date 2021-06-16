@@ -4138,7 +4138,7 @@ name - does nothing, intended for visual clue and for logging / debugging
   static const char *rbwcmd[]              = { "rofi-rbw", NULL };
   static const char *volumecmd[]           = { "/home/sravan/.scripts/pactl.sh", "--rofi", NULL };
   static const char *mediacmd[]            = { "/home/sravan/.scripts/playerctl.sh", "--rofi", NULL };
-  static const char *notificationcmd[]     = { "/home/sravan/.scripts/dunst.sh", "--rofi", NULL };
+  static const char *notificationcmd[]     = { "/home/sravan/.scripts/deadd.sh", "--rofi", NULL };
   static const char *sessioncmd[]          = { "/home/sravan/.scripts/session.sh", "--rofi", NULL };
   static const char *compositorcmd[]       = { "/home/sravan/.scripts/picom.sh", "--rofi", NULL };
   static const char *lowervolumecmd[]      = { "/home/sravan/.scripts/pactl.sh", "--lower", NULL };
@@ -5300,7 +5300,7 @@ Define module update intervals in seconds.
   ;   modules-right = ipc clock
   modules-left   = powermenu dwm media-playing
   modules-center = date time
-  modules-right  = kernel cpu memory filesystem dunst-notification-status
+  modules-right  = kernel cpu memory filesystem
 
   ; The separator will be inserted between the output of each module
   separator = " "
