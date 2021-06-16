@@ -16,9 +16,9 @@ endif
 
 options:
 	@echo dwm build options:
-	@echo "CFLAGS   = ${CFLAGS}"
-	@echo "LDFLAGS  = ${LDFLAGS}"
-	@echo "CC       = ${CC}"
+	@echo "CFLAGS	= ${CFLAGS}"
+	@echo "LDFLAGS	= ${LDFLAGS}"
+	@echo "CC	= ${CC}"
 
 .c.o:
 	${CC} -c ${CFLAGS} $<
@@ -42,6 +42,8 @@ endif
 clean:
 	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
 	rm -f dwm-msg
+	rm -f config.h
+	rm -f patches.h
 
 dist: clean
 	mkdir -p dwm-${VERSION}
@@ -57,7 +59,7 @@ install: all
 ifdef YAJLLIBS
 	cp -f dwm-msg ${DESTDIR}${PREFIX}/bin
 endif
-	#cp -f patch/dwmc ${DESTDIR}${PREFIX}/bin
+	cp -f patch/dwmc ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
 ifdef YAJLLIBS
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm-msg
