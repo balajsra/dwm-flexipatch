@@ -2949,7 +2949,7 @@ Gridmode (grid) layout.
 https://dwm.suckless.org/patches/gridmode/
 
 #+begin_src c :tangle patches.def.h
-  #define GRIDMODE_LAYOUT 0
+  #define GRIDMODE_LAYOUT 1
 #+end_src
 
 **** Gapless
@@ -3691,8 +3691,7 @@ The RULE macro has the default values set for each field allowing you to only sp
   RULE(.class = "Firefox", .tags = 1 << 7)
 #+end_example
 
- Refer to the Rule struct definition for the list of available fields depending on
- the patches you enable.
+Refer to the Rule struct definition for the list of available fields depending on the patches you enable.
 
 #+begin_example
   xprop(1):
@@ -3708,9 +3707,8 @@ The RULE macro has the default values set for each field allowing you to only sp
           RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
           RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
           RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
-          RULE(.class = "Gimp", .tags = 1 << 4)
-          RULE(.class = "Firefox", .tags = 1 << 7)
           RULE(.title = "Origin", .isfloating = 1)
+          RULE(.title = "Picture in picture", .isfloating = 1)
           #if SCRATCHPADS_PATCH
           RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
           #endif // SCRATCHPADS_PATCH
@@ -4392,6 +4390,7 @@ name - does nothing, intended for visual clue and for logging / debugging
           { MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
           { MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
           { MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
+          { MODKEY,                       XK_g,          setlayout,              {.v = &layouts[3]} },
 
           #if COLUMNS_LAYOUT
           { MODKEY,                       XK_c,          setlayout,              {.v = &layouts[3]} },
@@ -4434,6 +4433,7 @@ name - does nothing, intended for visual clue and for logging / debugging
           { MODKEY|Mod1Mask,              XK_space,      unfloatvisible,         {0} },
           { MODKEY|ShiftMask,             XK_t,          unfloatvisible,         {.v = &layouts[0]} },
           { MODKEY|ShiftMask,             XK_m,          unfloatvisible,         {.v = &layouts[2]} },
+          { MODKEY|ShiftMask,             XK_g,          unfloatvisible,         {.v = &layouts[3]} },
           #endif // UNFLOATVISIBLE_PATCH
 
           #if TOGGLEFULLSCREEN_PATCH

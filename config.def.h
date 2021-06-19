@@ -390,9 +390,8 @@ static const Rule rules[] = {
         RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
         RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
         RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
-        RULE(.class = "Gimp", .tags = 1 << 4)
-        RULE(.class = "Firefox", .tags = 1 << 7)
         RULE(.title = "Origin", .isfloating = 1)
+        RULE(.title = "Picture in picture", .isfloating = 1)
         #if SCRATCHPADS_PATCH
         RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
         #endif // SCRATCHPADS_PATCH
@@ -1009,6 +1008,7 @@ static Key keys[] = {
         { MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
         { MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
         { MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
+        { MODKEY,                       XK_g,          setlayout,              {.v = &layouts[3]} },
 
         #if COLUMNS_LAYOUT
         { MODKEY,                       XK_c,          setlayout,              {.v = &layouts[3]} },
@@ -1051,6 +1051,7 @@ static Key keys[] = {
         { MODKEY|Mod1Mask,              XK_space,      unfloatvisible,         {0} },
         { MODKEY|ShiftMask,             XK_t,          unfloatvisible,         {.v = &layouts[0]} },
         { MODKEY|ShiftMask,             XK_m,          unfloatvisible,         {.v = &layouts[2]} },
+        { MODKEY|ShiftMask,             XK_g,          unfloatvisible,         {.v = &layouts[3]} },
         #endif // UNFLOATVISIBLE_PATCH
 
         #if TOGGLEFULLSCREEN_PATCH
