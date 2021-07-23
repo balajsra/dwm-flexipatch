@@ -4129,7 +4129,7 @@ name - does nothing, intended for visual clue and for logging / debugging
           #endif // BAR_DMENUMATCHTOP_PATCH
           NULL
   };
-  static const char *termcmd[]             = { "alacritty", NULL };
+  static const char *termcmd[]             = { "kitty", NULL };
   static const char *roficmd[]             = { "rofi", "-show", "combi", NULL };
   static const char *controlcentercmd[]    = { "/home/sravan/.scripts/control-center.sh", "--rofi", NULL };
   static const char *clipboardcmd[]        = { "rofi", "-show", "clipboard", NULL };
@@ -5289,7 +5289,7 @@ Define module update intervals in seconds.
   ;   font-2 = Termsynu:size=8;-1
   ;   font-3 = FontAwesome:size=10
   ; See the Fonts wiki page for more details
-  font-0 = "NotoSans Nerd Font:size=11;3"
+  font-0 = "Ubuntu Nerd Font:size=11;3"
   font-1 = "FiraCode Nerd Font:size=11;3"
   font-2 = "Droid Sans Mono:size=11;3"
   font-3 = "IPAPGothic:size=11;3"
@@ -5751,7 +5751,7 @@ Define module update intervals in seconds.
   ;   <bar-load>
   ;   <ramp-load>
   ;   <ramp-coreload>
-  format = %{A3:alacritty -e bpytop &:} <label> %{A}
+  format = %{A3:kitty -e bpytop &:} <label> %{A}
 
   ; Available tokens:
   ;   %percentage% (default) - total cpu load averaged over all cores
@@ -5794,7 +5794,7 @@ Define module update intervals in seconds.
   ;   <bar-swap-free>
   ;   <ramp-swap-used>
   ;   <ramp-swap-free>
-  format = %{A3:alacritty -e bpytop &:} <label> %{A}
+  format = %{A3:kitty -e bpytop &:} <label> %{A}
 
   ; Available tokens:
   ;   %percentage_used% (default)

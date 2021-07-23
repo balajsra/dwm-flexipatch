@@ -753,7 +753,7 @@ static const char *dmenucmd[] = {
         #endif // BAR_DMENUMATCHTOP_PATCH
         NULL
 };
-static const char *termcmd[]             = { "alacritty", NULL };
+static const char *termcmd[]             = { "kitty", NULL };
 static const char *roficmd[]             = { "rofi", "-show", "combi", NULL };
 static const char *controlcentercmd[]    = { "/home/sravan/.scripts/control-center.sh", "--rofi", NULL };
 static const char *clipboardcmd[]        = { "rofi", "-show", "clipboard", NULL };
