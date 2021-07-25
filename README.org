@@ -2510,7 +2510,7 @@ You need to uncomment the corresponding line in config.mk to use the above libra
 https://dwm.suckless.org/patches/swallow/
 
 #+begin_src c :tangle patches.def.h
-  #define SWALLOW_PATCH 1
+  #define SWALLOW_PATCH 0
 #+end_src
 
 *** Swap Focus
@@ -3055,7 +3055,7 @@ This can be optionally disabled in favour of other layouts.
   #XEXTLIB = -lXext
 
   # Uncomment this for the swallow patch / SWALLOW_PATCH
-  XCBLIBS = -lX11-xcb -lxcb -lxcb-res
+  # XCBLIBS = -lX11-xcb -lxcb -lxcb-res
 
   # includes and libs
   INCS = -I${X11INC} -I${FREETYPEINC} ${YAJLINC} ${PANGOINC}
@@ -5121,18 +5121,17 @@ To learn more about how to configure Polybar go to https://github.com/polybar/po
   dwm-empty-foreground      = ${self.foreground}
   dwm-empty-background      = ${self.background}
 
+  ; center
   media-playing             = ${self.green}
 
-  ; center
-  date                      = ${self.blue}
-  time                      = ${self.yellow}
-
   ; right
-  kernel                    = ${self.purple}
-  cpu                       = ${self.yellow}
-  memory                    = ${self.pink}
-  filesystem                = ${self.blue}
+  kernel                    = ${self.orange}
+  cpu                       = ${self.purple}
+  memory                    = ${self.blue}
+  filesystem                = ${self.pink}
   dunst-notification-status = ${self.red}
+  date                      = ${self.yellow}
+  time                      = ${self.green}
 #+end_src
 
 **** Sizes
@@ -5150,6 +5149,11 @@ To learn more about how to configure Polybar go to https://github.com/polybar/po
 **** Intervals
 
 Define module update intervals in seconds.
+
+| Seconds | Minutes | Hours |
+|---------+---------+-------|
+|     900 |      15 |  0.25 |
+|   86400 |    1440 |    24 |
 
 #+begin_src conf :tangle polybar/config.ini
   [intervals]
@@ -5289,7 +5293,7 @@ Define module update intervals in seconds.
   ;   font-2 = Termsynu:size=8;-1
   ;   font-3 = FontAwesome:size=10
   ; See the Fonts wiki page for more details
-  font-0 = "Ubuntu Nerd Font:size=11;3"
+  font-0 = "NotoSansDisplay Nerd Font:size=11;3"
   font-1 = "FiraCode Nerd Font:size=11;3"
   font-2 = "Droid Sans Mono:size=11;3"
   font-3 = "IPAPGothic:size=11;3"
@@ -5298,12 +5302,12 @@ Define module update intervals in seconds.
   ;   modules-left = cpu ram
   ;   modules-center = xwindow xbacklight
   ;   modules-right = ipc clock
-  modules-left   = powermenu dwm media-playing
-  modules-center = date time
-  modules-right  = kernel cpu memory filesystem
+  modules-left   = powermenu dwm
+  modules-center = media-playing
+  modules-right  = kernel cpu memory filesystem date time
 
   ; The separator will be inserted between the output of each module
-  separator = " "
+  separator = ""
 
   ; This value is used to add extra spacing between elements
   ; @deprecated: This parameter will be removed in an upcoming version
@@ -5434,7 +5438,7 @@ Define module update intervals in seconds.
   [module/dwm]
   type = internal/dwm
   ; format = <label-tags> <label-layout> <label-floating> <label-title>
-  format = <label-tags> <label-layout>
+  format = <label-tags> <label-layout> <label-floating><label-title>
   ; Path to dwm socket (default: /tmp/dwm.sock)
   ; socket-path = /tmp/dwm.sock
 
@@ -5445,17 +5449,17 @@ Define module update intervals in seconds.
   ; If true and enable-tags-scroll = true, scrolling will view all tags regardless if occupied
   tags-scroll-empty = true
   ; If true and enable-tags-scroll = true, scrolling will cycle through tags backwards
-  tags-scroll-reverse = true
+  tags-scroll-reverse = false
   ; If true and enable-tags-scroll = true, wrap active tag when scrolling
   tags-scroll-wrap = true
   ; Left-click to set secondary layout, right-click to switch to previous layout
   enable-layout-click = true
   ; Scroll to cycle between available layouts
-  enable-layout-scroll = true
+  enable-layout-scroll = false
   ; Wrap when scrolling and reaching beginning/end of layouts
   layout-scroll-wrap = true
   ; Reverse scroll direction
-  layout-scroll-reverse = true
+  layout-scroll-reverse = false
 
   ; If enable-layout-click = true, clicking the layout symbol will switch to this layout
   secondary-layout-symbol = [M]
@@ -5468,7 +5472,7 @@ Define module update intervals in seconds.
   ;   %title%
   label-title = %title%
   label-title-padding = ${sizes.module-padding}
-  label-title-foreground = ${colors.foreground}
+  label-title-foreground = ${colors.dwm-focused-background}
   label-title-maxlen = ${sizes.maxlen}
 
   ; Symbol of current layout
@@ -5481,7 +5485,7 @@ Define module update intervals in seconds.
   label-layout-padding = ${sizes.module-padding}
 
   ; Text to show when currently focused window is floating
-  label-floating = (F)
+  label-floating = "(F)"
 
   ; States: focused, unfocused, visible, urgent, empty
   ; Available tokens:
@@ -5620,7 +5624,7 @@ Define module update intervals in seconds.
 
   ; See "https://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
   ; NOTE: if you want to use syntax tags here you need to use %%{...}
-  date = %a %x
+  date = %a %D
 
   ; Optional time format
   ; time = %X

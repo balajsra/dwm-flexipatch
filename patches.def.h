@@ -275,7 +275,7 @@
 
 #define STICKY_PATCH 0
 
-#define SWALLOW_PATCH 1
+#define SWALLOW_PATCH 0
 
 #define SWAPFOCUS_PATCH 1
 
