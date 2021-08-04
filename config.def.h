@@ -771,6 +771,7 @@ static const char *playernextcmd[]       = { "/home/sravan/.scripts/playerctl.sh
 static const char *playerprevcmd[]       = { "/home/sravan/.scripts/playerctl.sh", "--prev", NULL };
 static const char *flameshotcmd[]        = { "flameshot", "gui", NULL };
 static const char *forceclosewindowcmd[] = { "xkill", NULL };
+static const char *trackpadtogglecmd[]   = { "/home/sravan/.scripts/trackpad.sh", NULL };
 
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -820,6 +821,7 @@ static Key keys[] = {
         { 0,                            XF86XK_AudioPlay,        spawn,        {.v = playerplaypausecmd} },
         { 0,                            XF86XK_AudioNext,        spawn,        {.v = playernextcmd} },
         { 0,                            XF86XK_AudioPrev,        spawn,        {.v = playerprevcmd} },
+        { 0,                            XF86XK_TouchpadToggle,   spawn,        {.v = trackpadtogglecmd} },
         { 0,                            XK_Print,                spawn,        {.v = flameshotcmd} },
 
         #if RIODRAW_PATCH
