@@ -5258,8 +5258,8 @@ Define module update intervals in seconds.
   ; Individual values can be defined using:
   ;   {overline,underline}-size
   ;   {overline,underline}-color
-  line-size = 0
-  line-color = #f00
+  line-size = 1
+  line-color = #fff
 
   ; Values applied to all borders
   ; Individual side values can be defined using:
@@ -5416,11 +5416,12 @@ Define module update intervals in seconds.
 #+begin_src conf :tangle polybar/config.ini
   [module/powermenu]
   type = custom/text
-  content = "  "
+  content = " Menu"
 
   ; "content" has the same properties as "format-NAME"
   ; content-background = #000
   content-foreground = ${colors.powermenu}
+  content-underline = ${colors.powermenu}
   content-padding = ${bar/mybar.module-margin}
 
   ; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
@@ -5484,7 +5485,7 @@ Define module update intervals in seconds.
   label-layout = %symbol%
   label-layout-foreground = ${colors.green}
   label-layout-background = ${colors.background}
-  label-layout-underline = ${colors.background}
+  label-layout-underline = ${colors.green}
   label-layout-padding = ${sizes.module-padding}
 
   ; Text to show when currently focused window is floating
@@ -5498,28 +5499,28 @@ Define module update intervals in seconds.
   label-focused = %name%
   label-focused-foreground = ${colors.dwm-focused-foreground}
   label-focused-background = ${colors.dwm-focused-background}
-  label-focused-underline = ${colors.dwm-focused-background}
+  label-focused-underline = ${colors.dwm-focused-foreground}
   label-focused-padding = ${sizes.module-padding}
 
   ; unfocused = Unselected tag on unselected monitor
   label-unfocused = %name%
   label-unfocused-foreground = ${colors.dwm-unfocused-foreground}
   label-unfocused-background = ${colors.dwm-unfocused-background}
-  label-unfocused-underline = ${colors.dwm-unfocused-background}
+  label-unfocused-underline = ${colors.dwm-unfocused-foreground}
   label-unfocused-padding = ${sizes.module-padding}
 
   ; visible = Unselected tag, but occupied tag on any monitor
   label-visible = %name%
   label-visible-foreground = ${colors.dwm-visible-foreground}
   label-visible-background = ${colors.dwm-visible-background}
-  label-visible-underline = ${colors.dwm-visible-background}
+  label-visible-underline = ${colors.dwm-visible-foreground}
   label-visible-padding = ${sizes.module-padding}
 
   ; urgent = Unselected tag with window that has urgency hint set
   label-urgent = %name%
   label-urgent-foreground = ${colors.dwm-urgent-foreground}
   label-urgent-background = ${colors.dwm-urgent-background}
-  label-urgent-underline = ${colors.dwm-urgent-background}
+  label-urgent-underline = ${colors.dwm-urgent-foreground}
   label-urgent-padding = ${sizes.module-padding}
 
   ; empty = Unselected and unoccupied tag
@@ -5570,6 +5571,7 @@ Define module update intervals in seconds.
   ; Default: %output%
   label = %output%
   label-foreground = ${colors.media-playing}
+  label-underline = ${colors.media-playing}
   label-maxlen = ${sizes.maxlen}
 
   ; Available tokens:
@@ -5648,6 +5650,7 @@ Define module update intervals in seconds.
   label = " %date%"
   ; label-font = 3
   label-foreground = ${colors.date}
+  label-underline = ${colors.date}
 #+end_src
 
 **** Time
@@ -5683,6 +5686,7 @@ Define module update intervals in seconds.
   label = " %time%"
   ; label-font = 3
   label-foreground = ${colors.time}
+  label-underline = ${colors.time}
 #+end_src
 
 **** Kernel
@@ -5716,6 +5720,7 @@ Define module update intervals in seconds.
   format-background = ${colors.background}
   format-foreground = ${colors.kernel}
   ; format-padding = 4
+  format-underline = ${colors.kernel}
 
   ; Available tokens:
   ;   %output%
@@ -5759,6 +5764,7 @@ Define module update intervals in seconds.
   ;   <ramp-load>
   ;   <ramp-coreload>
   format = %{A3:kitty -e bpytop &:} <label> %{A}
+  format-underline = ${colors.cpu}
 
   ; Available tokens:
   ;   %percentage% (default) - total cpu load averaged over all cores
@@ -5802,6 +5808,7 @@ Define module update intervals in seconds.
   ;   <ramp-swap-used>
   ;   <ramp-swap-free>
   format = %{A3:kitty -e bpytop &:} <label> %{A}
+  format-underline = ${colors.memory}
 
   ; Available tokens:
   ;   %percentage_used% (default)
@@ -5885,10 +5892,12 @@ Define module update intervals in seconds.
   ;   <bar-used>
   ;   <ramp-capacity>
   format-mounted = %{A3:filelight &:} <label-mounted> %{A}
+  format-mounted-underline = ${colors.filesystem}
 
   ; Available tags:
   ;   <label-unmounted> (default)
   format-unmounted = %{A3:gnome-disks &:} <label-unmounted> %{A}
+  format-unmounted-underline = ${colors.filesystem}
 
   ; Available tokens:
   ;   %mountpoint%
@@ -5943,6 +5952,7 @@ Define module update intervals in seconds.
   ; format-background = ${colors.background}
   ; format-foreground =
   ; format-padding = 4
+  format-underline = ${colors.dunst-notification-status}
 
   ; Available tokens:
   ;   %output%
