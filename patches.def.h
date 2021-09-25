@@ -345,7 +345,7 @@
 
 #define COLUMNS_LAYOUT 0
 
-#define DECK_LAYOUT 0
+#define DECK_LAYOUT 1
 
 #define FIBONACCI_DWINDLE_LAYOUT 0
 

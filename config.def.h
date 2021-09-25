@@ -1030,7 +1030,8 @@ static Key keys[] = {
         { MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
         { MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
         { MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
-        { MODKEY,                       XK_g,          setlayout,              {.v = &layouts[3]} },
+        { MODKEY,                       XK_y,          setlayout,              {.v = &layouts[3]} },
+        { MODKEY,                       XK_g,          setlayout,              {.v = &layouts[4]} },
 
         #if COLUMNS_LAYOUT
         { MODKEY,                       XK_c,          setlayout,              {.v = &layouts[3]} },
@@ -1073,7 +1074,8 @@ static Key keys[] = {
         { MODKEY|Mod1Mask,              XK_space,      unfloatvisible,         {0} },
         { MODKEY|ShiftMask,             XK_t,          unfloatvisible,         {.v = &layouts[0]} },
         { MODKEY|ShiftMask,             XK_m,          unfloatvisible,         {.v = &layouts[2]} },
-        { MODKEY|ShiftMask,             XK_g,          unfloatvisible,         {.v = &layouts[3]} },
+        { MODKEY|ShiftMask,             XK_y,          unfloatvisible,         {.v = &layouts[3]} },
+        { MODKEY|ShiftMask,             XK_g,          unfloatvisible,         {.v = &layouts[4]} },
         #endif // UNFLOATVISIBLE_PATCH
 
         #if TOGGLEFULLSCREEN_PATCH
