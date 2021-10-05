@@ -2971,7 +2971,7 @@ This patch warps the mouse cursor to the center of the currently focused window 
 https://dwm.suckless.org/patches/warp/
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define WARP_PATCH 0
+#define WARP_PATCH 1
 #+END_SRC
 
 *** Window Role Rule

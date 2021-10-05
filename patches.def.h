@@ -321,7 +321,7 @@
 
 #define VIEWONTAG_PATCH 0
 
-#define WARP_PATCH 0
+#define WARP_PATCH 1
 
 #define WINDOWROLERULE_PATCH 0
 
