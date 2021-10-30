@@ -2750,15 +2750,10 @@ quit(const Arg *arg)
 
 	XQueryTree(dpy, root, junk, junk, &junk, &n);
 
-	#if COOL_AUTOSTART_PATCH
-	if (n - autostart_len <= quit_empty_window_count)
-	#else
 	if (n <= quit_empty_window_count)
-	#endif // COOL_AUTOSTART_PATCH
 	{
 		#if RESTARTSIG_PATCH
-		if (arg->i)
-			restart = 1;
+		restart = arg->i;
 		#endif // RESTARTSIG_PATCH
 		running = 0;
 	}
@@ -2766,17 +2761,16 @@ quit(const Arg *arg)
 		printf("[dwm] not exiting (n=%d)\n", n);
 
 	free(junk);
-	#else
+	#else // !ONLYQUITONEMPTY_PATCH
 	#if RESTARTSIG_PATCH
-	if (arg->i)
-		restart = 1;
+	restart = arg->i;
 	#endif // RESTARTSIG_PATCH
 	running = 0;
 	#endif // ONLYQUITONEMPTY_PATCH
 
 	#if COOL_AUTOSTART_PATCH
 	/* kill child processes */
-	for (i = 0; i < autostart_len; i++) {
+	for (i = 0; i < autostart_len && !running; i++) {
 		if (0 < autostart_pids[i]) {
 			kill(autostart_pids[i], SIGTERM);
 			waitpid(autostart_pids[i], NULL, 0);
@@ -2843,8 +2837,8 @@ resizeclient(Client *c, int x, int y, int w, int h)
 		#endif // FAKEFULLSCREEN_CLIENT_PATCH
 		&& !c->isfloating
 		&& c->mon->lt[c->mon->sellt]->arrange) {
-		wc.width += c->bw * 2;
-		wc.height += c->bw * 2;
+		c->w = wc.width += c->bw * 2;
+		c->h = wc.height += c->bw * 2;
 		wc.border_width = 0;
 	}
 	#endif // NOBORDER_PATCH
