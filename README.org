@@ -5368,28 +5368,32 @@ alert                     = ${self.red}
 
 ; left
 powermenu                 = ${self.blue}
-date                      = ${self.yellow}
-time                      = ${self.purple}
-media-playing             = ${self.green}
-
-; center
+deadd-notification-center = ${self.green}
 dwm-focused-foreground    = ${self.primary}
 dwm-focused-background    = ${self.background}
-dwm-unfocused-foreground  = ${self.pink}
+dwm-unfocused-foreground  = ${self.yellow}
 dwm-unfocused-background  = ${self.background}
-dwm-visible-foreground    = ${self.secondary}
+dwm-visible-foreground    = ${self.white}
 dwm-visible-background    = ${self.background}
 dwm-urgent-foreground     = ${self.alert}
 dwm-urgent-background     = ${self.background}
-dwm-empty-foreground      = ${self.foreground}
+dwm-empty-foreground      = ${self.light-gray}
 dwm-empty-background      = ${self.background}
+dwm-layout-foreground     = ${self.blue}
+dwm-title-foreground      = ${self.white}
+dwm-floating-foreground   = ${self.pink}
+
+; center
+date                      = ${self.yellow}
+time                      = ${self.purple}
 
 ; right
+media-playing             = ${self.green}
 kernel                    = ${self.orange}
 cpu                       = ${self.blue}
 memory                    = ${self.red}
-filesystem                = ${self.green}
-dunst-notification-status = ${self.yellow}
+filesystem                = ${self.purple}
+dunst-notification-status = ${self.green}
 #+END_SRC
 
 **** Sizes
@@ -5560,9 +5564,9 @@ font-3 = "IPAPGothic:size=11;3"
 ;   modules-left = cpu ram
 ;   modules-center = xwindow xbacklight
 ;   modules-right = ipc clock
-modules-left   = powermenu date time media-playing
-modules-center = dwm
-modules-right  = kernel cpu memory filesystem
+modules-left   = powermenu deadd-notification-center dwm
+modules-center = date time
+modules-right  = media-playing cpu memory filesystem
 
 ; The separator will be inserted between the output of each module
 separator = ""
@@ -5671,7 +5675,9 @@ cursor-scroll = ns-resize
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/powermenu]
 type = custom/text
-content = " Menu"
+; content = " Menu"
+content = ""
+; content = ""
 
 ; "content" has the same properties as "format-NAME"
 ; content-background = #000
@@ -5697,7 +5703,7 @@ click-right = "/home/sravan/.scripts/control-center.sh --rofi"
 [module/dwm]
 type = internal/dwm
 ; format = <label-tags> <label-layout> <label-floating> <label-title>
-format = <label-tags>
+format = <label-tags> <label-layout> <label-title> <label-floating>
 ; Path to dwm socket (default: /tmp/dwm.sock)
 ; socket-path = /tmp/dwm.sock
 
@@ -5730,21 +5736,27 @@ secondary-layout-symbol = [M]
 ; Available tokens:
 ;   %title%
 label-title = %title%
-label-title-padding = ${sizes.module-padding}
-label-title-foreground = ${colors.dwm-focused-background}
+label-title-foreground = ${colors.dwm-title-foreground}
+; label-title-background = ${colors.dwm-empty-background}
+; label-title-underline = ${colors.dwm-empty-background}
 label-title-maxlen = ${sizes.maxlen}
+; label-title-padding = ${sizes.module-padding}
 
 ; Symbol of current layout
 ; Available tokens:
 ;   %symbol%
 label-layout = %symbol%
-label-layout-foreground = ${colors.green}
-label-layout-background = ${colors.background}
-label-layout-underline = ${colors.green}
+label-layout-foreground = ${colors.dwm-layout-foreground}
+; label-layout-background = ${colors.dwm-empty-background}
+; label-layout-underline = ${colors.dwm-empty-background}
 label-layout-padding = ${sizes.module-padding}
 
 ; Text to show when currently focused window is floating
 label-floating = "(F)"
+label-floating-foreground = ${colors.dwm-floating-foreground}
+; label-floating-background = ${colors.dwm-unfocused-background}
+; label-floating-underline = ${colors.dwm-unfocused-background}
+; label-floating-padding = ${sizes.module-padding}
 
 ; States: focused, unfocused, visible, urgent, empty
 ; Available tokens:
@@ -5768,7 +5780,7 @@ label-unfocused-padding = ${sizes.module-padding}
 label-visible = %name%
 label-visible-foreground = ${colors.dwm-visible-foreground}
 label-visible-background = ${colors.dwm-visible-background}
-label-visible-underline = ${colors.dwm-visible-foreground}
+; label-visible-underline = ${colors.dwm-visible-foreground}
 label-visible-padding = ${sizes.module-padding}
 
 ; urgent = Unselected tag with window that has urgency hint set
@@ -6018,7 +6030,7 @@ interval = ${intervals.cpu}
 ;   <bar-load>
 ;   <ramp-load>
 ;   <ramp-coreload>
-format = %{A3:kitty -e btop &:} <label> %{A}
+format = %{A1:kitty -e btop &:} <label> %{A}
 format-underline = ${colors.cpu}
 
 ; Available tokens:
@@ -6062,7 +6074,7 @@ interval = ${intervals.memory}
 ;   <bar-swap-free>
 ;   <ramp-swap-used>
 ;   <ramp-swap-free>
-format = %{A3:kitty -e btop &:} <label> %{A}
+format = %{A1:kitty -e btop &:} <label> %{A}
 format-underline = ${colors.memory}
 
 ; Available tokens:
@@ -6146,12 +6158,12 @@ spacing = ${bar/mybar.module-margin}
 ;   <bar-free>
 ;   <bar-used>
 ;   <ramp-capacity>
-format-mounted = %{A3:filelight &:} <label-mounted> %{A}
+format-mounted = %{A1:filelight &:} <label-mounted> %{A}
 format-mounted-underline = ${colors.filesystem}
 
 ; Available tags:
 ;   <label-unmounted> (default)
-format-unmounted = %{A3:gnome-disks &:} <label-unmounted> %{A}
+format-unmounted = %{A1:gnome-disks &:} <label-unmounted> %{A}
 format-unmounted-underline = ${colors.filesystem}
 
 ; Available tokens:
@@ -6257,6 +6269,28 @@ fi
 echo $status_icon
 #+END_SRC
 
+**** Deadd Notification Center
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/deadd-notification-center]
+type = custom/text
+content = ""
+
+; "content" has the same properties as "format-NAME"
+; content-background = #000
+content-foreground = ${colors.deadd-notification-center}
+content-underline = ${colors.deadd-notification-center}
+content-padding = ${sizes.module-padding}
+
+; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
+click-left = "/home/sravan/.scripts/deadd.sh --toggle-center"
+; click-middle = notify-send middle
+click-right = "/home/sravan/.scripts/deadd.sh --rofi"
+
+; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
+; scroll-up = notify-send scroll up
+; scroll-down = notify-send scroll down
+#+END_SRC
 *** Launch Script
 
 #+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/launch.sh
