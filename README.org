@@ -5367,33 +5367,78 @@ secondary                 = ${self.blue}
 alert                     = ${self.red}
 
 ; left
-powermenu                 = ${self.blue}
-deadd-notification-center = ${self.green}
-dunst-notification-status = ${self.green}
-date                      = ${self.yellow}
-time                      = ${self.purple}
-media-playing             = ${self.green}
+powermenu-foreground      = ${self.blue}
+powermenu-background      = ${self.background}
+powermenu-underline       = ${self.blue}
 
-; center
-dwm-focused-foreground    = ${self.primary}
+dwm-title-foreground      = ${self.foreground}
+dwm-title-background      = ${self.background}
+dwm-title-underline       = ${self.background}
+
+dwm-layout-foreground     = ${self.green}
+dwm-layout-background     = ${self.background}
+dwm-layout-underline      = ${self.background}
+
+dwm-floating-foreground   = ${self.pink}
+dwm-floating-background   = ${self.background}
+dwm-floating-underline    = ${self.background}
+
+dwm-focused-foreground    = ${self.purple}
 dwm-focused-background    = ${self.background}
+dwm-focused-underline     = ${self.purple}
+
 dwm-unfocused-foreground  = ${self.pink}
 dwm-unfocused-background  = ${self.background}
-dwm-visible-foreground    = ${self.blue}
+dwm-unfocused-underline   = ${self.pink}
+
+dwm-visible-foreground    = ${self.yellow}
 dwm-visible-background    = ${self.background}
-dwm-urgent-foreground     = ${self.alert}
+dwm-visible-underline     = ${self.background}
+
+dwm-urgent-foreground     = ${self.red}
 dwm-urgent-background     = ${self.background}
+dwm-urgent-underline      = ${self.background}
+
 dwm-empty-foreground      = ${self.light-gray}
 dwm-empty-background      = ${self.background}
-dwm-layout-foreground     = ${self.blue}
-dwm-title-foreground      = ${self.white}
-dwm-floating-foreground   = ${self.pink}
+dwm-empty-underline       = ${self.background}
+
+media-playing-foreground  = ${self.green}
+media-playing-background  = ${self.background}
+media-playing-underline   = ${self.green}
 
 ; right
-kernel                    = ${self.orange}
-cpu                       = ${self.blue}
-memory                    = ${self.red}
-filesystem                = ${self.purple}
+kernel-foreground         = ${self.orange}
+kernel-background         = ${self.background}
+kernel-underline          = ${self.orange}
+
+cpu-foreground            = ${self.purple}
+cpu-background            = ${self.background}
+cpu-underline             = ${self.purple}
+
+memory-foreground         = ${self.blue}
+memory-background         = ${self.background}
+memory-underline          = ${self.blue}
+
+filesystem-foreground     = ${self.pink}
+filesystem-background     = ${self.background}
+filesystem-underline      = ${self.pink}
+
+date-foreground           = ${self.yellow}
+date-background           = ${self.background}
+date-underline            = ${self.yellow}
+
+time-foreground           = ${self.purple}
+time-background           = ${self.background}
+time-underline            = ${self.purple}
+
+deadd-notification-center-foreground = ${self.green}
+deadd-notification-center-background = ${self.background}
+deadd-notification-center-underline  = ${self.green}
+
+dunst-notification-status-foreground = ${self.green}
+dunst-notification-status-background = ${self.background}
+dunst-notification-status-underline  = ${self.green}
 #+END_SRC
 
 **** Sizes
@@ -5466,7 +5511,7 @@ monitor-exact = true
 
 ; Tell the Window Manager not to configure the window.
 ; Use this to detach the bar if your WM is locking its size/position.
-; Note: With this most WMs will no longer reserve space for 
+; Note: With this most WMs will no longer reserve space for
 ; the bar and it will overlap other windows. You need to configure
 ; your WM to add a gap where the bar will be placed.
 override-redirect = false
@@ -5474,11 +5519,11 @@ override-redirect = false
 ; Put the bar at the bottom of the screen
 bottom = false
 
-; Prefer fixed center position for the `modules-center` block. 
+; Prefer fixed center position for the `modules-center` block.
 ; The center block will stay in the middle of the bar whenever
 ; possible. It can still be pushed around if other blocks need
 ; more space.
-; When false, the center block is centered in the space between 
+; When false, the center block is centered in the space between
 ; the left and right block.
 fixed-center = true
 
@@ -5490,7 +5535,7 @@ height = ${sizes.bar-height}
 
 ; Offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
 ; the percentage can optionally be extended with a pixel offset like so:
-; 50%:-10, this will result in an offset in the x or y direction 
+; 50%:-10, this will result in an offset in the x or y direction
 ; of 50% minus 10 pixels
 offset-x = 0
 offset-y = 0
@@ -5503,11 +5548,11 @@ foreground = ${colors.foreground}
 
 ; Background gradient (vertical steps)
 ;   background-[0-9]+ = #aarrggbb
-; background-0 = 
+; background-0 =
 
 ; Value used for drawing rounded corners
-; Note: This shouldn't be used together with border-size because the border 
-; doesn't get rounded. For this to work you may also need to enable 
+; Note: This shouldn't be used together with border-size because the border
+; doesn't get rounded. For this to work you may also need to enable
 ; pseudo-transparency or use a compositor like compton.
 ; Individual top/bottom values can be defined using:
 ;   radius-{top,bottom}
@@ -5534,9 +5579,9 @@ line-color = #fff
 ; border-size can be defined as pixel value (e.g. 35) or percentage (e.g. 50%),
 ; the percentage can optionally be extended with a pixel offset like so:
 ; 50%:-10, this will result in 50% minus 10 pixels. The percentage is relative
-; to the monitor width or height depending on the border direction. 
-; border-size = 
-; border-color = 
+; to the monitor width or height depending on the border direction.
+; border-size =
+; border-color =
 
 ; Number of spaces to add at the beginning/end of the bar
 ; Individual side values can be defined using:
@@ -5559,14 +5604,16 @@ font-0 = "NotoSansDisplay Nerd Font:size=11;3"
 font-1 = "FiraCode Nerd Font:size=11;3"
 font-2 = "Droid Sans Mono:size=11;3"
 font-3 = "IPAPGothic:size=11;3"
+font-4 = "Baekmuk Dotum:size=11;3"
+font-5 = "IPAPGothic:size=11;3"
 
 ; Modules are added to one of the available blocks
 ;   modules-left = cpu ram
 ;   modules-center = xwindow xbacklight
 ;   modules-right = ipc clock
-modules-left   = powermenu deadd-notification-center date time media-playing
-modules-center = dwm
-modules-right  = kernel cpu memory filesystem
+modules-left   = powermenu dwm media-playing
+; modules-center =
+modules-right  = kernel cpu memory filesystem date time deadd-notification-center
 
 ; The separator will be inserted between the output of each module
 separator = ""
@@ -5612,7 +5659,7 @@ tray-maxsize = ${sizes.tray-maxsize}
 ; background color is defined using `tray-background`
 ; tray-transparent = false
 
-; Background color for the tray container 
+; Background color for the tray container
 ; ARGB color (e.g. #f00, #ff992a, #ddff1023)
 ; By default the tray container will use the bar
 ; background color.
@@ -5640,7 +5687,7 @@ tray-scale = ${sizes.tray-scale}
 ; Set a DPI values used when rendering text
 ; This only affects scalable fonts
 ; Set this to 0 to let polybar calculate the dpi from the screen size.
-; dpi = 
+; dpi =
 dpi-x = ${xrdb:dpi}
 dpi-y = ${xrdb:dpi}
 
@@ -5650,8 +5697,8 @@ enable-ipc = true
 
 ; Fallback click handlers that will be called if
 ; there's no matching module handler found.
-; click-left = 
-; click-middle = 
+; click-left =
+; click-middle =
 ; click-right =
 ; scroll-up =
 ; scroll-down =
@@ -5676,20 +5723,20 @@ cursor-scroll = ns-resize
 [module/powermenu]
 type = custom/text
 ; content = " Menu"
-content = ""
 ; content = ""
+content = ""
 
 ; "content" has the same properties as "format-NAME"
-; content-background = #000
-content-foreground = ${colors.powermenu}
-content-underline = ${colors.powermenu}
-content-padding = ${bar/mybar.module-margin}
+content-foreground = ${colors.powermenu-foreground}
+content-background = ${colors.powermenu-background}
+content-underline  = ${colors.powermenu-underline}
+content-padding    = ${bar/mybar.module-margin}
 
 ; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
 ; click-left = notify-send left
 ; click-middle = notify-send middle
 ; click-right = notify-send right
-click-left = "rofi -show combi"
+click-left  = "rofi -show combi"
 click-right = "/home/sravan/.scripts/control-center.sh --rofi"
 
 ; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
@@ -5737,9 +5784,9 @@ secondary-layout-symbol = [M]
 ;   %title%
 label-title = %title%
 label-title-foreground = ${colors.dwm-title-foreground}
-; label-title-background = ${colors.dwm-empty-background}
-; label-title-underline = ${colors.dwm-empty-background}
-label-title-maxlen = ${sizes.maxlen}
+label-title-background = ${colors.dwm-title-background}
+label-title-underline  = ${colors.dwm-title-underline}
+label-title-maxlen     = ${sizes.maxlen}
 ; label-title-padding = ${sizes.module-padding}
 
 ; Symbol of current layout
@@ -5747,15 +5794,15 @@ label-title-maxlen = ${sizes.maxlen}
 ;   %symbol%
 label-layout = %symbol%
 label-layout-foreground = ${colors.dwm-layout-foreground}
-; label-layout-background = ${colors.dwm-empty-background}
-; label-layout-underline = ${colors.dwm-empty-background}
-label-layout-padding = ${sizes.module-padding}
+label-layout-background = ${colors.dwm-layout-background}
+label-layout-underline  = ${colors.dwm-layout-underline}
+label-layout-padding    = ${sizes.module-padding}
 
 ; Text to show when currently focused window is floating
 label-floating = "(F)"
 label-floating-foreground = ${colors.dwm-floating-foreground}
-; label-floating-background = ${colors.dwm-unfocused-background}
-; label-floating-underline = ${colors.dwm-unfocused-background}
+label-floating-background = ${colors.dwm-floating-background}
+label-floating-underline  = ${colors.dwm-floating-underline}
 ; label-floating-padding = ${sizes.module-padding}
 
 ; States: focused, unfocused, visible, urgent, empty
@@ -5766,37 +5813,37 @@ label-floating-foreground = ${colors.dwm-floating-foreground}
 label-focused = %name%
 label-focused-foreground = ${colors.dwm-focused-foreground}
 label-focused-background = ${colors.dwm-focused-background}
-label-focused-underline = ${colors.dwm-focused-foreground}
-label-focused-padding = ${sizes.module-padding}
+label-focused-underline  = ${colors.dwm-focused-underline}
+label-focused-padding    = ${sizes.module-padding}
 
 ; unfocused = Unselected tag on unselected monitor
 label-unfocused = %name%
 label-unfocused-foreground = ${colors.dwm-unfocused-foreground}
 label-unfocused-background = ${colors.dwm-unfocused-background}
-label-unfocused-underline = ${colors.dwm-unfocused-foreground}
-label-unfocused-padding = ${sizes.module-padding}
+label-unfocused-underline  = ${colors.dwm-unfocused-underline}
+label-unfocused-padding    = ${sizes.module-padding}
 
 ; visible = Unselected tag, but occupied tag on any monitor
 label-visible = %name%
 label-visible-foreground = ${colors.dwm-visible-foreground}
 label-visible-background = ${colors.dwm-visible-background}
-; label-visible-underline = ${colors.dwm-visible-foreground}
-label-visible-padding = ${sizes.module-padding}
+label-visible-underline  = ${colors.dwm-visible-underline}
+label-visible-padding    = ${sizes.module-padding}
 
 ; urgent = Unselected tag with window that has urgency hint set
 label-urgent = %name%
 label-urgent-foreground = ${colors.dwm-urgent-foreground}
 label-urgent-background = ${colors.dwm-urgent-background}
-label-urgent-underline = ${colors.dwm-urgent-foreground}
-label-urgent-padding = ${sizes.module-padding}
+label-urgent-underline  = ${colors.dwm-urgent-underline}
+label-urgent-padding    = ${sizes.module-padding}
 
 ; empty = Unselected and unoccupied tag
 ; This can be set to an empty string to hide empty tags
 label-empty = %name%
 label-empty-foreground = ${colors.dwm-empty-foreground}
 label-empty-background = ${colors.dwm-empty-background}
-label-empty-underline = ${colors.dwm-empty-background}
-label-empty-padding = ${sizes.module-padding}
+label-empty-underline  = ${colors.dwm-empty-underline}
+label-empty-padding    = ${sizes.module-padding}
 #+END_SRC
 
 **** Media Playing (Playerctl)
@@ -5837,9 +5884,10 @@ format = <label>
 ;   %output%
 ; Default: %output%
 label = %output%
-label-foreground = ${colors.media-playing}
-label-underline = ${colors.media-playing}
-label-maxlen = ${sizes.maxlen}
+label-foreground = ${colors.media-playing-foreground}
+label-background = ${colors.media-playing-background}
+label-underline  = ${colors.media-playing-underline}
+label-maxlen     = ${sizes.maxlen}
 
 ; Available tokens:
 ;   %counter%
@@ -5848,8 +5896,8 @@ label-maxlen = ${sizes.maxlen}
 ; "click-(left|middle|right)" will be executed using "/bin/sh -c [command]"
 click-left = "/home/sravan/.scripts/playerctl.sh --play-pause"
 ; click-middle = echo middle %counter%
-click-right = "/home/sravan/.scripts/playerctl.sh --change"
-; double-click-left = echo double left %counter%
+click-right = "/home/sravan/.scripts/playerctl.sh --rofi"
+double-click-left = "/home/sravan/.scripts/playerctl.sh --change"
 ; double-click-middle = echo double middle %counter%
 ; double-click-right = echo double right %counter%
 
@@ -5916,8 +5964,9 @@ format = <label>
 ; Default: %date%
 label = " %date%"
 ; label-font = 3
-label-foreground = ${colors.date}
-label-underline = ${colors.date}
+label-foreground = ${colors.date-foreground}
+label-background = ${colors.date-background}
+label-underline  = ${colors.date-underline}
 #+END_SRC
 
 **** Time
@@ -5952,8 +6001,9 @@ format = <label>
 ; Default: %date%
 label = " %time%"
 ; label-font = 3
-label-foreground = ${colors.time}
-label-underline = ${colors.time}
+label-foreground = ${colors.time-foreground}
+label-background = ${colors.time-background}
+label-underline  = ${colors.time-underline}
 #+END_SRC
 
 **** Kernel
@@ -5984,10 +6034,10 @@ interval = ${intervals.kernel}
 ;   <output> - deprecated
 ;   <label> (default)
 format = <label>
-format-background = ${colors.background}
-format-foreground = ${colors.kernel}
+format-foreground = ${colors.kernel-foreground}
+format-background = ${colors.kernel-background}
+format-underline  = ${colors.kernel-underline}
 ; format-padding = 4
-format-underline = ${colors.kernel}
 
 ; Available tokens:
 ;   %output%
@@ -6031,7 +6081,6 @@ interval = ${intervals.cpu}
 ;   <ramp-load>
 ;   <ramp-coreload>
 format = %{A1:kitty -e btop &:} <label> %{A}
-format-underline = ${colors.cpu}
 
 ; Available tokens:
 ;   %percentage% (default) - total cpu load averaged over all cores
@@ -6039,7 +6088,9 @@ format-underline = ${colors.cpu}
 ;   %percentage-cores% - load percentage for each core
 ;   %percentage-core[1-9]% - load percentage for specific core
 label =  %percentage%%
-label-foreground = ${colors.cpu}
+label-foreground = ${colors.cpu-foreground}
+label-background = ${colors.cpu-background}
+label-underline  = ${colors.cpu-underline}
 
 ; Spacing between individual per-core ramps
 ramp-coreload-spacing = 1
@@ -6075,7 +6126,6 @@ interval = ${intervals.memory}
 ;   <ramp-swap-used>
 ;   <ramp-swap-free>
 format = %{A1:kitty -e btop &:} <label> %{A}
-format-underline = ${colors.memory}
 
 ; Available tokens:
 ;   %percentage_used% (default)
@@ -6096,7 +6146,9 @@ format-underline = ${colors.memory}
 ;   %gb_swap_used%
 
 label =  %percentage_used%%
-label-foreground = ${colors.memory}
+label-foreground = ${colors.memory-foreground}
+label-background = ${colors.memory-background}
+label-underline  = ${colors.memory-underline}
 
 ; Only applies if <bar-used> is used
 bar-used-indicator =
@@ -6159,12 +6211,10 @@ spacing = ${bar/mybar.module-margin}
 ;   <bar-used>
 ;   <ramp-capacity>
 format-mounted = %{A1:filelight &:} <label-mounted> %{A}
-format-mounted-underline = ${colors.filesystem}
 
 ; Available tags:
 ;   <label-unmounted> (default)
 format-unmounted = %{A1:gnome-disks &:} <label-unmounted> %{A}
-format-unmounted-underline = ${colors.filesystem}
 
 ; Available tokens:
 ;   %mountpoint%
@@ -6177,13 +6227,17 @@ format-unmounted-underline = ${colors.filesystem}
 ;   %used%
 ; Default: %mountpoint% %percentage_free%%
 label-mounted =  %percentage_used%%
-label-mounted-foreground = ${colors.filesystem}
+label-mounted-foreground = ${colors.filesystem-foreground}
+label-mounted-background = ${colors.filesystem-background}
+label-mounted-underline  = ${colors.filesystem-underline}
 
 ; Available tokens:
 ;   %mountpoint%
 ; Default: %mountpoint% is not mounted
 label-unmounted = %mountpoint% is not mounted
-label-unmounted-foreground = ${colors.filesystem}
+label-unmounted-foreground = ${colors.filesystem-foreground}
+label-unmounted-background = ${colors.filesystem-background}
+label-unmounted-underline  = ${colors.filesystem-underline}
 #+END_SRC
 
 **** Dunst Notification Status
@@ -6219,13 +6273,14 @@ format = <label>
 ; format-background = ${colors.background}
 ; format-foreground =
 ; format-padding = 4
-format-underline = ${colors.dunst-notification-status}
 
 ; Available tokens:
 ;   %output%
 ; Default: %output%
 label = %output%
-label-foreground = ${colors.dunst-notification-status}
+label-foreground = ${colors.dunst-notification-status-foreground}
+label-background = ${colors.dunst-notification-status-background}
+label-underline  = ${colors.dunst-notification-status-underline}
 ; label-maxlen =
 
 ; Available tokens:
@@ -6278,8 +6333,9 @@ content = ""
 
 ; "content" has the same properties as "format-NAME"
 ; content-background = #000
-content-foreground = ${colors.deadd-notification-center}
-content-underline = ${colors.deadd-notification-center}
+content-foreground = ${colors.deadd-notification-center-foreground}
+content-background = ${colors.deadd-notification-center-background}
+content-underline  = ${colors.deadd-notification-center-underline}
 content-padding = ${sizes.module-padding}
 
 ; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
@@ -6298,7 +6354,7 @@ BAR="mybar"
 CONFIG="~/.config/dwm-flexipatch/polybar/config.ini"
 NUM_MONITORS=0
 CONNECTED_MONITORS=$(xrandr --query | grep " connected" | cut -d" " -f1)
-TRAY_POS="right"
+TRAY_POS="center"
 
 killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done

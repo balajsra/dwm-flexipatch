@@ -3,7 +3,7 @@ BAR="mybar"
 CONFIG="~/.config/dwm-flexipatch/polybar/config.ini"
 NUM_MONITORS=0
 CONNECTED_MONITORS=$(xrandr --query | grep " connected" | cut -d" " -f1)
-TRAY_POS="right"
+TRAY_POS="center"
 
 killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
