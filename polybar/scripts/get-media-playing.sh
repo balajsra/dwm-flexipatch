@@ -14,5 +14,13 @@ else
                 status_icon=" "
         fi
 
-        echo "$status_icon $artist - $title"
+        if [[ $artist == "" ]]; then
+            artist="N/A"
+        fi
+
+        if [[ $title == "" ]]; then
+            title="N/A"
+        fi
+
+        echo "$status_icon $title - $artist"
 fi
