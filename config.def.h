@@ -417,6 +417,7 @@ static const Rule rules[] = {
         RULE(.title = "Origin", .tags = 1 << 7, .isfloating = 1)
         RULE(.class = "Thunar", .tags = 1 << 8)
         RULE(.class = "trackma", .tags = 1 << 8)
+        RULE(.class = "Trackma-gtk", .tags = 1 << 8)
         RULE(.class = "obs", .tags = 1 << 8)
         RULE(.class = "NoiseTorch", .tags = 1 << 8)
         RULE(.class = "kdenlive", .tags = 1 << 8)
