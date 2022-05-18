@@ -2850,7 +2850,7 @@ If you try to send a fullscreen window to an adjacent monitor using tagmon then 
 https://github.com/bakkeby/patches/blob/master/dwm/dwm-tagmonfixfs-6.2.diff
 
 #+BEGIN_SRC c :tangle patches.def.h
-  #define TAGMONFIXFS_PATCH 1
+#define TAGMONFIXFS_PATCH 1
 #+END_SRC
 
 *** Tag Other Monitor
@@ -6095,7 +6095,7 @@ interval = ${intervals.cpu}
 ;   <bar-load>
 ;   <ramp-load>
 ;   <ramp-coreload>
-format = %{A1:kitty -e btop &:}<label>%{A}
+format = %{A1:kitty btop:}<label>%{A}
 
 ; Available tokens:
 ;   %percentage% (default) - total cpu load averaged over all cores
@@ -6141,7 +6141,7 @@ interval = ${intervals.memory}
 ;   <bar-swap-free>
 ;   <ramp-swap-used>
 ;   <ramp-swap-free>
-format = %{A1:kitty -e btop &:}<label>%{A}
+format = %{A1:kitty btop:}<label>%{A}
 
 ; Available tokens:
 ;   %percentage_used% (default)
