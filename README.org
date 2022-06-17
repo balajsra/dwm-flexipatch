@@ -2507,7 +2507,7 @@ Additionally dwm can quit cleanly by using kill -TERM dwmpid.
 https://dwm.suckless.org/patches/restartsig/
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define RESTARTSIG_PATCH 1
+#define RESTARTSIG_PATCH 0
 #+END_SRC
 
 *** Rio Draw
@@ -2606,7 +2606,7 @@ This patch persists some settings across window manager restarts. These include 
 The above is not persisted across reboots, however.
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define SEAMLESS_RESTART_PATCH 0
+#define SEAMLESS_RESTART_PATCH 1
 #+END_SRC
 
 *** Selective Fake Fullscreen
@@ -2626,7 +2626,7 @@ Allows restarting dwm without the dependency of an external script.
 https://dwm.suckless.org/patches/selfrestart/
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define SELFRESTART_PATCH 0
+#define SELFRESTART_PATCH 1
 #+END_SRC
 
 *** Send Monitor Keep Focus
@@ -4674,7 +4674,7 @@ static Key keys[] = {
         #endif // KILLUNSEL_PATCH
 
         #if SELFRESTART_PATCH
-        { MODKEY|ShiftMask,             XK_r,          self_restart,           {0} },
+        { MODKEY|ControlMask|ShiftMask, XK_q,          self_restart,           {0} },
         #endif // SELFRESTART_PATCH
 
         { MODKEY|ShiftMask,             XK_q,          quit,                   {0} },

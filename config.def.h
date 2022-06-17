@@ -1028,7 +1028,7 @@ static Key keys[] = {
         #endif // KILLUNSEL_PATCH
 
         #if SELFRESTART_PATCH
-        { MODKEY|ShiftMask,             XK_r,          self_restart,           {0} },
+        { MODKEY|ControlMask|ShiftMask, XK_q,          self_restart,           {0} },
         #endif // SELFRESTART_PATCH
 
         { MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
