@@ -2507,7 +2507,7 @@ Additionally dwm can quit cleanly by using kill -TERM dwmpid.
 https://dwm.suckless.org/patches/restartsig/
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define RESTARTSIG_PATCH 0
+#define RESTARTSIG_PATCH 1
 #+END_SRC
 
 *** Rio Draw
@@ -2626,7 +2626,7 @@ Allows restarting dwm without the dependency of an external script.
 https://dwm.suckless.org/patches/selfrestart/
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define SELFRESTART_PATCH 1
+#define SELFRESTART_PATCH 0
 #+END_SRC
 
 *** Send Monitor Keep Focus
@@ -3989,7 +3989,7 @@ static const Rule rules[] = {
         RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
         RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
         RULE(.title = "Picture in picture", .isfloating = 1)
-        RULE(.class = "Ferdi", .tags = 1 << 0)
+        RULE(.class = "Ferdium", .tags = 1 << 0)
         RULE(.class = "Signal", .tags = 1 << 0)
         RULE(.class = "discord", .tags = 1 << 0)
         RULE(.class = "Microsoft Teams - Preview", .tags = 1 << 0)

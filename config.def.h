@@ -410,7 +410,7 @@ static const Rule rules[] = {
         RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
         RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
         RULE(.title = "Picture in picture", .isfloating = 1)
-        RULE(.class = "Ferdi", .tags = 1 << 0)
+        RULE(.class = "Ferdium", .tags = 1 << 0)
         RULE(.class = "Signal", .tags = 1 << 0)
         RULE(.class = "discord", .tags = 1 << 0)
         RULE(.class = "Microsoft Teams - Preview", .tags = 1 << 0)
