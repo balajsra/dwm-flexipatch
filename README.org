@@ -5482,78 +5482,91 @@ secondary                 = ${self.blue}
 alert                     = ${self.red}
 
 ; left
-powermenu-foreground      = ${self.blue}
-powermenu-background      = ${self.background}
-powermenu-underline       = ${self.blue}
+powermenu-foreground      = ${self.background}
+powermenu-background      = ${self.blue}
+powermenu-underline       = ${self.background}
+powermenu-overline        = ${self.background}
 
 dwm-title-foreground      = ${self.foreground}
 dwm-title-background      = ${self.background}
 dwm-title-underline       = ${self.background}
+dwm-title-overline        = ${self.background}
 
 dwm-layout-foreground     = ${self.green}
-dwm-layout-background     = ${self.background}
+dwm-layout-background     = ${self.foreground}
 dwm-layout-underline      = ${self.background}
+dwm-layout-overline       = ${self.background}
 
 dwm-floating-foreground   = ${self.pink}
-dwm-floating-background   = ${self.background}
+dwm-floating-background   = ${self.foreground}
 dwm-floating-underline    = ${self.background}
+dwm-floating-overline     = ${self.background}
 
 dwm-focused-foreground    = ${self.purple}
 dwm-focused-background    = ${self.background}
-dwm-focused-underline     = ${self.purple}
+dwm-focused-underline     = ${self.background}
+dwm-focused-overline      = ${self.background}
 
 dwm-unfocused-foreground  = ${self.pink}
 dwm-unfocused-background  = ${self.background}
-dwm-unfocused-underline   = ${self.pink}
+dwm-unfocused-underline   = ${self.background}
+dwm-unfocused-overline    = ${self.background}
 
 dwm-visible-foreground    = ${self.yellow}
 dwm-visible-background    = ${self.background}
 dwm-visible-underline     = ${self.background}
+dwm-visible-overline      = ${self.background}
 
 dwm-urgent-foreground     = ${self.red}
 dwm-urgent-background     = ${self.background}
 dwm-urgent-underline      = ${self.background}
+dwm-urgent-overline       = ${self.background}
 
 dwm-empty-foreground      = ${self.light-gray}
 dwm-empty-background      = ${self.background}
 dwm-empty-underline       = ${self.background}
+dwm-empty-overline        = ${self.background}
 
-media-playing-foreground  = ${self.green}
-media-playing-background  = ${self.background}
-media-playing-underline   = ${self.green}
+media-playing-foreground  = ${self.background}
+media-playing-background  = ${self.green}
+media-playing-underline   = ${self.background}
+media-playing-overline    = ${self.background}
 
 ; right
-kernel-foreground         = ${self.orange}
-kernel-background         = ${self.background}
-kernel-underline          = ${self.orange}
+kernel-foreground         = ${self.background}
+kernel-background         = ${self.orange}
+kernel-underline          = ${self.background}
+kernel-overline           = ${self.background}
 
-cpu-foreground            = ${self.purple}
-cpu-background            = ${self.background}
-cpu-underline             = ${self.purple}
+cpu-foreground            = ${self.background}
+cpu-background            = ${self.purple}
+cpu-underline             = ${self.background}
+cpu-overline              = ${self.background}
 
-memory-foreground         = ${self.blue}
-memory-background         = ${self.background}
-memory-underline          = ${self.blue}
+memory-foreground         = ${self.background}
+memory-background         = ${self.blue}
+memory-underline          = ${self.background}
+memory-overline           = ${self.background}
 
-filesystem-foreground     = ${self.pink}
-filesystem-background     = ${self.background}
-filesystem-underline      = ${self.pink}
+filesystem-foreground     = ${self.background}
+filesystem-background     = ${self.pink}
+filesystem-underline      = ${self.background}
+filesystem-overline       = ${self.background}
 
-date-foreground           = ${self.yellow}
-date-background           = ${self.background}
-date-underline            = ${self.yellow}
+date-foreground           = ${self.background}
+date-background           = ${self.yellow}
+date-underline            = ${self.background}
+date-overline             = ${self.background}
 
-time-foreground           = ${self.purple}
-time-background           = ${self.background}
-time-underline            = ${self.purple}
+time-foreground           = ${self.background}
+time-background           = ${self.purple}
+time-underline            = ${self.background}
+time-overline             = ${self.background}
 
-deadd-notification-center-foreground = ${self.green}
-deadd-notification-center-background = ${self.background}
-deadd-notification-center-underline  = ${self.green}
-
-dunst-notification-status-foreground = ${self.green}
-dunst-notification-status-background = ${self.background}
-dunst-notification-status-underline  = ${self.green}
+deadd-notification-center-foreground = ${self.background}
+deadd-notification-center-background = ${self.green}
+deadd-notification-center-underline  = ${self.background}
+deadd-notification-center-overline   = ${self.background}
 #+END_SRC
 
 **** Sizes
@@ -5561,8 +5574,8 @@ dunst-notification-status-underline  = ${self.green}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [sizes]
 bar-height          = ${xrdb:polybar.bar-height:25}
-module-margin       = ${xrdb:polybar.module-margin:1}
-module-padding      = ${xrdb:polybar.module-padding:1}
+module-margin       = ${xrdb:polybar.module-margin:0}
+module-padding      = ${xrdb:polybar.module-padding:0}
 module-dwm-padding  = ${xrdb:polybar.module-dwm-padding:2}
 tray-maxsize        = ${xrdb:polybar.tray-maxsize:15}
 tray-scale          = ${xrdb:polybar.tray-scale:1}
@@ -5586,7 +5599,6 @@ time                      = 1
 filesystem                = 900
 memory                    = 1
 media-playing             = 1
-dunst-notification-status = 1
 kernel                    = 86400
 #+END_SRC
 
@@ -5672,14 +5684,14 @@ foreground = ${colors.foreground}
 ; pseudo-transparency or use a compositor like compton.
 ; Individual top/bottom values can be defined using:
 ;   radius-{top,bottom}
-radius = 0.0
+radius = 10.0
 
 ; Under-/overline pixel size and argb color
 ; Individual values can be defined using:
 ;   {overline,underline}-size
 ;   {overline,underline}-color
-line-size = 1
-line-color = #fff
+overline-size  = 4
+underline-size = 4
 
 ; Values applied to all borders
 ; Individual side values can be defined using:
@@ -5717,9 +5729,9 @@ module-margin = ${sizes.module-margin}
 ;   font-2 = Termsynu:size=8;-1
 ;   font-3 = FontAwesome:size=10
 ; See the Fonts wiki page for more details
-font-0 = "NotoSansDisplay Nerd Font:size=11;3"
+font-0 = "Ubuntu Nerd Font:style=Medium:size=11;3"
 font-1 = "FiraCode Nerd Font:size=11;3"
-font-2 = "Droid Sans Mono:size=11;3"
+font-2 = "DroidSansMono Nerd Font:size=11;3"
 font-3 = "IPAPGothic:size=11;3"
 font-4 = "Baekmuk Dotum:size=11;3"
 font-5 = "IPAPGothic:size=11;3"
@@ -5728,9 +5740,9 @@ font-5 = "IPAPGothic:size=11;3"
 ;   modules-left = cpu ram
 ;   modules-center = xwindow xbacklight
 ;   modules-right = ipc clock
-modules-left   = powermenu dwm media-playing
+modules-left   = powermenu-left powermenu powermenu-right dwm media-playing-left media-playing media-playing-right
 ; modules-center =
-modules-right  = kernel cpu memory filesystem date time deadd-notification-center
+modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right deadd-notification-center-left deadd-notification-center deadd-notification-center-right
 
 ; The separator will be inserted between the output of each module
 separator = ""
@@ -5837,16 +5849,37 @@ cursor-scroll = ns-resize
 **** Power Menu
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
+[module/powermenu-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.powermenu-background}
+content-underline  = ${colors.powermenu-underline}
+content-overline   = ${colors.powermenu-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/powermenu-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.powermenu-background}
+content-underline  = ${colors.powermenu-underline}
+content-overline   = ${colors.powermenu-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
 [module/powermenu]
 type = custom/text
 ; content = " Menu"
-; content = ""
-content = ""
+content = ""
+; content = ""
 
 ; "content" has the same properties as "format-NAME"
 content-foreground = ${colors.powermenu-foreground}
 content-background = ${colors.powermenu-background}
 content-underline  = ${colors.powermenu-underline}
+content-overline   = ${colors.powermenu-overline}
 content-padding    = ${sizes.module-padding}
 
 ; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
@@ -5903,6 +5936,7 @@ label-title = %title%
 label-title-foreground = ${colors.dwm-title-foreground}
 label-title-background = ${colors.dwm-title-background}
 label-title-underline  = ${colors.dwm-title-underline}
+label-title-overline   = ${colors.dwm-title-overline}
 label-title-maxlen     = ${sizes.maxlen}
 label-title-padding    = ${sizes.module-dwm-padding}
 
@@ -5913,6 +5947,7 @@ label-layout = %symbol%
 label-layout-foreground = ${colors.dwm-layout-foreground}
 label-layout-background = ${colors.dwm-layout-background}
 label-layout-underline  = ${colors.dwm-layout-underline}
+label-layout-overline   = ${colors.dwm-layout-overline }
 label-layout-padding    = ${sizes.module-dwm-padding}
 
 ; Text to show when currently focused window is floating
@@ -5920,6 +5955,7 @@ label-floating = "(F)"
 label-floating-foreground = ${colors.dwm-floating-foreground}
 label-floating-background = ${colors.dwm-floating-background}
 label-floating-underline  = ${colors.dwm-floating-underline}
+label-floating-overline   = ${colors.dwm-floating-overline}
 label-floating-padding    = ${sizes.module-dwm-padding}
 
 ; States: focused, unfocused, visible, urgent, empty
@@ -5931,6 +5967,7 @@ label-focused = %name%
 label-focused-foreground = ${colors.dwm-focused-foreground}
 label-focused-background = ${colors.dwm-focused-background}
 label-focused-underline  = ${colors.dwm-focused-underline}
+label-focused-overline   = ${colors.dwm-focused-overline}
 label-focused-padding    = ${sizes.module-dwm-padding}
 
 ; unfocused = Unselected tag on unselected monitor
@@ -5938,6 +5975,7 @@ label-unfocused = %name%
 label-unfocused-foreground = ${colors.dwm-unfocused-foreground}
 label-unfocused-background = ${colors.dwm-unfocused-background}
 label-unfocused-underline  = ${colors.dwm-unfocused-underline}
+label-unfocused-overline   = ${colors.dwm-unfocused-overline}
 label-unfocused-padding    = ${sizes.module-dwm-padding}
 
 ; visible = Unselected tag, but occupied tag on any monitor
@@ -5945,6 +5983,7 @@ label-visible = %name%
 label-visible-foreground = ${colors.dwm-visible-foreground}
 label-visible-background = ${colors.dwm-visible-background}
 label-visible-underline  = ${colors.dwm-visible-underline}
+label-visible-overline   = ${colors.dwm-visible-overline}
 label-visible-padding    = ${sizes.module-dwm-padding}
 
 ; urgent = Unselected tag with window that has urgency hint set
@@ -5952,6 +5991,7 @@ label-urgent = %name%
 label-urgent-foreground = ${colors.dwm-urgent-foreground}
 label-urgent-background = ${colors.dwm-urgent-background}
 label-urgent-underline  = ${colors.dwm-urgent-underline}
+label-urgent-overline   = ${colors.dwm-urgent-overline}
 label-urgent-padding    = ${sizes.module-dwm-padding}
 
 ; empty = Unselected and unoccupied tag
@@ -5960,12 +6000,33 @@ label-empty = %name%
 label-empty-foreground = ${colors.dwm-empty-foreground}
 label-empty-background = ${colors.dwm-empty-background}
 label-empty-underline  = ${colors.dwm-empty-underline}
+label-empty-overline   = ${colors.dwm-empty-overline}
 label-empty-padding    = ${sizes.module-dwm-padding}
 #+END_SRC
 
 **** Media Playing (Playerctl)
 
 ***** Module
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/media-playing-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.media-playing-background}
+content-underline  = ${colors.media-playing-underline}
+content-overline   = ${colors.media-playing-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/media-playing-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.media-playing-background}
+content-underline  = ${colors.media-playing-underline}
+content-overline   = ${colors.media-playing-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing]
@@ -6004,6 +6065,7 @@ label = %output%
 label-foreground = ${colors.media-playing-foreground}
 label-background = ${colors.media-playing-background}
 label-underline  = ${colors.media-playing-underline}
+label-overline   = ${colors.media-playing-overline}
 label-maxlen     = ${sizes.maxlen}
 label-padding    = ${sizes.module-padding}
 
@@ -6061,6 +6123,26 @@ fi
 **** Date
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
+[module/date-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.date-background}
+content-underline  = ${colors.date-underline}
+content-overline   = ${colors.date-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/date-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.date-background}
+content-underline  = ${colors.date-underline}
+content-overline   = ${colors.date-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
 [module/date]
 type = internal/date
 
@@ -6093,10 +6175,31 @@ label = " %date%"
 label-foreground = ${colors.date-foreground}
 label-background = ${colors.date-background}
 label-underline  = ${colors.date-underline}
+label-overline   = ${colors.date-overline}
 label-padding    = ${sizes.module-padding}
 #+END_SRC
 
 **** Time
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/time-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.time-background}
+content-underline  = ${colors.time-underline}
+content-overline   = ${colors.time-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/time-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.time-background}
+content-underline  = ${colors.time-underline}
+content-overline   = ${colors.time-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/time]
@@ -6131,10 +6234,31 @@ label = " %time%"
 label-foreground = ${colors.time-foreground}
 label-background = ${colors.time-background}
 label-underline  = ${colors.time-underline}
+label-overline   = ${colors.time-overline}
 label-padding    = ${sizes.module-padding}
 #+END_SRC
 
 **** Kernel
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/kernel-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.kernel-background}
+content-underline  = ${colors.kernel-underline}
+content-overline   = ${colors.kernel-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/kernel-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.kernel-background}
+content-underline  = ${colors.kernel-underline}
+content-overline   = ${colors.kernel-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/kernel]
@@ -6165,6 +6289,7 @@ format = <label>
 format-foreground = ${colors.kernel-foreground}
 format-background = ${colors.kernel-background}
 format-underline  = ${colors.kernel-underline}
+format-overline   = ${colors.kernel-overline}
 
 ; Available tokens:
 ;   %output%
@@ -6196,6 +6321,26 @@ label-padding    = ${sizes.module-padding}
 **** CPU
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
+[module/cpu-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.cpu-background}
+content-underline  = ${colors.cpu-underline}
+content-overline   = ${colors.cpu-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/cpu-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.cpu-background}
+content-underline  = ${colors.cpu-underline}
+content-overline   = ${colors.cpu-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
 [module/cpu]
 type = internal/cpu
 
@@ -6220,6 +6365,7 @@ label-padding    = ${sizes.module-padding}
 label-foreground = ${colors.cpu-foreground}
 label-background = ${colors.cpu-background}
 label-underline  = ${colors.cpu-underline}
+label-overline   = ${colors.cpu-overline}
 
 ; Spacing between individual per-core ramps
 ramp-coreload-spacing = 1
@@ -6235,6 +6381,26 @@ ramp-coreload-foreground = ${colors.cpu}
 #+END_SRC
 
 **** Memory
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/memory-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.memory-background}
+content-underline  = ${colors.memory-underline}
+content-overline   = ${colors.memory-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/memory-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.memory-background}
+content-underline  = ${colors.memory-underline}
+content-overline   = ${colors.memory-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/memory]
@@ -6279,6 +6445,7 @@ label-padding    = ${sizes.module-padding}
 label-foreground = ${colors.memory-foreground}
 label-background = ${colors.memory-background}
 label-underline  = ${colors.memory-underline}
+label-overline   = ${colors.memory-overline}
 
 ; Only applies if <bar-used> is used
 bar-used-indicator =
@@ -6315,6 +6482,26 @@ ramp-free-foreground = ${colors.memory}
 #+END_SRC
 
 **** Filesystem
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/filesystem-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.filesystem-background}
+content-underline  = ${colors.filesystem-underline}
+content-overline   = ${colors.filesystem-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/filesystem-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.filesystem-background}
+content-underline  = ${colors.filesystem-underline}
+content-overline   = ${colors.filesystem-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/filesystem]
@@ -6360,6 +6547,7 @@ label-mounted =  %percentage_used%%
 label-mounted-foreground = ${colors.filesystem-foreground}
 label-mounted-background = ${colors.filesystem-background}
 label-mounted-underline  = ${colors.filesystem-underline}
+label-mounted-overline   = ${colors.filesystem-overline}
 label-mounted-padding    = ${sizes.module-padding}
 
 ; Available tokens:
@@ -6369,95 +6557,31 @@ label-unmounted = %mountpoint% is not mounted
 label-unmounted-foreground = ${colors.filesystem-foreground}
 label-unmounted-background = ${colors.filesystem-background}
 label-unmounted-underline  = ${colors.filesystem-underline}
+label-unmounted-overline   = ${colors.filesystem-overline}
 label-unmounted-padding    = ${sizes.module-padding}
 #+END_SRC
 
-**** Dunst Notification Status
-
-***** Module
+**** Deadd Notification Center
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
-[module/dunst-notification-status]
-type = custom/script
-
-; Available tokens:
-;   %counter%
-; Command to be executed (using "/bin/sh -c [command]")
-exec = ~/.config/dwm-flexipatch/polybar/scripts/dunst-notification-status.sh
-
-; Conditional command that, if defined, needs to exit successfully
-; before the main exec command is invoked.
-; Default: ""
-; exec-if = pgrep -x myservice
-
-; Will the script output continous content?
-; Default: false
-tail = false
-
-; Seconds to sleep between updates
-; Default: 5 (0 if `tail = true`)
-interval = ${intervals.dunst-notification-status}
-
-; Available tags:
-;   <output> - deprecated
-;   <label> (default)
-format = <label>
-; format-background = ${colors.background}
-; format-foreground =
-; format-padding = 4
-
-; Available tokens:
-;   %output%
-; Default: %output%
-label = %output%
-label-foreground = ${colors.dunst-notification-status-foreground}
-label-background = ${colors.dunst-notification-status-background}
-label-underline  = ${colors.dunst-notification-status-underline}
-label-padding    = ${sizes.module-padding}
-; label-maxlen =
-
-; Available tokens:
-;   %counter%
-;   %pid%
-;
-; "click-(left|middle|right)" will be executed using "/bin/sh -c [command]"
-click-left = "/home/sravan/.scripts/dunst.sh --dnd"
-; click-middle = echo middle %counter%
-click-right = "/home/sravan/.scripts/dunst.sh --history"
-; double-click-left = echo double left %counter%
-; double-click-middle = echo double middle %counter%
-; double-click-right = echo double right %counter%
-
-; Available tokens:
-;   %counter%
-;   %pid%
-;
-; "scroll-(up|down)" will be executed using "/bin/sh -c [command]"
-; scroll-up =
-; scroll-down =
+[module/deadd-notification-center-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.deadd-notification-center-background}
+content-underline  = ${colors.deadd-notification-center-underline}
+content-overline   = ${colors.deadd-notification-center-overline}
+content-padding    = ${sizes.module-padding}
 #+END_SRC
 
-***** Script
-
-#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/dunst-notification-status.sh
-# Check if dunst is running
-if pgrep -x "dunst" > /dev/null
-then
-    is_paused=$(dunstctl is-paused)
-
-    if [[ $is_paused == 'false' ]]; then
-        status_icon=" on"
-    elif [[ $is_paused == 'true' ]]; then
-        status_icon=" off"
-    fi
-else
-    status_icon=" off"
-fi
-
-echo $status_icon
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/deadd-notification-center-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.deadd-notification-center-background}
+content-underline  = ${colors.deadd-notification-center-underline}
+content-overline   = ${colors.deadd-notification-center-overline}
+content-padding    = ${sizes.module-padding}
 #+END_SRC
-
-**** Deadd Notification Center
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/deadd-notification-center]
@@ -6469,6 +6593,7 @@ content = ""
 content-foreground = ${colors.deadd-notification-center-foreground}
 content-background = ${colors.deadd-notification-center-background}
 content-underline  = ${colors.deadd-notification-center-underline}
+content-overline   = ${colors.deadd-notification-center-overline}
 content-padding    = ${sizes.module-padding}
 
 ; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
@@ -6480,6 +6605,7 @@ click-right = "/home/sravan/.scripts/deadd.sh --rofi"
 ; scroll-up = notify-send scroll up
 ; scroll-down = notify-send scroll down
 #+END_SRC
+
 *** Launch Script
 
 #+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/launch.sh
