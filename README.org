@@ -289,6 +289,8 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
 ** Changelog
 
+2022-06-20 - Added the renamed scratchpads patch
+
 2022-06-17 - Ported the seamless restart feature from dusk into dwm-flexipatch
 
 2022-02-11 - Added the isfreesize version of the sizehints patch and the [[https://github.com/bakkeby/dwm-flexipatch/pull/219][tagsync]] patch (contributed by [[https://github.com/Bagellll][Bagelli]])
@@ -833,6 +835,9 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://dwm.suckless.org/patches/push/][push]]
      - this patch provides a way to move clients up and down inside the client list
+
+   - [[https://github.com/bakkeby/patches/wiki/renamedscratchpads][renamed_scratchpads]]
+      - variant of the [[https://dwm.suckless.org/patches/namedscratchpads/][named scratchpads]] patch
 
    - [[https://dwm.suckless.org/patches/reorganizetags/][reorganizetags]]
      - shifts all clients per tag to leftmost unoccupied tags
@@ -2462,6 +2467,29 @@ https://dwm.suckless.org/patches/push/
 #define PUSH_NO_MASTER_PATCH 0
 #+END_SRC
 
+*** Renamed Scratchpads
+
+**** Main
+
+Variant of the named scratchpads patch allowing scratch keys to be added or removed
+on demand, allowing multiple scratchpad windows to be toggled into and out of view
+in unison, as well as including multi-monitor support.
+
+https://github.com/bakkeby/patches/wiki/renamedscratchpads
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define RENAMED_SCRATCHPADS_PATCH 0
+#+END_SRC
+
+**** Auto-Hide
+
+Renamed scratchpads option to auto-hide scratchpads when moving to a different tag.
+This behaviour is similar to that of the (multiple) scratchpads patch.
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define RENAMED_SCRATCHPADS_AUTO_HIDE_PATCH 0
+#+END_SRC
+
 *** Re-Organize Tags
 
 Shifts all clients per tag to leftmost unoccupied tags.
@@ -3685,6 +3713,22 @@ static char urgbordercolor[]             = "#FF5555";
 static char urgfloatcolor[]              = "#FF5555";
 #+END_SRC
 
+*** Renamed Scratchpads
+
+#+BEGIN_SRC c :tangle config.def.h
+#if RENAMED_SCRATCHPADS_PATCH
+static char scratchselfgcolor[]          = "#FFF7D4";
+static char scratchselbgcolor[]          = "#77547E";
+static char scratchselbordercolor[]      = "#894B9F";
+static char scratchselfloatcolor[]       = "#894B9F";
+
+static char scratchnormfgcolor[]         = "#FFF7D4";
+static char scratchnormbgcolor[]         = "#664C67";
+static char scratchnormbordercolor[]     = "#77547E";
+static char scratchnormfloatcolor[]      = "#77547E";
+#endif // RENAMED_SCRATCHPADS_PATCH
+#+END_SRC
+
 *** Bar Flex Win Title
 
 #+BEGIN_SRC c :tangle config.def.h
@@ -3742,6 +3786,10 @@ static const unsigned int alphas[][3] = {
         [SchemeHidNorm]      = { OPAQUE, baralpha, borderalpha },
         [SchemeHidSel]       = { OPAQUE, baralpha, borderalpha },
         [SchemeUrg]          = { OPAQUE, baralpha, borderalpha },
+        #if RENAMED_SCRATCHPADS_PATCH
+        [SchemeScratchSel]   = { OPAQUE, baralpha, borderalpha },
+        [SchemeScratchNorm]  = { OPAQUE, baralpha, borderalpha },
+        #endif // RENAMED_SCRATCHPADS_PATCH
         #if BAR_FLEXWINTITLE_PATCH
         [SchemeFlexActTTB]   = { OPAQUE, baralpha, borderalpha },
         [SchemeFlexActLTR]   = { OPAQUE, baralpha, borderalpha },
@@ -3816,6 +3864,10 @@ static char *colors[][ColCount] = {
         [SchemeHidNorm]      = { hidnormfgcolor,   hidnormbgcolor,   c000000,              c000000 },
         [SchemeHidSel]       = { hidselfgcolor,    hidselbgcolor,    c000000,              c000000 },
         [SchemeUrg]          = { urgfgcolor,       urgbgcolor,       urgbordercolor,       urgfloatcolor },
+        #if RENAMED_SCRATCHPADS_PATCH
+        [SchemeScratchSel]   = { scratchselfgcolor, scratchselbgcolor, scratchselbordercolor, scratchselfloatcolor },
+        [SchemeScratchNorm]  = { scratchnormfgcolor, scratchnormbgcolor, scratchnormbordercolor, scratchnormfloatcolor },
+        #endif // RENAMED_SCRATCHPADS_PATCH
         #if BAR_FLEXWINTITLE_PATCH
         [SchemeFlexActTTB]   = { titleselfgcolor,  actTTBbgcolor,    actTTBbgcolor,        c000000 },
         [SchemeFlexActLTR]   = { titleselfgcolor,  actLTRbgcolor,    actLTRbgcolor,        c000000 },
@@ -3895,7 +3947,9 @@ static const char *const autostart[] = {
 ** Scratchpads
 
 #+BEGIN_SRC c :tangle config.def.h
-#if SCRATCHPADS_PATCH
+#if RENAMED_SCRATCHPADS_PATCH
+static const char *scratchpadcmd[] = {"s", "st", "-n", "spterm", NULL};
+#elif SCRATCHPADS_PATCH
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 static Sp scratchpads[] = {
    /* name          cmd  */
@@ -4011,7 +4065,9 @@ static const Rule rules[] = {
         RULE(.class = "NoiseTorch", .tags = 1 << 8)
         RULE(.class = "kdenlive", .tags = 1 << 8)
         RULE(.class = "Motrix", .tags = 1 << 8)
-        #if SCRATCHPADS_PATCH
+        #if RENAMED_SCRATCHPADS_PATCH
+        RULE(.instance = "spterm", .scratchkey = 's', .isfloating = 1)
+        #elif SCRATCHPADS_PATCH
         RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
         #endif // SCRATCHPADS_PATCH
 };
@@ -4736,11 +4792,15 @@ static Key keys[] = {
         { MODKEY|ShiftMask,             XK_Escape,     togglenomodbuttons,     {0} },
         #endif // NO_MOD_BUTTONS_PATCH
 
-        #if SCRATCHPADS_PATCH
+        #if RENAMED_SCRATCHPADS_PATCH
+        { MODKEY,                       XK_grave,      togglescratch,          {.v = scratchpadcmd } },
+        { MODKEY|ControlMask,           XK_grave,      setscratch,             {.v = scratchpadcmd } },
+        { MODKEY|ShiftMask,             XK_grave,      removescratch,          {.v = scratchpadcmd } },
+        #elif SCRATCHPADS_PATCH
         { MODKEY,                       XK_grave,      togglescratch,          {.ui = 0 } },
         { MODKEY|ControlMask,           XK_grave,      setscratch,             {.ui = 0 } },
         { MODKEY|ShiftMask,             XK_grave,      removescratch,          {.ui = 0 } },
-        #endif // SCRATCHPADS_PATCH
+        #endif // SCRATCHPADS_PATCH | RENAMED_SCRATCHPADS_PATCH
 
         #if UNFLOATVISIBLE_PATCH
         { MODKEY|Mod1Mask,              XK_space,      unfloatvisible,         {0} },
@@ -4770,7 +4830,7 @@ static Key keys[] = {
         { MODKEY,                       XK_minus,      scratchpad_show,        {0} },
         { MODKEY|ShiftMask,             XK_minus,      scratchpad_hide,        {0} },
         { MODKEY,                       XK_equal,      scratchpad_remove,      {0} },
-        #elif SCRATCHPADS_PATCH
+        #elif SCRATCHPADS_PATCH && !RENAMED_SCRATCHPADS_PATCH
         { MODKEY,                       XK_0,          view,                   {.ui = ~SPTAGMASK } },
         { MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~SPTAGMASK } },
         #else
@@ -5192,7 +5252,7 @@ static Signal signals[] = {
         { "toggleverticalmax",       toggleverticalmax },
         { "togglemax",               togglemax },
         #endif // MAXIMIZE_PATCH
-        #if SCRATCHPADS_PATCH
+        #if SCRATCHPADS_PATCH && !RENAMED_SCRATCHPADS_PATCH
         { "togglescratch",           togglescratch },
         #endif // SCRATCHPADS_PATCH
         #if UNFLOATVISIBLE_PATCH
@@ -5319,7 +5379,7 @@ static IPCCommand ipccommands[] = {
         #if ROTATESTACK_PATCH
         IPCCOMMAND( rotatestack, 1, {ARG_TYPE_SINT} ),
         #endif // ROTATESTACK_PATCH
-        #if SCRATCHPADS_PATCH
+        #if SCRATCHPADS_PATCH && !RENAMED_SCRATCHPADS_PATCH
         IPCCOMMAND( togglescratch, 1, {ARG_TYPE_UINT} ),
         #endif // SCRATCHPADS_PATCH
         #if SELFRESTART_PATCH
