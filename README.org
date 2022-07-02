@@ -118,6 +118,7 @@
     - [[#per-tag][Per Tag]]
     - [[#place-mouse][Place Mouse]]
     - [[#push][Push]]
+    - [[#renamed-scratchpads][Renamed Scratchpads]]
     - [[#re-organize-tags][Re-Organize Tags]]
     - [[#resize-corners][Resize Corners]]
     - [[#resize-point][Resize Point]]
@@ -184,6 +185,7 @@
   - [[#indicators][Indicators]]
   - [[#colors][Colors]]
     - [[#define-colors][Define Colors]]
+    - [[#renamed-scratchpads-1][Renamed Scratchpads]]
     - [[#bar-flex-win-title][Bar Flex Win Title]]
     - [[#bar-alpha][Bar Alpha]]
     - [[#vt-colors-1][VT Colors]]
@@ -5451,6 +5453,7 @@ static IPCCommand ipccommands[] = {
 #+END_SRC
 
 * Status Bar
+
 ** Polybar
 
 To learn more about how to configure Polybar go to https://github.com/polybar/polybar
