@@ -24,6 +24,7 @@
     - [[#powerline][Powerline]]
     - [[#tab-groups][Tab Groups]]
     - [[#tag-grid][Tag Grid]]
+    - [[#tag-preview][Tag Preview]]
     - [[#status][Status]]
     - [[#status-button][Status Button]]
     - [[#status-cmd][Status CMD]]
@@ -295,6 +296,8 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
 ** Changelog
 
+2022-07-05 - Added the tagpreview patch
+
 2022-07-04 - Added the shift-tools patch(es) with individual toggles
 
 2022-06-20 - Added the renamed scratchpads patch
@@ -494,15 +497,13 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 ** Patches Included
 
    - [[https://dwm.suckless.org/patches/activetagindicatorbar/][activetagindicatorbar]]
-     - this patch changes the rectangle indicating if a tag is used by a client into a bar above
-       the tag name
+     - this patch changes the rectangle indicating if a tag is used by a client into a bar above the tag name
 
    - [[https://dwm.suckless.org/patches/alpha/][alpha]]
      - adds transparency for the status bar
 
    - [[https://dwm.suckless.org/patches/alternativetags/][alternativetags]]
-     - adds alternative tags which can be toggled on the fly for the sole purpose of providing
-       visual aid
+     - adds alternative tags which can be toggled on the fly for the sole purpose of providing visual aid
 
    - [[https://dwm.suckless.org/patches/alttagsdecoration/][alttagsdecoration]]
      - provides the ability to use alternative text for tags which contain at least one window
@@ -515,8 +516,7 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://dwm.suckless.org/patches/anybar/][anybar]]
      - enables dwm to manage external status bars such as lemonbar and polybar
-     - dwm treats the external bar as it would its own, so all regular dwm commands such as
-       togglebar affect the external bar in the same way
+     - dwm treats the external bar as it would its own, so all regular dwm commands such as togglebar affect the external bar in the same way
 
    - [[https://dwm.suckless.org/patches/aspectresize/][aspectresize]]
      - allows windows to be resized with its aspect ratio remaining constant
@@ -534,15 +534,13 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - new windows are placed at the bottom of the stack
 
    - [[https://dwm.suckless.org/patches/autoresize/][autoresize]]
-     - by default, windows that are not visible when requesting a resize/move will not get
-       resized/moved, with this patch, however, they will
+     - by default, windows that are not visible when requesting a resize/move will not get resized/moved, with this patch, however, they will
 
    - [[https://dwm.suckless.org/patches/autostart/][autostart]]
      - makes dwm run =~/.dwm/autostart_blocking.sh= and =~/.dwm/autostart.sh &= on startup
 
    - [[https://dwm.suckless.org/patches/awesomebar/][awesomebar]]
-     - enhanced taskbar that allows focus / hiding / unhiding of windows by clicking on the status
-       bar
+     - enhanced taskbar that allows focus / hiding / unhiding of windows by clicking on the status bar
 
    - [[https://codemadness.org/paste/dwm-border-bar.patch][bar_border]]
      - adds a border around the bar similarly to how client windows have borders
@@ -551,8 +549,7 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - allows the bar height to be explicitly set rather than being derived from font
 
    - [[https://github.com/bakkeby/patches/wiki/barmodules/][barmodules]]
-     - splits the dwm bar into modules allowing for re-arrangement of the bar and easier
-       integration for new features
+     - splits the dwm bar into modules allowing for re-arrangement of the bar and easier integration for new features
 
    - [[https://dwm.suckless.org/patches/barpadding/][barpadding]]
      - adds vertical and horizontal space between the statusbar and the edge of the screen
@@ -564,8 +561,7 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - adds an iscentered rule to automatically center clients on the current monitor
 
    - [[https://dwm.suckless.org/patches/cfacts/][cfacts]]
-     - the cfacts patch provides the ability to assign different weights to clients in their
-       respective stack in tiled layout
+     - the cfacts patch provides the ability to assign different weights to clients in their respective stack in tiled layout
 
    - [[https://dwm.suckless.org/patches/clientindicators/][clientindicators]]
      - draws a dot indicator overlayed on each tag icon for each client
@@ -578,14 +574,11 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - lets you change the foreground and background color of every statusbar element
 
    - color_emoji
-     - enables color emoji in dmenu by removing a workaround for a BadLength error in the Xft
-       library when color glyphs are used
-     - enabling this will crash dwm on encountering such glyphs unless you also have an updated
-       Xft library that can handle them
+     - enables color emoji in dmenu by removing a workaround for a BadLength error in the Xft library when color glyphs are used
+     - enabling this will crash dwm on encountering such glyphs unless you also have an updated Xft library that can handle them
 
    - [[https://dwm.suckless.org/patches/combo/][combo]]
-     - allows you to select multiple tags by pressing all the right keys as a combo, e.g. hold MOD
-       and press and hold 1 and 3 together to view those two tags
+     - allows you to select multiple tags by pressing all the right keys as a combo, e.g. hold MOD and press and hold 1 and 3 together to view those two tags
 
    - [[https://dwm.suckless.org/patches/cool_autostart/][cool_autostart]]
      - allows dwm to execute commands from an array in the config.h file
@@ -595,31 +588,24 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - lets you cycle through all your layouts
 
    - [[https://dwm.suckless.org/patches/decoration_hints/][decoration_hints]]
-     - make dwm respect =_MOTIF_WM_HINTS= property, and not draw borders around windows
-      requesting for it
-     - some applications use this property to notify window managers to not draw window
-       decorations
-     - not respecting this property leads to issues with applications that draw their own borders,
-       like chromium (with "Use system title bar and borders" turned off) or vlc in fullscreen mode
+     - make dwm respect =_MOTIF_WM_HINTS= property, and not draw borders around windows requesting for it
+     - some applications use this property to notify window managers to not draw window decorations
+     - not respecting this property leads to issues with applications that draw their own borders, like chromium (with "Use system title bar and borders" turned off) or vlc in fullscreen mode
 
    - [[https://dwm.suckless.org/patches/reorganizetags/][distributetags]]
-     - this reorganisetags variant re-distributes all clients on the current monitor evenly across
-       all tags
+     - this reorganisetags variant re-distributes all clients on the current monitor evenly across all tags
 
    - [[https://dwm.suckless.org/patches/dmenumatchtop][dmenumatchtop]]
      - updates the position of dmenu to match that of the bar
-     - i.e. if topbar is 0 then dmenu will appear at the bottom and if 1 then dmenu will appear at
-       the top
+     - i.e. if topbar is 0 then dmenu will appear at the bottom and if 1 then dmenu will appear at the top
 
    - [[https://github.com/bakkeby/patches/wiki/dragcfact/][dragcfact]]
-     - lets you resize clients' size (i.e. modify cfact) by holding modkey + shift + right-click
-       and dragging the mouse
+     - lets you resize clients' size (i.e. modify cfact) by holding modkey + shift + right-click and dragging the mouse
 
    - [[https://github.com/bakkeby/patches/wiki/dragmfact/][dragmfact]]
      - lets you resize the split in layouts (i.e. modify mfact) by holding the modkey + shift
        + left-click and dragging the mouse
-     - this is a bespoke patch that supports vertical and horizontal layout splits as well as
-       centered master variants
+     - this is a bespoke patch that supports vertical and horizontal layout splits as well as centered master variants
 
    - [[https://gist.github.com/danbyl/54f7c1d57fc6507242a95b71c3d8fdea][dwmblocks]]
      - signal integration to use dwm with a patched [[https://github.com/torrinfail/dwmblocks][dwmblocks]]
@@ -630,82 +616,65 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://dwm.suckless.org/patches/emptyview/][emptyview]]
      - allows no tag at all to be selected
-     - dwm will start with no tag selected and when a client with no tag rule is started and no
-       tag is selected then it will be opened on the first tag
+     - dwm will start with no tag selected and when a client with no tag rule is started and no tag is selected then it will be opened on the first tag
 
    - [[https://dwm.suckless.org/patches/ewmhtags/][ewmhtags]]
-     - adds EWMH support for =_NET_NUMBER_OF_DESKTOPS=, =_NET_CURRENT_DESKTOP=, =_NET_DESKTOP_NAMES=
-       and =_NET_DESKTOP_VIEWPORT=, which allows for compatibility with other bars and programs
-       that request workspace information, e.g. polybar's xworkspaces module
+     - adds EWMH support for =_NET_NUMBER_OF_DESKTOPS=, =_NET_CURRENT_DESKTOP=, =_NET_DESKTOP_NAMES= and =_NET_DESKTOP_VIEWPORT=, which allows for compatibility with other bars and programs that request workspace information, e.g. polybar's xworkspaces module
 
    - [[https://dwm.suckless.org/patches/exresize/][exresize]]
-     - this patch allows the user to change size and placement of floating windows using only the
-       keyboard
-     - it also allows for temporary vertical and horizontal extension of windows similar to other
-       WMs fill command
+     - this patch allows the user to change size and placement of floating windows using only the keyboard
+     - it also allows for temporary vertical and horizontal extension of windows similar to other WMs fill command
 
    - +[[https://dwm.suckless.org/patches/extrabar/][extrabar]]+
      - +enables an extra status bar in dwm in a similar manner to the dualstatus patch+
-     - +if the primary status is at the top via topbar then the extra status bar will be placed at
-       the bottom and vice versa+
+     - +if the primary status is at the top via topbar then the extra status bar will be placed at the bottom and vice versa+
 
    - extrastatus
      - formerly extrabar - now only splits the status into to statuses by using a status separator
 
    - [[https://dwm.suckless.org/patches/fakefullscreen/][fakefullscreen]]
      - only allow clients to "fullscreen" into the space currently given to them
-     - as an example, this will allow you to view a fullscreen video in your browser on one half
-       of the screen, while having the other half available for other tasks
+     - as an example, this will allow you to view a fullscreen video in your browser on one half of the screen, while having the other half available for other tasks
 
    - [[https://github.com/bakkeby/patches/wiki/fakefullscreenclient/][fakefullscreenclient]]
-     - similarly to the fakefullscreen patch this patch only allows clients to "fullscreen" into
-       the space currently given to them
-     - as an example, this will allow you to view a fullscreen video in your browser on one half
-       of the screen, while having the other half available for other tasks
-     - the "twist" with this patch is that fake fullscreen can be toggled on a per client basis
-       rather than applying to all clients globally
+     - similarly to the fakefullscreen patch this patch only allows clients to "fullscreen" into the space currently given to them
+     - as an example, this will allow you to view a fullscreen video in your browser on one half of the screen, while having the other half available for other tasks
+     - the "twist" with this patch is that fake fullscreen can be toggled on a per client basis rather than applying to all clients globally
 
    - [[https://dwm.suckless.org/patches/fancybar/][fancybar]]
      - shows the titles of all visible windows in the status bar
 
    - flexwintitle
-     - based on the bartabgroups patch, this is a layout aware barmodules module for handling
-       window titles intended to be used with flextile-deluxe
+     - based on the bartabgroups patch, this is a layout aware barmodules module for handling window titles intended to be used with flextile-deluxe
 
    - +[[https://dwm.suckless.org/patches/float_border_color/][floatbordercolor]]+
      - +this patch allows a different border color to be chosen for floating windows+
 
    - [[https://github.com/bakkeby/patches/wiki/floatpos/][floatpos]]
      - adds a float rule allowing the size and position of floating windows to be specified
-     - control the size and position of floating windows similar to exresize, moveresize,
-       moveplace patches
+     - control the size and position of floating windows similar to exresize, moveresize, moveplace patches
      - specify size and position using absolute, relative or fixed co-ordinates or
      - position floating windows in a grid-like manner
 
    - [[https://dwm.suckless.org/patches/focusadjacenttag/][focusadjacenttag]]
-     - provides the ability to focus the tag on the immediate left or right of the currently
-       focused tag
+     - provides the ability to focus the tag on the immediate left or right of the currently focused tag
      - it also allows to send the focused window either on the left or the right tag
 
    - [[https://github.com/bakkeby/patches/wiki/focusdir][focusdir]]
-     - allows focusing on clients based on direction (up, down, left, right) instead of client
-       order
+     - allows focusing on clients based on direction (up, down, left, right) instead of client order
 
    - [[https://dwm.suckless.org/patches/focusmaster/][focusmaster]]
      - a simple patch that just puts focus back to the master client
 
    - [[https://dwm.suckless.org/patches/focusonclick/][focusonclick]]
-     - this patch makes you switch focus only by mouse click and not sloppy (focus follows mouse
-       pointer)
+     - this patch makes you switch focus only by mouse click and not sloppy (focus follows mouse pointer)
 
    - [[https://dwm.suckless.org/patches/focusonnetactive/][focusonnetactive]]
-     - by default, dwm responds to =_NET_ACTIVE_WINDOW= client messages by setting the urgency bit
-       on the named window
+     - by default, dwm responds to =_NET_ACTIVE_WINDOW= client messages by setting the urgency bit on the named window
      - this patch activates the window instead
 
    - [[https://dwm.suckless.org/patches/focusurgent/][focusurgent]]
-     - adds a keyboard shortcut to select the next window having the urgent flag regardless of the
-       tag it is on
+     - adds a keyboard shortcut to select the next window having the urgent flag regardless of the tag it is on
 
    - [[https://dwm.suckless.org/patches/fsignal/][fsignal]]
      - send "fake signals" to dwm for handling, using xsetroot
@@ -713,8 +682,7 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://dwm.suckless.org/patches/fullscreen/][fullscreen]]
      - applies the monocle layout with the focused client on top and hides the bar
-     - when pressed again it shows the bar and restores the layout that was active before going
-       fullscreen
+     - when pressed again it shows the bar and restores the layout that was active before going fullscreen
 
    - [[https://dwm.suckless.org/patches/hide_vacant_tags/][hidevacanttags]]
      - prevents dwm from drawing tags with no clients (i.e. vacant) on the bar
@@ -725,8 +693,7 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://groups.google.com/forum/m/#!topic/wmii/7bncCahYIww][ignore-xft-errors-when-drawing-text]]
      - sometimes dwm crashes when it cannot render some glyphs in window titles (usually emoji)
-     - this patch is essentially a hack to ignore any errors when drawing text on the status bar
-       and may be removed if a more appropriate solution comes up
+     - this patch is essentially a hack to ignore any errors when drawing text on the status bar and may be removed if a more appropriate solution comes up
 
    - [[https://dwm.suckless.org/patches/inplacerotate/][inplacerotate]]
      - allows rotation of all clients in the master or stack area without affecting the other area
@@ -737,23 +704,18 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://github.com/mihirlad55/dwm-ipc][ipc]]
      - implements inter-process communication through a UNIX socket for dwm
-     - allows for the window manager to be queried for information, e.g. listen for events such as
-       tag or layout changes, as well as send commands to control the window manager via other
-       programs
+     - allows for the window manager to be queried for information, e.g. listen for events such as tag or layout changes, as well as send commands to control the window manager via other programs
 
    - [[https://github.com/bakkeby/dwm-flexipatch/issues/50][_IS_FLOATING]]
      - adds the =_IS_FLOATING= xproperty for floating windows
-     - this can allow for a compositor to handle floating windows differently to tiled windows,
-       e.g. only show shadows on floating windows
+     - this can allow for a compositor to handle floating windows differently to tiled windows, e.g. only show shadows on floating windows
      - this patch is enabled via the ewmhtags patch
 
    - [[https://dwm.suckless.org/patches/ispermanent/][ispermanent]]
-     - adds rule option for clients to avoid accidental termination by killclient for sticky
-       windows
+     - adds rule option for clients to avoid accidental termination by killclient for sticky windows
 
    - [[https://dwm.suckless.org/patches/keymodes/][keymodes]]
-     - this patch adds key modes (like in vim or emacs) where chains of keyboard shortcuts can be
-       performed
+     - this patch adds key modes (like in vim or emacs) where chains of keyboard shortcuts can be performed
 
    - [[https://dwm.suckless.org/patches/killunsel/][killunsel]]
      - kills all visible clients that are not selected (only the selected client will remain)
@@ -762,29 +724,23 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - +moves the layout symbol in the status bar to the left hand side+
 
    - LG3D
-     - changes the window manager name to "LG3d" instead of "dwm" as a workaround for Java
-       applications that assume that the window manager is using window reparenting
+     - changes the window manager name to "LG3d" instead of "dwm" as a workaround for Java applications that assume that the window manager is using window reparenting
      - refer to the ISSUES secton of the dwm man page for more details
 
    - [[https://github.com/bakkeby/patches/wiki/losefullscreen/][losefullscreen]]
-     - by default in dwm it is possible to make an application fullscreen, then use the focusstack
-       keybindings to focus on other windows beneath the current window
-     - it is also possible to spawn new windows (e.g. a terminal) that end up getting focus while
-       the previous window remains in fullscreen
+     - by default in dwm it is possible to make an application fullscreen, then use the focusstack keybindings to focus on other windows beneath the current window
+     - it is also possible to spawn new windows (e.g. a terminal) that end up getting focus while the previous window remains in fullscreen
      - this patch ensures that in such scenarios the previous window loses fullscreen
 
    - [[https://dwm.suckless.org/patches/maximize/][maximize]]
-     - adds helper functions for maximizing, horizontally and vertically, floating windows using
-       keybindings
+     - adds helper functions for maximizing, horizontally and vertically, floating windows using keybindings
 
    - [[https://dwm.suckless.org/patches/mpdcontrol/][mpdcontrol]]
      - adds keyboard bindings to control MDP (Music Player Daemon)
 
    - [[https://github.com/bakkeby/patches/wiki/monitorrules/][monitorrules]]
      - adds rules per monitor, e.g. have default layouts per monitor
-     - the use case for this is if the second monitor is vertical (i.e. rotated) then you may want
-       to use a different default layout for this monitor than what is used for the main monitor
-       (for example normal vertical split for main monitor and horizontal split for the second)
+     - the use case for this is if the second monitor is vertical (i.e. rotated) then you may want to use a different default layout for this monitor than what is used for the main monitor (for example normal vertical split for main monitor and horizontal split for the second)
 
    - [[https://dwm.suckless.org/patches/monoclesymbol/][monoclesymbol]]
      - always display the monocle-symbol as defined in config.h if the monocle-layout is activated
@@ -797,22 +753,19 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - allows you to move clients around in the stack and swap them with the master
 
    - [[https://github.com/bakkeby/patches/wiki/netclientliststacking][netclientliststacking]]
-     - adds support for the =_NET_CLIENT_LIST_STACKING= atom, needed by certain applications
-       like the Zoom video conferencing application
+     - adds support for the =_NET_CLIENT_LIST_STACKING= atom, needed by certain applications like the Zoom video conferencing application
 
    - [[https://dwm.suckless.org/patches/noborder/][noborder]]
      - removes the border when there is only one window visible
 
    - [[https://git.suckless.org/sites/commit/ed68e3629de4ef2ca2d3f8893a79fb570b4c0cbc.html][nodmenu]]
-     - enable modifying dmenu in config.def.h which resulted previously in a compilation error
-       because two lines of code hardcode dmenu into dwm
+     - enable modifying dmenu in config.def.h which resulted previously in a compilation error because two lines of code hardcode dmenu into dwm
      - allows complete removal of dmenu, should you want to do that
      - NB: this patch was removed from the patches listing on the suckless page due to it's simplicity
 
    - nomodbuttons
      - allows for toggleable client button bindings that have no modifiers
-     - this can, for example, allow you to move or resize using the mouse alone without holding
-       down a modifier key, which can be practical if you have extra buttons on your mouse
+     - this can, for example, allow you to move or resize using the mouse alone without holding down a modifier key, which can be practical if you have extra buttons on your mouse
 
    - [[https://github.com/szatanjl/dwm/commit/1529909466206016f2101457bbf37c67195714c8][no_transparent_borders]]
      - when terminals have transparency then their borders also become transparent
@@ -820,14 +773,11 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - note that this patch is only relevant if you are not using the alpha patch
 
    - [[https://github.com/bakkeby/dwm-flexipatch/issues/51][on_empty_keys]]
-     - port of InstantWM's on_empty_keys functionality allowing keybindings that apply only when a
-       tag/view is empty
-     - an example use case is being able to launch applications with first hand keys like "f" to
-       launch firefox
+     - port of InstantWM's on_empty_keys functionality allowing keybindings that apply only when a tag/view is empty
+     - an example use case is being able to launch applications with first hand keys like "f" to launch firefox
 
    - [[https://dwm.suckless.org/patches/onlyquitonempty/][onlyquitonempty]]
-     - makes it so dwm will only exit via quit() if no windows are open (in order to prevent
-       accidental loss of work)
+     - makes it so dwm will only exit via quit() if no windows are open (in order to prevent accidental loss of work)
 
    - [[https://dwm.suckless.org/patches/pango/][pango]]
      - adds simple markup for status messages using pango markup
@@ -845,28 +795,25 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - this patch provides a way to move clients up and down inside the client list
 
    - [[https://github.com/bakkeby/patches/wiki/renamedscratchpads][renamed_scratchpads]]
-      - variant of the [[https://dwm.suckless.org/patches/namedscratchpads/][named scratchpads]] patch
+     - variant of the [[https://dwm.suckless.org/patches/namedscratchpads/][named scratchpads]] patch
 
    - [[https://dwm.suckless.org/patches/reorganizetags/][reorganizetags]]
      - shifts all clients per tag to leftmost unoccupied tags
-     - e.g. if clients A, B, C are tagged on tags 1, 5, 9 respectively, when reorganized they will
-       now be on tag 1, 2, and 3
+     - e.g. if clients A, B, C are tagged on tags 1, 5, 9 respectively, when reorganized they will now be on tag 1, 2, and 3
 
    - [[https://dwm.suckless.org/patches/resizecorners/][resizecorners]]
      - by default, windows only resize from the bottom right corner
      - with this patch the mouse is warped to the nearest corner and you resize from there
 
    - [[https://github.com/bakkeby/patches/wiki/resizepoint/][resizepoint]]
-     - practically the same as resizecorners, but the cursor does not warp to any of the window
-       corners
+     - practically the same as resizecorners, but the cursor does not warp to any of the window corners
 
    - [[https://dwm.suckless.org/patches/restartsig/][restartsig]]
      - adds a keyboard shortcut to restart dwm or alternatively by using kill -HUP dwmpid
      - additionally dwm can quit cleanly by using kill -TERM dwmpid
 
    - [[https://github.com/bakkeby/patches/wiki/riodraw/][riodraw]]
-     - adds rio-like drawing to spawn new windows or to resize the selected client (ported from
-       instantWM)
+     - adds rio-like drawing to spawn new windows or to resize the selected client (ported from instantWM)
      - depends on an external tool slop being installed
 
    - [[https://dwm.suckless.org/patches/rotatestack/][rotatestack]]
@@ -883,11 +830,10 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - the scratchpad patch allows you to spawn or restore a floating terminal window
 
    - [[https://github.com/GasparVardanyan/dwm-scratchpad][scratchpad_alt_1]]
-     - this alternative patch enables a scratchpad feature in dwm similar to the scratchpad
-       feature in i3wm
+     - this alternative patch enables a scratchpad feature in dwm similar to the scratchpad feature in i3wm
 
-    - seamless_restart
-       - allows for selected layout, assigned tags, etc. to be persisted across restarts
+   - seamless_restart
+     - allows for selected layout, assigned tags, etc. to be persisted across restarts
 
    - [[https://dwm.suckless.org/patches/selfrestart/][selfrestart]]
      - restart dwm without the unnecessary dependency of an external script
@@ -912,9 +858,7 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - makes dwm obey even "soft" sizehints for new clients
 
    - [[https://www.mail-archive.com/hackers@suckless.org/msg09400.html][sortscreens]]
-     - this patch aims to address some inconsistencies when it comes to focusmon, tagmon and
-       similar functionality by explicitly sorting screens left to right (or top to bottom in a
-       vertical layout)
+     - this patch aims to address some inconsistencies when it comes to focusmon, tagmon and similar functionality by explicitly sorting screens left to right (or top to bottom in a vertical layout)
 
    - [[https://dwm.suckless.org/patches/spawn_cwd/][spawn_cwd]]
      - spawns programs from currently focused client's working directory
@@ -935,58 +879,47 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - adds a clickable button to the left hand side of the statusbar
 
    - [[https://dwm.suckless.org/patches/statuscmd/][statuscmd]]
-     - adds the ability to execute shell commands based on the mouse button and position when
-       clicking the status bar
+     - adds the ability to execute shell commands based on the mouse button and position when clicking the status bar
 
    - [[https://dwm.suckless.org/patches/statuscolors/][statuscolors]]
-     - enables colored text in the status bar allowing multiple color combinations for use in the
-       status script
+     - enables colored text in the status bar allowing multiple color combinations for use in the status script
 
    - [[https://dwm.suckless.org/patches/statuspadding/][statuspadding]]
      - adds configuration options for horizontal and vertical padding in the status bar
 
    - [[https://github.com/bakkeby/patches/wiki/steam][steam]]
-     - a minor patch that works around the issue of floating Steam windows jumping around the
-       screen when they receive focus
+     - a minor patch that works around the issue of floating Steam windows jumping around the screen when they receive focus
 
    - [[https://dwm.suckless.org/patches/sticky/][sticky]]
      - adds toggleable keyboard shortcut to make a client 'sticky', i.e. visible on all tags
 
    - [[https://dwm.suckless.org/patches/swallow/][swallow]]
      - this patch adds "window swallowing" to dwm as known from Plan 9's windowing system rio
-     - clients marked with isterminal in config.h swallow a window opened by any child process,
-       e.g. running xclock in a terminal
+     - clients marked with isterminal in config.h swallow a window opened by any child process, e.g. running xclock in a terminal
      - closing the xclock window restores the terminal window in the current position
 
    - [[https://dwm.suckless.org/patches/swapfocus/][swapfocus]]
-     - this patch depends on the pertag patch and makes it possible to switch focus with a single
-       shortcut (mod-s) instead of having to think if you should use mod-j or mod-k for reaching
-       the previously used window
+     - this patch depends on the pertag patch and makes it possible to switch focus with a single shortcut (mod-s) instead of having to think if you should use mod-j or mod-k for reaching the previously used window
 
    - [[https://dwm.suckless.org/patches/swaptags/][swaptags]]
-     - allows swapping the contents of the currently selected tag with another tag by using
-       keyboard shortcuts
+     - allows swapping the contents of the currently selected tag with another tag by using keyboard shortcuts
 
    - [[https://dwm.suckless.org/patches/switchcol/][switchcol]]
      - allows you to switch focus between the master and stack columns using a single keybinding
 
    - [[https://github.com/bakkeby/patches/wiki/switchtag/][switchtag]]
-     - when an application opens on a specific tab this patch adds the option to also switch to
-       that tag when the application starts
+     - when an application opens on a specific tab this patch adds the option to also switch to that tag when the application starts
      - optionally, the previous view can also be restored when the client is closed
 
    - [[https://dwm.suckless.org/patches/systray/][systray]]
      - adds system tray in the status bar
 
    - [[https://dwm.suckless.org/patches/tab/][tab]]
-     - transforms the monocle layout into a "tabbed" layout if more than one window is present on
-       the monocle view
+     - transforms the monocle layout into a "tabbed" layout if more than one window is present on the monocle view
      - this is essentially just a specific bar
-     - the patch has been added for demonstration purposes only and has limited compatibility with
-       other patches
+     - the patch has been added for demonstration purposes only and has limited compatibility with other patches
      - it will conflict space-wise with a second bar
-     - note that fancybar, awesomebar, bartabgroups and similar patches make the tab patch
-       redundant
+     - note that fancybar, awesomebar, bartabgroups and similar patches make the tab patch redundant
 
    - [[https://dwm.suckless.org/patches/tagall/][tagall]]
      - adds keyboard shortcuts to move all (or only floating) windows from one tag to another
@@ -1010,13 +943,15 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
    - [[https://dwm.suckless.org/patches/tagothermonitor/][tagothermonitor]]
      - adds functions and keybindings to tag a window to a desired tag on an adjacent monitor
 
+   - [[https://dwm.suckless.org/patches/tag-previews/][tagpreview]]
+     - shows a preview of a tag when hovering the tag icon using the mouse
+
    - [[https://github.com/bakkeby/patches/wiki/tagswapmon/][tagswapmon]]
      - swap all visible windows on one monitor with those of an adjacent monitor
 
    - [[https://dwm.suckless.org/patches/tapresize/][tapresize]]
      - allows resizing of windows using a touchpad
-     - uses vertical and horizontal scroll events allowing you to use one-finger tap for moving
-       windows and two-finger tap for resizing
+     - uses vertical and horizontal scroll events allowing you to use one-finger tap for moving windows and two-finger tap for resizing
 
    - +[[https://dwm.suckless.org/patches/titlecolor/][titlecolor]]+
      - +adds a new color scheme used by the (selected) window title in the bar+
@@ -1026,60 +961,48 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://github.com/bakkeby/patches/wiki/toggletag][toggletag]]
      - toggle tags using the same keyboard shortcuts to view tags
-     - e.g. hitting ~MOD+4~ lets you view tag 4 and hitting the keybinding a second time brings
-       you back to where you were before
+     - e.g. hitting ~MOD+4~ lets you view tag 4 and hitting the keybinding a second time brings you back to where you were before
 
    - [[https://github.com/bakkeby/patches/wiki/togglelayout][togglelayout]]
      - toggle layout using the same keyboard shortcuts to set the layout
-     - e.g. hitting ~MOD+m~ switches to monocle layout, hitting the same keybinding again brings
-       you back to the previous layout
+     - e.g. hitting ~MOD+m~ switches to monocle layout, hitting the same keybinding again brings you back to the previous layout
 
    - [[https://dwm.suckless.org/patches/transfer/][transfer]]
-     - lets you transfer the currently focused client between the master and stack area while
-       increasing or decreasing the master area (nmaster) accordingly
+     - lets you transfer the currently focused client between the master and stack area while increasing or decreasing the master area (nmaster) accordingly
 
    - [[https://dwm.suckless.org/patches/transfer/][transferall]]
-     - lets you transfer all clients between the master and stack area while increasing or
-       decreasing the master area (nmaster) accordingly
+     - lets you transfer all clients between the master and stack area while increasing or decreasing the master area (nmaster) accordingly
 
    - [[https://dwm.suckless.org/patches/underlinetags/][underlinetags]]
      - underlines the selected tag, or optionally all tags
 
    - [[https://dwm.suckless.org/patches/unfloatvisible/][unfloatvisible]]
-     - resets isfloating on any visible windows that have it set and optionally also applies a
-       layout
+     - resets isfloating on any visible windows that have it set and optionally also applies a layout
 
    - +[[https://dwm.suckless.org/patches/urgentborder/][urgentborder]]+
      - +this patch makes "urgent" windows have different colors+
 
    - [[https://github.com/bakkeby/patches/blob/master/dwm/dwm-vanitygaps-6.2.diff][vanitygaps]]
-     - adds configurable gaps between windows differentiating between outer, inner, horizontal and
-       vertical gaps
+     - adds configurable gaps between windows differentiating between outer, inner, horizontal and vertical gaps
 
    - [[https://dwm.suckless.org/patches/viewontag/][viewontag]]
      - follow a window to the tag it is being moved to
 
    - [[https://dwm.suckless.org/patches/vtcolors/][vtcolor]]
-     - this patch adds the ability for dwm to read colors from the linux virtual console
-       essentially allowing you to use the same color scheme as your regular tty
+     - this patch adds the ability for dwm to read colors from the linux virtual console essentially allowing you to use the same color scheme as your regular tty
 
    - [[https://dwm.suckless.org/patches/warp/][warp]]
-     - warps the mouse cursor to the center of the currently focused window or screen when the
-       mouse cursor is (a) on a different screen or (b) on top of a different window
+     - warps the mouse cursor to the center of the currently focused window or screen when the mouse cursor is (a) on a different screen or (b) on top of a different window
 
    - [[https://dwm.suckless.org/patches/winicon/][winicon]]
      - adds the window icon next to the window title in the bar
 
    - [[https://github.com/bakkeby/patches/wiki/windowrolerule/][windowrolerule]]
-     - sometimes a single application opens different windows depending on the task at hand and
-       this is often reflected in the =WM_WINDOW_ROLE(STRING)= x property
-     - this patch adds the role field to the rule configuration so that one can differentiate
-       between, say, Firefox "browser" vs "Preferences" vs "Manager" or Google-chrome "browser"
-       vs "pop-up".
+     - sometimes a single application opens different windows depending on the task at hand and this is often reflected in the =WM_WINDOW_ROLE(STRING)= x property
+     - this patch adds the role field to the rule configuration so that one can differentiate between, say, Firefox "browser" vs "Preferences" vs "Manager" or Google-chrome "browser" vs "pop-up".
 
    - [[http://dwm.suckless.org/patches/winview/][winview]]
-     - allows switching the view to that of a given client from the all-window view (Mod-0) using
-       a keyboard shortcut
+     - allows switching the view to that of a given client from the all-window view (Mod-0) using a keyboard shortcut
 
    - [[https://dwm.suckless.org/patches/xkb/][xkb]]
      - remembers keyboard layout per client
@@ -1091,53 +1014,50 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - a simple patch that allows floating windows to be zoomed into the master stack position
 
    - [[https://dwm.suckless.org/patches/zoomswap/][zoomswap]]
-     - allows a master and a stack window to swap places rather than every window on the screen
-       changing position
+     - allows a master and a stack window to swap places rather than every window on the screen changing position
 
 ** Layouts Included
 
    - [[https://dwm.suckless.org/patches/bottomstack/][bstack]]
-      - bottomstack layout
+     - bottomstack layout
 
    - [[https://dwm.suckless.org/patches/bottomstack/][bstackhoriz]]
-      - bottomstack horizontal layout
+     - bottomstack horizontal layout
 
    - [[https://dwm.suckless.org/patches/centeredmaster/][centeredmaster]]
-      - centeredmaster layout
+     - centeredmaster layout
 
    - [[https://dwm.suckless.org/patches/centeredmaster/][centeredfloatingmaster]]
-      - centeredfloatingmaster layout
+     - centeredfloatingmaster layout
 
    - [[https://dwm.suckless.org/patches/columns/][columns]]
-      - same as the default tile layout except clients in the master area are arranged in columns
-        (i.e. left to right)
+     - same as the default tile layout except clients in the master area are arranged in columns (i.e. left to right)
 
    - [[https://dwm.suckless.org/patches/deck/][deck]]
-      - deck layout - clients in the stack area are arranged on top of each other (like monocle)
+     - deck layout - clients in the stack area are arranged on top of each other (like monocle)
 
    - [[https://dwm.suckless.org/patches/fibonacci/][fibonacci]]
-      - fibonacci (dwindle and spiral) layouts
+     - fibonacci (dwindle and spiral) layouts
 
    - [[https://github.com/bakkeby/patches/wiki/flextile-deluxe/][flextile-deluxe]]
-      - a re-envisioned, flexible and over-the-top version of the original [[https://dwm.suckless.org/patches/flextile/][flextile]] patch supporting
-         - multiple split layouts (horizontal, vertical, centered, floating, fixed)
-         - tile arrangement on a per split basis (stack horizontally, stack vertically, grids,
-           fibonacci)
-         - pertag, cfacts, rmaster, vanitygaps compatibility
-         - tile, deck, monocle, centeredmaster, bstack, bstackhoriz, gapplessgrid and more
-      - this gives you a lot of versatility in terms of layout
+     - a re-envisioned, flexible and over-the-top version of the original [[https://dwm.suckless.org/patches/flextile/][flextile]] patch supporting
+       - multiple split layouts (horizontal, vertical, centered, floating, fixed)
+       - tile arrangement on a per split basis (stack horizontally, stack vertically, grids, fibonacci)
+       - pertag, cfacts, rmaster, vanitygaps compatibility
+       - tile, deck, monocle, centeredmaster, bstack, bstackhoriz, gapplessgrid and more
+     - this gives you a lot of versatility in terms of layout
 
    - [[https://dwm.suckless.org/patches/gaplessgrid/][gapplessgrid]]
-      - gappless grid layout
+     - gappless grid layout
 
    - [[https://dwm.suckless.org/patches/gridmode/][gridmode]]
-      - gridmode (grid) layout
+     - gridmode (grid) layout
 
    - [[https://dwm.suckless.org/patches/horizgrid/][horizgrid]]
-      - horizontal grid layout
+     - horizontal grid layout
 
    - [[https://dwm.suckless.org/patches/nrowgrid/][nrowgrid]]
-      - nrowgrid layout, number of rows in grid controlled by nmaster
+     - nrowgrid layout, number of rows in grid controlled by nmaster
 
 * Patches
 
@@ -1304,6 +1224,25 @@ https://dwm.suckless.org/patches/taggrid/
 
 #+BEGIN_SRC c :tangle patches.def.h
 #define BAR_TAGGRID_PATCH 0
+#+END_SRC
+
+*** Tag Preview
+
+Hover tag icons to see a preview of the windows on that tag.
+
+The patch depends on Imlib2 for icon scaling. You need to uncomment the corresponding line in config.mk to use the -lImlib2 library.
+
+Arch Linux:
+    ~sudo pacman -S imlib2~
+Debian:
+    ~sudo apt install libimlib2-dev~
+
+As with the winicon patch you may want to consider adding the compiler flags of ~-O3~ and ~-march=native~ to enable auto loop vectorize for better performance.
+
+https://dwm.suckless.org/patches/tag-previews/
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define BAR_TAGPREVIEW_PATCH 0
 #+END_SRC
 
 *** Status
@@ -3392,7 +3331,7 @@ YAJLINC = -I/usr/include/yajl
 # Uncomment this for the swallow patch / SWALLOW_PATCH
 XCBLIBS = -lX11-xcb -lxcb -lxcb-res
 
-# This is needed for the winicon patch / BAR_WINICON_PATCH
+# This is needed for the winicon and tagpreview patches / BAR_WINICON_PATCH / BAR_TAGPREVIEW_PATCH
 #IMLIB2LIBS = -lImlib2
 
 # includes and libs
@@ -3514,6 +3453,12 @@ static const unsigned int snap           = 10;  /* snap pixel */
 #if SWALLOW_PATCH
 static const int swallowfloating         = 0;   /* 1 means swallow floating windows by default */
 #endif // SWALLOW_PATCH
+#+END_SRC
+
+#+BEGIN_SRC c :tangle config.def.h
+#if BAR_TAGPREVIEW_PATCH
+static const int scalepreview            = 4;        /* Tag preview scaling */
+#endif // BAR_TAGPREVIEW_PATCH
 #+END_SRC
 
 #+BEGIN_SRC c :tangle config.def.h
@@ -4175,81 +4120,81 @@ name - does nothing, intended for visual clue and for logging / debugging
 
 #+BEGIN_SRC c :tangle config.def.h
 static const BarRule barrules[] = {
-        /* monitor   bar    alignment         widthfunc                drawfunc                clickfunc                name */
+        /* monitor   bar    alignment         widthfunc                 drawfunc                clickfunc                hoverfunc                name */
         { -2 },
         #if BAR_STATUSBUTTON_PATCH
-        { -1,        0,     BAR_ALIGN_LEFT,   width_stbutton,          draw_stbutton,          click_stbutton,          "statusbutton" },
+        { -1,        0,     BAR_ALIGN_LEFT,   width_stbutton,           draw_stbutton,          click_stbutton,          NULL,                    "statusbutton" },
         #endif // BAR_STATUSBUTTON_PATCH
         #if BAR_POWERLINE_TAGS_PATCH
-        {  0,        0,     BAR_ALIGN_LEFT,   width_pwrl_tags,         draw_pwrl_tags,         click_pwrl_tags,         "powerline_tags" },
+        {  0,        0,     BAR_ALIGN_LEFT,   width_pwrl_tags,          draw_pwrl_tags,         click_pwrl_tags,         NULL,                    "powerline_tags" },
         #endif // BAR_POWERLINE_TAGS_PATCH
         #if BAR_TAGS_PATCH
-        { -1,        0,     BAR_ALIGN_LEFT,   width_tags,              draw_tags,              click_tags,              "tags" },
+        { -1,        0,     BAR_ALIGN_LEFT,   width_tags,               draw_tags,              click_tags,              hover_tags,              "tags" },
         #endif // BAR_TAGS_PATCH
         #if BAR_TAGLABELS_PATCH
-        { -1,        0,     BAR_ALIGN_LEFT,   width_taglabels,         draw_taglabels,         click_taglabels,         "taglabels" },
+        { -1,        0,     BAR_ALIGN_LEFT,   width_taglabels,          draw_taglabels,         click_taglabels,         NULL,                    "taglabels" },
         #endif // BAR_TAGLABELS_PATCH
         #if BAR_TAGGRID_PATCH
-        { -1,        0,     BAR_ALIGN_LEFT,   width_taggrid,           draw_taggrid,           click_taggrid,           "taggrid" },
+        { -1,        0,     BAR_ALIGN_LEFT,   width_taggrid,            draw_taggrid,           click_taggrid,           NULL,                    "taggrid" },
         #endif // BAR_TAGGRID_PATCH
         #if BAR_SYSTRAY_PATCH
-        {  0,        0,     BAR_ALIGN_RIGHT,  width_systray,           draw_systray,           click_systray,           "systray" },
+        {  0,        0,     BAR_ALIGN_RIGHT,  width_systray,            draw_systray,           click_systray,           NULL,                    "systray" },
         #endif // BAR_SYSTRAY_PATCH
         #if BAR_LTSYMBOL_PATCH
-        { -1,        0,     BAR_ALIGN_LEFT,   width_ltsymbol,          draw_ltsymbol,          click_ltsymbol,          "layout" },
+        { -1,        0,     BAR_ALIGN_LEFT,   width_ltsymbol,           draw_ltsymbol,          click_ltsymbol,          NULL,                    "layout" },
         #endif // BAR_LTSYMBOL_PATCH
         #if BAR_STATUSCOLORS_PATCH && BAR_STATUSCMD_PATCH
-        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_statuscolors,      draw_statuscolors,      click_statuscmd,         "statuscolors" },
+        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_statuscolors,       draw_statuscolors,      click_statuscmd,         NULL,                    "statuscolors" },
         #elif BAR_STATUSCOLORS_PATCH
-        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_statuscolors,      draw_statuscolors,      click_statuscolors,      "statuscolors" },
+        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_statuscolors,       draw_statuscolors,      click_statuscolors,      NULL,                    "statuscolors" },
         #elif BAR_STATUS2D_PATCH && BAR_STATUSCMD_PATCH
-        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_status2d,          draw_status2d,          click_statuscmd,         "status2d" },
+        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_status2d,           draw_status2d,          click_statuscmd,         NULL,                    "status2d" },
         #elif BAR_STATUS2D_PATCH
-        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_status2d,          draw_status2d,          click_status2d,          "status2d" },
+        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_status2d,           draw_status2d,          click_status2d,          NULL,                    "status2d" },
         #elif BAR_POWERLINE_STATUS_PATCH
-        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_pwrl_status,       draw_pwrl_status,       click_pwrl_status,       "powerline_status" },
+        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_pwrl_status,        draw_pwrl_status,       click_pwrl_status,       NULL,                    "powerline_status" },
         #elif BAR_STATUS_PATCH && BAR_STATUSCMD_PATCH
-        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_status,            draw_status,            click_statuscmd,         "status" },
+        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_status,             draw_status,            click_statuscmd,         NULL,                    "status" },
         #elif BAR_STATUS_PATCH
-        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_status,            draw_status,            click_status,            "status" },
+        { statusmon, 0,     BAR_ALIGN_RIGHT,  width_status,             draw_status,            click_status,            NULL,                    "status" },
         #endif // BAR_STATUS2D_PATCH | BAR_STATUSCMD_PATCH
         #if XKB_PATCH
-        {  0,        0,     BAR_ALIGN_RIGHT,  width_xkb,               draw_xkb,               click_xkb,               "xkb" },
+        {  0,        0,     BAR_ALIGN_RIGHT,  width_xkb,                draw_xkb,               click_xkb,               NULL,                    "xkb" },
         #endif // XKB_PATCH
         #if BAR_FLEXWINTITLE_PATCH
-        { -1,        0,     BAR_ALIGN_NONE,   width_flexwintitle,      draw_flexwintitle,      click_flexwintitle,      "flexwintitle" },
+        { -1,        0,     BAR_ALIGN_NONE,   width_flexwintitle,       draw_flexwintitle,      click_flexwintitle,      NULL,                    "flexwintitle" },
         #elif BAR_TABGROUPS_PATCH
-        { -1,        0,     BAR_ALIGN_NONE,   width_bartabgroups,      draw_bartabgroups,      click_bartabgroups,      "bartabgroups" },
+        { -1,        0,     BAR_ALIGN_NONE,   width_bartabgroups,       draw_bartabgroups,      click_bartabgroups,      NULL,                    "bartabgroups" },
         #elif BAR_AWESOMEBAR_PATCH
-        { -1,        0,     BAR_ALIGN_NONE,   width_awesomebar,        draw_awesomebar,        click_awesomebar,        "awesomebar" },
+        { -1,        0,     BAR_ALIGN_NONE,   width_awesomebar,         draw_awesomebar,        click_awesomebar,        NULL,                    "awesomebar" },
         #elif BAR_FANCYBAR_PATCH
-        { -1,        0,     BAR_ALIGN_NONE,   width_fancybar,          draw_fancybar,          click_fancybar,          "fancybar" },
+        { -1,        0,     BAR_ALIGN_NONE,   width_fancybar,           draw_fancybar,          click_fancybar,          NULL,                    "fancybar" },
         #elif BAR_WINTITLE_PATCH
-        { -1,        0,     BAR_ALIGN_NONE,   width_wintitle,          draw_wintitle,          click_wintitle,          "wintitle" },
+        { -1,        0,     BAR_ALIGN_NONE,   width_wintitle,           draw_wintitle,          click_wintitle,          NULL,                    "wintitle" },
         #endif // BAR_TABGROUPS_PATCH | BAR_AWESOMEBAR_PATCH | BAR_FANCYBAR_PATCH | BAR_WINTITLE_PATCH
         #if BAR_EXTRASTATUS_PATCH
         #if BAR_STATUSCOLORS_PATCH && BAR_STATUSCMD_PATCH
-        { statusmon, 1,     BAR_ALIGN_CENTER, width_statuscolors_es,   draw_statuscolors_es,   click_statuscmd_es,      "statuscolors_es" },
+        { statusmon, 1,     BAR_ALIGN_CENTER, width_statuscolors_es,    draw_statuscolors_es,   click_statuscmd_es,      NULL,                    "statuscolors_es" },
         #elif BAR_STATUSCOLORS_PATCH
-        { statusmon, 1,     BAR_ALIGN_CENTER, width_statuscolors_es,   draw_statuscolors_es,   click_statuscolors,      "statuscolors_es" },
+        { statusmon, 1,     BAR_ALIGN_CENTER, width_statuscolors_es,    draw_statuscolors_es,   click_statuscolors,      NULL,                    "statuscolors_es" },
         #elif BAR_STATUS2D_PATCH && BAR_STATUSCMD_PATCH
-        { statusmon, 1,     BAR_ALIGN_CENTER, width_status2d_es,       draw_status2d_es,       click_statuscmd_es,      "status2d_es" },
+        { statusmon, 1,     BAR_ALIGN_CENTER, width_status2d_es,        draw_status2d_es,       click_statuscmd_es,      NULL,                    "status2d_es" },
         #elif BAR_STATUS2D_PATCH
-        { statusmon, 1,     BAR_ALIGN_CENTER, width_status2d_es,       draw_status2d_es,       click_status2d,          "status2d_es" },
+        { statusmon, 1,     BAR_ALIGN_CENTER, width_status2d_es,        draw_status2d_es,       click_status2d,          NULL,                    "status2d_es" },
         #elif BAR_POWERLINE_STATUS_PATCH
-        { statusmon, 1,     BAR_ALIGN_RIGHT,  width_pwrl_status_es,    draw_pwrl_status_es,    click_pwrl_status,       "powerline_status" },
+        { statusmon, 1,     BAR_ALIGN_RIGHT,  width_pwrl_status_es,     draw_pwrl_status_es,    click_pwrl_status,       NULL,                    "powerline_status" },
         #elif BAR_STATUSCMD_PATCH && BAR_STATUS_PATCH
-        { statusmon, 1,     BAR_ALIGN_CENTER, width_status_es,         draw_status_es,         click_statuscmd_es,      "status_es" },
+        { statusmon, 1,     BAR_ALIGN_CENTER, width_status_es,          draw_status_es,         click_statuscmd_es,      NULL,                    "status_es" },
         #elif BAR_STATUS_PATCH
-        { statusmon, 1,     BAR_ALIGN_CENTER, width_status_es,         draw_status_es,         click_status,            "status_es" },
+        { statusmon, 1,     BAR_ALIGN_CENTER, width_status_es,          draw_status_es,         click_status,            NULL,                    "status_es" },
         #endif // BAR_STATUS2D_PATCH | BAR_STATUSCMD_PATCH
         #endif // BAR_EXTRASTATUS_PATCH
         #if BAR_FLEXWINTITLE_PATCH
         #if BAR_WINTITLE_HIDDEN_PATCH
-        { -1,        1,  BAR_ALIGN_RIGHT_RIGHT, width_wintitle_hidden, draw_wintitle_hidden,   click_wintitle_hidden,   "wintitle_hidden" },
+        { -1,        1,  BAR_ALIGN_RIGHT_RIGHT, width_wintitle_hidden,  draw_wintitle_hidden,   click_wintitle_hidden,   NULL,                    "wintitle_hidden" },
         #endif
         #if BAR_WINTITLE_FLOATING_PATCH
-        { -1,        1,     BAR_ALIGN_LEFT,   width_wintitle_floating, draw_wintitle_floating, click_wintitle_floating, "wintitle_floating" },
+        { -1,        1,     BAR_ALIGN_LEFT,   width_wintitle_floating,  draw_wintitle_floating, click_wintitle_floating, NULL,                    "wintitle_floating" },
         #endif // BAR_WINTITLE_FLOATING_PATCH
         #endif // BAR_FLEXWINTITLE_PATCH
 };
