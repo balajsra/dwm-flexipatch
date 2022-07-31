@@ -5609,6 +5609,11 @@ deadd-notification-center-foreground = ${self.background}
 deadd-notification-center-background = ${self.green}
 deadd-notification-center-underline  = ${self.background}
 deadd-notification-center-overline   = ${self.background}
+
+volume-foreground           = ${self.background}
+volume-background           = ${self.red}
+volume-underline            = ${self.background}
+volume-overline             = ${self.background}
 #+END_SRC
 
 **** Sizes
@@ -5782,7 +5787,7 @@ font-5 = "IPAPGothic:size=11;3"
 ;   modules-left = cpu ram
 ;   modules-center = xwindow xbacklight
 ;   modules-right = ipc clock
-modules-left   = powermenu-left powermenu powermenu-right dwm media-playing-left media-playing-change media-playing-prev media-playing-play-pause media-playing-next media-playing media-playing-right
+modules-left   = powermenu-left powermenu powermenu-right dwm volume-left volume volume-right media-playing-left media-playing-change media-playing-prev media-playing-play-pause media-playing-next media-playing media-playing-right
 ; modules-center =
 modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right deadd-notification-center-left deadd-notification-center deadd-notification-center-right
 
@@ -6716,6 +6721,87 @@ click-right = "/home/sravan/.scripts/deadd.sh --rofi"
 ; scroll-up = notify-send scroll up
 ; scroll-down = notify-send scroll down
 #+END_SRC
+
+**** Pulseaudio
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/volume-left]
+type = custom/text
+content = ""
+content-foreground = ${colors.volume-background}
+content-underline  = ${colors.volume-underline}
+content-overline   = ${colors.volume-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/volume-right]
+type = custom/text
+content = ""
+content-foreground = ${colors.volume-background}
+content-underline  = ${colors.volume-underline}
+content-overline   = ${colors.volume-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/volume]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+; sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding    = ${sizes.module-padding}
+format-volume-foreground = ${colors.volume-foreground}
+format-volume-background = ${colors.volume-background}
+format-volume-underline  = ${colors.volume-underline}
+format-volume-overline   = ${colors.volume-overline}
+
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-muted = <label-muted>
+format-muted-padding    = ${sizes.module-padding}
+format-muted-foreground = ${colors.volume-foreground}
+format-muted-background = ${colors.volume-background}
+format-muted-underline  = ${colors.volume-underline}
+format-muted-overline   = ${colors.volume-overline}
+
+; Available tokens:
+;   %percentage% (default)
+;   %decibels%
+;label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+;   %decibels%
+label-muted = ﱝ muted
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 奄
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
+
+; Right and Middle click
+click-right = pavucontrol
+; click-middle =
+#+END_SRC
+
 
 *** Launch Script
 
