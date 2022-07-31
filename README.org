@@ -5782,7 +5782,7 @@ font-5 = "IPAPGothic:size=11;3"
 ;   modules-left = cpu ram
 ;   modules-center = xwindow xbacklight
 ;   modules-right = ipc clock
-modules-left   = powermenu-left powermenu powermenu-right dwm media-playing-left media-playing media-playing-right
+modules-left   = powermenu-left powermenu powermenu-right dwm media-playing-left media-playing-change media-playing-prev media-playing-play-pause media-playing-next media-playing media-playing-right
 ; modules-center =
 modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right deadd-notification-center-left deadd-notification-center deadd-notification-center-right
 
@@ -6073,82 +6073,138 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing]
 type = custom/script
-
-; Available tokens:
-;   %counter%
-; Command to be executed (using "/bin/sh -c [command]")
-exec = ~/.config/dwm-flexipatch/polybar/scripts/get-media-playing.sh
-
-; Conditional command that, if defined, needs to exit successfully
-; before the main exec command is invoked.
-; Default: ""
-; exec-if = pgrep -x myservice
-
-; Will the script output continous content?
-; Default: false
-tail = false
-
-; Seconds to sleep between updates
-; Default: 5 (0 if `tail = true`)
+exec = ~/.config/dwm-flexipatch/polybar/scripts/scroll-media-playing.sh
+tail = true
 interval = ${intervals.media-playing}
-
-; Available tags:
-;   <output> - deprecated
-;   <label> (default)
 format = <label>
-; format-padding = ${sizes.module-padding}
-; format-background = ${colors.background}
-; format-foreground =
-
-; Available tokens:
-;   %output%
-; Default: %output%
 label = %output%
 label-foreground = ${colors.media-playing-foreground}
 label-background = ${colors.media-playing-background}
 label-underline  = ${colors.media-playing-underline}
 label-overline   = ${colors.media-playing-overline}
 label-maxlen     = ${sizes.maxlen}
-label-padding    = ${sizes.module-padding}
+label-padding    = 1
+#+END_SRC
 
-; Available tokens:
-;   %counter%
-;   %pid%
-;
-; "click-(left|middle|right)" will be executed using "/bin/sh -c [command]"
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/media-playing-change]
+type = custom/script
+exec = /home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-source-icon.sh
+interval = ${intervals.media-playing}
+format = <label>
+label = %output%
+label-foreground = ${colors.media-playing-foreground}
+label-background = ${colors.media-playing-background}
+label-underline  = ${colors.media-playing-underline}
+label-overline   = ${colors.media-playing-overline}
+label-maxlen     = ${sizes.maxlen}
+label-padding    = 1
+click-left = "/home/sravan/.scripts/playerctl.sh --change"
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/media-playing-prev]
+type = custom/script
+exec = echo "玲"
+format = <label>
+label = %output%
+label-foreground = ${colors.media-playing-foreground}
+label-background = ${colors.media-playing-background}
+label-underline  = ${colors.media-playing-underline}
+label-overline   = ${colors.media-playing-overline}
+label-maxlen     = ${sizes.maxlen}
+label-padding    = 1
+click-left = "/home/sravan/.scripts/playerctl.sh --prev"
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/media-playing-play-pause]
+type = custom/script
+exec = /home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-status-icon.sh
+format = <label>
+label = %output%
+label-foreground = ${colors.media-playing-foreground}
+label-background = ${colors.media-playing-background}
+label-underline  = ${colors.media-playing-underline}
+label-overline   = ${colors.media-playing-overline}
+label-maxlen     = ${sizes.maxlen}
+label-padding    = 1
 click-left = "/home/sravan/.scripts/playerctl.sh --play-pause"
-; click-middle = echo middle %counter%
-click-right = "/home/sravan/.scripts/playerctl.sh --rofi"
-double-click-left = "/home/sravan/.scripts/playerctl.sh --change"
-; double-click-middle = echo double middle %counter%
-; double-click-right = echo double right %counter%
+#+END_SRC
 
-; Available tokens:
-;   %counter%
-;   %pid%
-;
-; "scroll-(up|down)" will be executed using "/bin/sh -c [command]"
-scroll-up = "/home/sravan/.scripts/playerctl.sh --next"
-scroll-down = "/home/sravan/.scripts/playerctl.sh --prev"
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/media-playing-next]
+type = custom/script
+exec = echo "怜"
+format = <label>
+label = %output%
+label-foreground = ${colors.media-playing-foreground}
+label-background = ${colors.media-playing-background}
+label-underline  = ${colors.media-playing-underline}
+label-overline   = ${colors.media-playing-overline}
+label-maxlen     = ${sizes.maxlen}
+label-padding    = 1
+click-left = "/home/sravan/.scripts/playerctl.sh --next"
 #+END_SRC
 
 ***** Script
+
+#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/get-media-source-icon.sh
+mediaStatus=$(playerctl --player=playerctld metadata 2>&1)
+
+if [[ "$mediaStatus" == "No player could handle this command" ]]; then
+    echo "ﱙ"
+else
+    trackid=$(playerctl --player=playerctld metadata --format '{{ mpris:trackid }}')
+
+    if grep -q -i "chromium" <<< "$trackid"; then
+        echo ""
+    elif grep -q -i "vlc" <<< "$trackid"; then
+        echo "嗢"
+    elif grep -q -i "spotify" <<< "$trackid"; then
+        echo ""
+    else
+        echo "﴾"
+    fi
+fi
+#+END_SRC
+
+#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/get-media-status-icon.sh
+mediaStatus=$(/home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-status.sh)
+
+if [[ "$mediaStatus" == "N/A" ]]; then
+    echo "懶"
+else
+    if [[ "$mediaStatus" == "Playing" ]]; then
+        echo ""
+    elif [[ "$mediaStatus" == "Paused" ]]; then
+        echo "契"
+    fi
+
+    echo $status
+fi
+#+END_SRC
+
+#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/get-media-status.sh
+mediaStatus=$(playerctl --player=playerctld metadata 2>&1)
+
+if [[ "$mediaStatus" == "No player could handle this command" ]]; then
+    echo "N/A"
+else
+    status=$(playerctl --player=playerctld metadata --format '{{ status }}')
+
+    echo $status
+fi
+#+END_SRC
 
 #+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/get-media-playing.sh
 mediaStatus=$(playerctl --player=playerctld metadata 2>&1)
 
 if [[ "$mediaStatus" == "No player could handle this command" ]]; then
-        echo "  N/A"
+        echo "N/A"
 else
         artist=$(playerctl --player=playerctld metadata --format '{{ artist }}')
         title=$(playerctl --player=playerctld metadata --format '{{ title }}')
-        status=$(playerctl --player=playerctld metadata --format '{{ status }}')
-
-        if [[ $status == "Paused" ]]; then
-                status_icon=" "
-        elif [[ $status == "Playing" ]]; then
-                status_icon=" "
-        fi
 
         if [[ $artist == "" ]]; then
             artist="N/A"
@@ -6158,8 +6214,21 @@ else
             title="N/A"
         fi
 
-        echo "$status_icon $title - $artist"
+        echo "ﱘ $title | ﴁ $artist"
 fi
+#+END_SRC
+
+#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/scroll-media-playing.sh
+zscroll \
+    --length $(xrdb -get polybar.maxlen) \
+    --delay 0.2 \
+    --scroll-padding " | " \
+    --match-command "`dirname $0`/get-media-status.sh" \
+    --match-text "Playing" "--scroll 1" \
+    --match-text "Paused" "--scroll 0" \
+    --update-check true "`dirname $0`/get-media-playing.sh" &
+
+wait
 #+END_SRC
 
 **** Date

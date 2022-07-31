@@ -2,7 +2,7 @@
 mediaStatus=$(playerctl --player=playerctld metadata 2>&1)
 
 if [[ "$mediaStatus" == "No player could handle this command" ]]; then
-        echo "N/A"
+        echo "  N/A"
 else
         artist=$(playerctl --player=playerctld metadata --format '{{ artist }}')
         title=$(playerctl --player=playerctld metadata --format '{{ title }}')
@@ -15,5 +15,5 @@ else
             title="N/A"
         fi
 
-        echo "ﱘ $title | ﴁ $artist"
+        echo "$title - $artist"
 fi
