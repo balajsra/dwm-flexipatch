@@ -109,6 +109,7 @@
     - [[#move-place][Move Place]]
     - [[#move-resize][Move Resize]]
     - [[#move-stack][Move Stack]]
+    - [[#name-tag][Name Tag]]
     - [[#net-client-list-stacking][Net Client List Stacking]]
     - [[#no-border][No Border]]
     - [[#no-dmenu][No Dmenu]]
@@ -277,7 +278,7 @@ exec dwm
 
 * dwm flexipatch
 
-This dwm 6.3 (e0dee91, 2022-08-08) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [[https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0][dwm-flexipatch-1.0]].
+This dwm 6.3 (44adafe, 2022-08-11) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [[https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0][dwm-flexipatch-1.0]].
 
 For example to include the ~alpha~ patch then you would only need to flip this setting from 0 to 1 in [[https://github.com/bakkeby/dwm-flexipatch/blob/master/patches.def.h][patches.h]]:
 
@@ -296,6 +297,8 @@ If you are experiencing issues then you may want to check out the [[https://gith
 Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map of patches]] diagram which tries to organize patches into categories.
 
 ** Changelog
+
+2022-08-12 - Added the nametag patch
 
 2022-08-02 - Added the bidi patch
 
@@ -757,6 +760,9 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://dwm.suckless.org/patches/movestack/][movestack]]
      - allows you to move clients around in the stack and swap them with the master
+
+   - [[https://dwm.suckless.org/patches/nametag/][nametag]]
+     - allows the names of tags to be changed during runtime
 
    - [[https://github.com/bakkeby/patches/wiki/netclientliststacking][netclientliststacking]]
      - adds support for the =_NET_CLIENT_LIST_STACKING= atom, needed by certain applications like the Zoom video conferencing application
@@ -2282,6 +2288,42 @@ https://dwm.suckless.org/patches/movestack/
 #define MOVESTACK_PATCH 1
 #+END_SRC
 
+*** Name Tag
+
+**** Main
+
+This patch allows you to change the names of tags during runtime.
+
+This is a bespoke version implemented specifically in relation to tagicons, which is integrated
+into dwm-flexipatch. By default it uses dmenu to retrieve the new name, but this can be
+customised via config along with the maximum text length and the format string.
+
+Special behaviour:
+   - if more than one tag is selected then the name change applies to all selected tags
+   - if tagicons is configured to have unique tags per monitor then the change only applies
+     for the current monitor
+   - the name change applies to the tag set that is active for the current tag:
+      * if used in combination with BAR_ALTTAGSDECORATION_PATCH and there are clients on the
+        given tag then the name change only applies to the ALT_TAGS_DECORATION tag set
+      * if used in combination with the BAR_ALTERNATIVE_TAGS_PATCH and alternative tags are
+        shown then the name change only applies to the ALTERNATIVE_TAGS tag set
+      * if used in combination with both then BAR_ALTTAGSDECORATION_PATCH takes precedence
+      * otherwise the name change applies to the DEFAULT_TAGS tag set
+
+https://dwm.suckless.org/patches/nametag/
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define NAMETAG_PATCH 0
+#+END_SRC
+
+**** Prepend
+
+Variant of the above which prepends the tag number to the given string. The toggle does nothing on its own and need to be enabled in combination with the above.
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define NAMETAG_PREPEND_PATCH 0
+#+END_SRC
+
 *** Net Client List Stacking
 
 Adds support for the _NET_CLIENT_LIST_STACKING atom, needed by certain applications like the Zoom video conferencing application.
@@ -3633,6 +3675,24 @@ static const int ulineall = 0;                  /* 1 to show underline on all ta
 #endif // BAR_UNDERLINETAGS_PATCH
 #+END_SRC
 
+#+BEGIN_SRC c :tangle config.def.h
+#if NAMETAG_PATCH
+#if NAMETAG_PREPEND_PATCH
+/* The format in which the tag is written when named. E.g. %d: %.12s will write the tag number
+ * followed the first 12 characters of the given string. You can also just use "%d: %s" here. */
+#define NAMETAG_FORMAT "%d: %.12s"
+#else
+#define NAMETAG_FORMAT "%s"
+#endif // NAMETAG_PREPEND_PATCH
+/* The maximum amount of bytes reserved for each tag text. */
+#define MAX_TAGLEN 16
+/* The command to run (via popen). This can be tailored by adding a prompt, passing other command
+ * line arguments or providing name options. Optionally you can use other dmenu like alternatives
+ * like rofi -dmenu. */
+#define NAMETAG_COMMAND "dmenu < /dev/null"
+#endif // NAMETAG_PATCH
+#+END_SRC
+
 ** Indicators
 
 See patch/bar_indicators.h for options
@@ -4000,7 +4060,12 @@ The first example would result in the tags on the first monitor to be 1 through 
 For the second example each tag would be represented as a bullet point. Both cases work the same from a technical standpoint - the icon index is derived from the tag index and the monitor index. If the icon index is is greater than the number of tag icons then it will wrap around until it an icon matches. Similarly if there are two tag icons then it would alternate between them. This works seamlessly with alternative tags and alttagsdecoration patches.
 
 #+BEGIN_SRC c :tangle config.def.h
-static char *tagicons[][NUMTAGS] = {
+#if NAMETAG_PATCH
+static char tagicons[][NUMTAGS][MAX_TAGLEN] =
+#else
+static char *tagicons[][NUMTAGS] =
+#endif // NAMETAG_PATCH
+{
         /* [DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }, */
         [DEFAULT_TAGS]        = { " ₁", "龎 ₂", " ₃", " ₄", "爵 ₅", " ₆", " ₇", " ₈", " ₉" },
         [ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
@@ -4928,6 +4993,10 @@ static Key keys[] = {
         { MODKEY,                       XK_n,          togglealttag,           {0} },
         #endif // BAR_ALTERNATIVE_TAGS_PATCH
 
+        #if NAMETAG_PATCH
+        { MODKEY|ShiftMask,             XK_n,          nametag,                {0} },
+        #endif // NAMETAG_PATCH
+
         #if BAR_TAGGRID_PATCH
         { MODKEY|ControlMask,           XK_Up,         switchtag,              { .ui = SWITCHTAG_UP    | SWITCHTAG_VIEW } },
         { MODKEY|ControlMask,           XK_Down,       switchtag,              { .ui = SWITCHTAG_DOWN  | SWITCHTAG_VIEW } },
@@ -4950,6 +5019,10 @@ static Key keys[] = {
         { MODKEY,                       XK_KP_2,       moveplace,              {.ui = WIN_S  }},   /* XK_KP_Down,  */
         { MODKEY,                       XK_KP_3,       moveplace,              {.ui = WIN_SE }},   /* XK_KP_Next,  */
         #endif // MOVEPLACE_PATCH
+
+        #if NAMETAG_PATCH
+        { "nametag",                 nametag },
+        #endif // NAMETAG_PATCH
 
         #if EXRESIZE_PATCH
         { MODKEY,                       XK_KP_7,       explace,                {.ui = EX_NW }},   /* XK_KP_Home,  */
@@ -5425,6 +5498,9 @@ static IPCCommand ipccommands[] = {
         #if MOVERESIZE_PATCH
         IPCCOMMAND( moveresize, 1, {ARG_TYPE_STR} ),
         #endif // MOVERESIZE_PATCH
+        #if NAMETAG_PATCH
+        IPCCOMMAND( nametag, 1, {ARG_TYPE_NONE} ),
+        #endif // NAMETAG_PATCH
         #if RIODRAW_PATCH
         IPCCOMMAND( rioresize, 1, {ARG_TYPE_NONE} ),
         #endif // RIODRAW_PATCH
