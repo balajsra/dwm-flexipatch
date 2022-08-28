@@ -885,14 +885,14 @@ static const char *statuscmd[] = { "/bin/sh", "-c", NULL, NULL };
 
 #if ON_EMPTY_KEYS_PATCH
 static const char* firefoxcmd[] = {"firefox", NULL};
-static Key on_empty_keys[] = {
+static const Key on_empty_keys[] = {
         /* modifier key            function                argument */
         { 0,        XK_f,          spawn,                  {.v = firefoxcmd } },
 };
 #endif // ON_EMPTY_KEYS_PATCH
 
 #include <X11/XF86keysym.h>
-static Key keys[] = {
+static const Key keys[] = {
         /* modifier                     key            function                argument */
         #if KEYMODES_PATCH
         { MODKEY,                       XK_Escape,     setkeymode,             {.ui = COMMANDMODE} },
@@ -1384,14 +1384,14 @@ static Key keys[] = {
 };
 
 #if KEYMODES_PATCH
-static Key cmdkeys[] = {
+static const Key cmdkeys[] = {
         /* modifier                    keys                     function         argument */
         { 0,                           XK_Escape,               clearcmd,        {0} },
         { ControlMask,                 XK_c,                    clearcmd,        {0} },
         { 0,                           XK_i,                    setkeymode,      {.ui = INSERTMODE} },
 };
 
-static Command commands[] = {
+static const Command commands[] = {
         /* modifier (4 keys)                          keysyms (4 keys)                              function         argument */
         { {ControlMask, ShiftMask, 0,         0},    {XK_w,      XK_h,    0,         0},            setlayout,       {.v = &layouts[0]} },
         { {ControlMask, 0,         0,         0},    {XK_w,      XK_o,    0,         0},            setlayout,       {.v = &layouts[2]} },
@@ -1415,7 +1415,7 @@ static Command commands[] = {
 #else
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 #endif //
-static Button buttons[] = {
+static const Button buttons[] = {
         /* click                event mask           button          function        argument */
         #if BAR_STATUSBUTTON_PATCH
         { ClkButton,            0,                   Button1,        spawn,          {.v = dmenucmd } },
@@ -1484,7 +1484,7 @@ static Button buttons[] = {
 /* signal definitions */
 /* signum must be greater than 0 */
 /* trigger signals using `xsetroot -name "fsignal:<signame> [<type> <value>]"` */
-static Signal signals[] = {
+static const Signal signals[] = {
         /* signum                    function */
         { "focusstack",              focusstack },
         { "setmfact",                setmfact },
@@ -1570,6 +1570,9 @@ static Signal signals[] = {
         { "viewall",                 viewallex },
         { "viewex",                  viewex },
         { "toggleview",              toggleview },
+        #if BAR_WINTITLEACTIONS_PATCH
+        { "showhideclient",          showhideclient },
+        #endif // BAR_WINTITLEACTIONS_PATCH
         #if SHIFTBOTH_PATCH
         { "shiftboth",               shiftboth },
         #endif // SHIFTBOTH_PATCH
@@ -1669,7 +1672,7 @@ static Signal signals[] = {
 
 #if IPC_PATCH
 static const char *ipcsockpath = "/tmp/dwm.sock";
-static IPCCommand ipccommands[] = {
+static const IPCCommand ipccommands[] = {
         IPCCOMMAND( focusmon, 1, {ARG_TYPE_SINT} ),
         IPCCOMMAND( focusstack, 1, {ARG_TYPE_SINT} ),
         IPCCOMMAND( incnmaster, 1, {ARG_TYPE_SINT} ),
@@ -1773,6 +1776,9 @@ static IPCCommand ipccommands[] = {
         #if SETBORDERPX_PATCH
         IPCCOMMAND( setborderpx, 1, {ARG_TYPE_SINT} ),
         #endif // SETBORDERPX_PATCH
+        #if BAR_WINTITLEACTIONS_PATCH
+        IPCCOMMAND( showhideclient, 1, {ARG_TYPE_NONE} ),
+        #endif // BAR_WINTITLEACTIONS_PATCH
         #if SHIFTBOTH_PATCH
         IPCCOMMAND( shiftboth, 1, {ARG_TYPE_SINT} ),
         #endif // SHIFTBOTH_PATCH
