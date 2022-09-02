@@ -827,15 +827,8 @@ static const char *xkb_layouts[]  = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-#if !NODMENU_PATCH
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-#endif // NODMENU_PATCH
-
 static const char *dmenucmd[] = {
         "dmenu_run",
-        #if !NODMENU_PATCH
-        "-m", dmenumon,
-        #endif // NODMENU_PATCH
         "-fn", dmenufont,
         "-nb", normbgcolor,
         "-nf", normfgcolor,
@@ -849,7 +842,7 @@ static const char *dmenucmd[] = {
 static const char *termcmd[]             = { "kitty", NULL };
 static const char *roficmd[]             = { "rofi", "-show", "combi", NULL };
 static const char *controlcentercmd[]    = { "/home/sravan/.scripts/control-center.sh", "--rofi", NULL };
-static const char *brightnesscmd[]    = { "/home/sravan/.scripts/brightness.sh", "--rofi", NULL };
+static const char *brightnesscmd[]       = { "/home/sravan/.scripts/brightness.sh", "--rofi", NULL };
 static const char *clipboardcmd[]        = { "rofi", "-show", "clipboard", NULL };
 static const char *rbwcmd[]              = { "rofi-rbw", NULL };
 static const char *volumecmd[]           = { "/home/sravan/.scripts/pactl.sh", "--rofi", NULL };
@@ -1672,7 +1665,7 @@ static Signal signals[] = {
 
 #if IPC_PATCH
 static const char *ipcsockpath = "/tmp/dwm.sock";
-static const IPCCommand ipccommands[] = {
+static IPCCommand ipccommands[] = {
         IPCCOMMAND( focusmon, 1, {ARG_TYPE_SINT} ),
         IPCCOMMAND( focusstack, 1, {ARG_TYPE_SINT} ),
         IPCCOMMAND( incnmaster, 1, {ARG_TYPE_SINT} ),
