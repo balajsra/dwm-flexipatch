@@ -43,7 +43,6 @@
     - [[#border][Border]]
     - [[#centered-window-name][Centered Window Name]]
     - [[#client-indicator][Client Indicator]]
-    - [[#color-emoji][Color Emoji]]
     - [[#dmenu-match-top][Dmenu Match Top]]
     - [[#extra-status][Extra Status]]
     - [[#ewmh-tags][EWMH Tags]]
@@ -51,6 +50,7 @@
     - [[#hide-vacant-tags][Hide Vacant Tags]]
     - [[#holdbar][Holdbar]]
     - [[#ignore-xft-errors-when-drawing-text][Ignore Xft Errors When Drawing Text]]
+    - [[#no-color-emoji][No Color Emoji]]
     - [[#padding][Padding]]
     - [[#pango][Pango]]
     - [[#static-status][Static Status]]
@@ -60,6 +60,7 @@
     - [[#vt-colors][VT Colors]]
     - [[#window-title-actions][Window Title Actions]]
   - [[#other][Other]]
+    - [[#alt-tab][Alt Tab]]
     - [[#always-center][Always Center]]
     - [[#aspect-resize][Aspect Resize]]
     - [[#attach-above][Attach Above]]
@@ -277,7 +278,7 @@ exec dwm
 
 * dwm flexipatch
 
-This dwm 6.3 (c2b748e, 2022-08-26) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [[https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0][dwm-flexipatch-1.0]].
+This dwm 6.4 (50ad171, 2022-10-04) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [[https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0][dwm-flexipatch-1.0]].
 
 For example to include the ~alpha~ patch then you would only need to flip this setting from 0 to 1 in [[https://github.com/bakkeby/dwm-flexipatch/blob/master/patches.def.h][patches.h]]:
 
@@ -296,6 +297,8 @@ If you are experiencing issues then you may want to check out the [[https://gith
 Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map of patches]] diagram which tries to organize patches into categories.
 
 ** Changelog
+
+2022-10-08 - Added the alt-tab patch
 
 2022-08-12 - Added the nametag patch
 
@@ -507,6 +510,9 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
    - [[https://dwm.suckless.org/patches/alpha/][alpha]]
      - adds transparency for the status bar
 
+   - [[https://dwm.suckless.org/patches/alt-tab/][alt-tab]]
+     - adds a window task switcher toggled using alt-tab
+
    - [[https://dwm.suckless.org/patches/alternativetags/][alternativetags]]
      - adds alternative tags which can be toggled on the fly for the sole purpose of providing visual aid
 
@@ -581,9 +587,9 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
    - [[https://dwm.suckless.org/patches/colorbar/][colorbar]]
      - lets you change the foreground and background color of every statusbar element
 
-   - color_emoji
-     - enables color emoji in dmenu by removing a workaround for a BadLength error in the Xft library when color glyphs are used
-     - enabling this will crash dwm on encountering such glyphs unless you also have an updated Xft library that can handle them
+   - +color_emoji+
+     - +enables color emoji in dmenu by removing a workaround for a BadLength error in the Xft library when color glyphs are used+
+     - +enabling this will crash dwm on encountering such glyphs unless you also have an updated Xft library that can handle them+
 
    - [[https://dwm.suckless.org/patches/combo/][combo]]
      - allows you to select multiple tags by pressing all the right keys as a combo, e.g. hold MOD and press and hold 1 and 3 together to view those two tags
@@ -1529,16 +1535,6 @@ https://dwm.suckless.org/patches/clientindicators/
 #define BAR_CLIENTINDICATOR_PATCH N/A
 #+END_SRC
 
-*** Color Emoji
-
-This patch enables color emoji in dwm by removing a workaround for a BadLength error in the Xft library when color glyphs are used.
-
-To enable this you will need an updated Xft library that can handle color glyphs otherwise dwm will crash on encountering such characters. Note that you will also need a font that provides color emojis for this to work.
-
-#+BEGIN_SRC c :tangle patches.def.h
-#define BAR_COLOR_EMOJI_PATCH 0
-#+END_SRC
-
 *** Dmenu Match Top
 
 Updates the position of dmenu to match that of the bar. I.e. if topbar is 0 then dmenu will appear at the bottom and if 1 then dmenu will appear at the top.
@@ -1619,6 +1615,14 @@ https://docs.google.com/viewer?a=v&pid=forums&srcid=MDAwODA2MTg0MDQyMjE0OTgzMzMB
 
 #+BEGIN_SRC c :tangle patches.def.h
 #define BAR_IGNORE_XFT_ERRORS_WHEN_DRAWING_TEXT_PATCH 0
+#+END_SRC
+
+*** No Color Emoji
+
+This patch adds back in the workaround for a BadLength error in the Xft library when color glyphs are used. This is for systems that do not have an updated version of the Xft library (or generally prefer monochrome fonts).
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define BAR_NO_COLOR_EMOJI_PATCH 0
 #+END_SRC
 
 *** Padding
@@ -1726,6 +1730,16 @@ https://github.com/bakkeby/patches/blob/master/dwm/dwm-barmodules-wintitleaction
 #+END_SRC
 
 ** Other
+
+*** Alt Tab
+
+Adds a window task switcher toggled using alt-tab.
+
+https://dwm.suckless.org/patches/alt-tab/
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define ALT_TAB_PATCH 0
+#+END_SRC
 
 *** Always Center
 
@@ -3335,7 +3349,7 @@ This can be optionally disabled in favour of other layouts.
 
 #+BEGIN_SRC makefile :tangle config.mk
 # dwm version
-VERSION = 6.3
+VERSION = 6.4
 
 # Customize below to fit your system
 
@@ -3365,7 +3379,7 @@ FREETYPEINC = /usr/include/freetype2
 #KVMLIB = -lkvm
 
 # Uncomment this for the alpha patch and the winicon patch (BAR_ALPHA_PATCH, BAR_WINICON_PATCH)
-#XRENDER = -lXrender
+XRENDER = -lXrender
 
 # Uncomment this for the mdpcontrol patch / MDPCONTROL_PATCH
 #MPDCLIENT = -lmpdclient
@@ -3480,10 +3494,14 @@ endif
 	mkdir -p ${DESTDIR}${MANPREFIX}/man1
 	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
 	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
+	mkdir -p ${DESTDIR}${PREFIX}/share/xsession
+	cp -n dwm.desktop ${DESTDIR}${PREFIX}/share/xsession
+	chmod 644 ${DESTDIR}${PREFIX}/share/xsession/dwm.desktop
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
-		${DESTDIR}${MANPREFIX}/man1/dwm.1
+		${DESTDIR}${MANPREFIX}/man1/dwm.1\
+		${DESTDIR}${PREFIX}/share/xsession/dwm.desktop
 
 .PHONY: all options clean dist install uninstall
 #+END_SRC
@@ -3681,6 +3699,18 @@ static const int ulineall = 0;                  /* 1 to show underline on all ta
  * like rofi -dmenu. */
 #define NAMETAG_COMMAND "dmenu < /dev/null"
 #endif // NAMETAG_PATCH
+#+END_SRC
+
+#+BEGIN_SRC c :tangle config.def.h
+#if ALT_TAB_PATCH
+/* alt-tab configuration */
+static const unsigned int tabmodkey        = 0x40; /* (Alt) when this key is held down the alt-tab functionality stays active. Must be the same modifier as used to run alttabstart */
+static const unsigned int tabcyclekey      = 0x17; /* (Tab) when this key is hit the menu moves one position forward in client stack. Must be the same key as used to run alttabstart */
+static const unsigned int tabposy          = 1;    /* tab position on Y axis, 0 = top, 1 = center, 2 = bottom */
+static const unsigned int tabposx          = 1;    /* tab position on X axis, 0 = left, 1 = center, 2 = right */
+static const unsigned int maxwtab          = 600;  /* tab menu width */
+static const unsigned int maxhtab          = 200;  /* tab menu height */
+#endif // ALT_TAB_PATCH
 #+END_SRC
 
 ** Indicators
@@ -4773,7 +4803,11 @@ static const Key keys[] = {
         { MODKEY|Mod1Mask|ShiftMask,    XK_0,          defaultgaps,            {0} },
         #endif // VANITYGAPS_PATCH
 
+        #if ALT_TAB_PATCH
+        { Mod1Mask,                     XK_Tab,        alttabstart,            {0} },
+        #else
         { MODKEY,                       XK_Tab,        view,                   {0} },
+        #endif // ALT_TAB_PATCH
 
         #if SHIFTTAG_PATCH
         { MODKEY|ShiftMask,             XK_Left,       shifttag,               { .i = -1 } }, // note keybinding conflict with focusadjacenttag tagtoleft
