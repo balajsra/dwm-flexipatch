@@ -1,4 +1,4 @@
-This dwm 6.4 (89f9905, 2022-12-07) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [dwm-flexipatch-1.0](https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0).
+This dwm 6.4 (e81f17d, 2023-04-09) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [dwm-flexipatch-1.0](https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0).
 
 For example to include the `alpha` patch then you would only need to flip this setting from 0 to 1 in [patches.h](https://github.com/bakkeby/dwm-flexipatch/blob/master/patches.def.h):
 ```c
@@ -18,6 +18,8 @@ Browsing patches? There is a [map of patches](https://coggle.it/diagram/X9IiSSM6
 ---
 
 ### Changelog:
+
+2023-01-18 - Added the view history patch
 
 2022-10-08 - Added the alt-tab patch
 
@@ -801,6 +803,11 @@ Browsing patches? There is a [map of patches](https://coggle.it/diagram/X9IiSSM6
    - [vanitygaps](https://github.com/bakkeby/patches/blob/master/dwm/dwm-vanitygaps-6.2.diff)
       - adds configurable gaps between windows differentiating between outer, inner, horizontal and
         vertical gaps
+
+   - viewhistory
+      - adds a tag change history that is longer than the default current and previous tag
+      - `MOD`+Tab (`view(0)`) can be pressed multiple times to go further back to earlier tag
+        selections
 
    - [viewontag](https://dwm.suckless.org/patches/viewontag/)
       - follow a window to the tag it is being moved to
