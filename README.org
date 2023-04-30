@@ -5474,7 +5474,7 @@ static IPCCommand ipccommands[] = {
         IPCCOMMAND( focusstack, 1, {ARG_TYPE_SINT} ),
         IPCCOMMAND( incnmaster, 1, {ARG_TYPE_SINT} ),
         IPCCOMMAND( killclient, 1, {ARG_TYPE_SINT} ),
-        IPCCOMMAND( quit, 1, {ARG_TYPE_NONE} ),
+        IPCCOMMAND( quit, 1, {ARG_TYPE_SINT} ),
         IPCCOMMAND( setlayoutsafe, 1, {ARG_TYPE_PTR} ),
         IPCCOMMAND( setmfact, 1, {ARG_TYPE_FLOAT} ),
         IPCCOMMAND( setstatus, 1, {ARG_TYPE_STR} ),
