@@ -15,5 +15,5 @@ else
             title="N/A"
         fi
 
-        echo "ﱘ $title | ﴁ $artist"
+        echo " $title | 󰠃 $artist"
 fi

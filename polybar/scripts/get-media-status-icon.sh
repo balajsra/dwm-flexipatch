@@ -2,12 +2,12 @@
 mediaStatus=$(/home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-status.sh)
 
 if [[ "$mediaStatus" == "N/A" ]]; then
-    echo "懶"
+    echo "󰐎"
 else
     if [[ "$mediaStatus" == "Playing" ]]; then
-        echo ""
+        echo "󰏤"
     elif [[ "$mediaStatus" == "Paused" ]]; then
-        echo "契"
+        echo "󰐊"
     fi
 
     echo $status

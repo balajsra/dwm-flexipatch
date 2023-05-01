@@ -4116,7 +4116,7 @@ static char *tagicons[][NUMTAGS] =
 #endif // NAMETAG_PATCH
 {
         /* [DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }, */
-        [DEFAULT_TAGS]        = { " ₁", "龎 ₂", " ₃", " ₄", "爵 ₅", " ₆", " ₇", " ₈", " ₉" },
+        [DEFAULT_TAGS]        = { "󰍩 ₁", "󰗚 ₂", " ₃", " ₄", "󰖟 ₅", " ₆", "󰊢 ₇", " ₈", " ₉" },
         [ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
         [ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
@@ -6269,7 +6269,7 @@ click-left = "/home/sravan/.scripts/playerctl.sh --change"
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing-prev]
 type = custom/script
-exec = echo "玲"
+exec = echo "󰒮"
 format = <label>
 label = %output%
 label-foreground = ${colors.media-playing-foreground}
@@ -6299,7 +6299,7 @@ click-left = "/home/sravan/.scripts/playerctl.sh --play-pause"
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing-next]
 type = custom/script
-exec = echo "怜"
+exec = echo "󰒭"
 format = <label>
 label = %output%
 label-foreground = ${colors.media-playing-foreground}
@@ -6317,25 +6317,25 @@ click-left = "/home/sravan/.scripts/playerctl.sh --next"
 mediaStatus=$(playerctl --player=playerctld metadata 2>&1)
 
 if [[ "$mediaStatus" == "No player could handle this command" ]]; then
-    echo "ﱙ"
+    echo "󰡀"
 else
     trackid=$(playerctl --player=playerctld metadata --format '{{ mpris:trackid }}')
     title=$(playerctl --player=playerctld metadata --format '{{ xesam:title }}')
 
     if grep -q -i "netflix" <<< "$title"; then
-        echo "ﱄ"
+        echo "󰝆"
     elif grep -q -i "hulu" <<< "$title"; then
-        echo "ﴧ"
+        echo "󰠩"
     elif grep -q -i "prime video" <<< "$title"; then
-        echo ""
+        echo ""
     elif grep -q -i "chromium" <<< "$trackid"; then
         echo ""
     elif grep -q -i "vlc" <<< "$trackid"; then
-        echo "嗢"
+        echo "󰕼"
     elif grep -q -i "spotify" <<< "$trackid"; then
         echo ""
     else
-        echo "﴾"
+        echo "󰡀"
     fi
 fi
 #+END_SRC
@@ -6344,12 +6344,12 @@ fi
 mediaStatus=$(/home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-status.sh)
 
 if [[ "$mediaStatus" == "N/A" ]]; then
-    echo "懶"
+    echo "󰐎"
 else
     if [[ "$mediaStatus" == "Playing" ]]; then
-        echo ""
+        echo "󰏤"
     elif [[ "$mediaStatus" == "Paused" ]]; then
-        echo "契"
+        echo "󰐊"
     fi
 
     echo $status
@@ -6385,7 +6385,7 @@ else
             title="N/A"
         fi
 
-        echo "ﱘ $title | ﴁ $artist"
+        echo " $title | 󰠃 $artist"
 fi
 #+END_SRC
 
@@ -6511,7 +6511,7 @@ format = <label>
 ;   %date%
 ;   %time%
 ; Default: %date%
-label = " %time%"
+label = "󰥔 %time%"
 ; label-font = 3
 label-foreground = ${colors.time-foreground}
 label-background = ${colors.time-background}
@@ -6722,7 +6722,7 @@ format = %{A1:kitty btop:}<label>%{A}
 ;   %gb_swap_free%
 ;   %gb_swap_used%
 
-label =  %percentage_used%%
+label = 󰍛 %percentage_used%%
 label-padding    = ${sizes.module-padding}
 label-foreground = ${colors.memory-foreground}
 label-background = ${colors.memory-background}
@@ -6825,7 +6825,7 @@ format-unmounted = %{A1:gnome-disks &:} <label-unmounted> %{A}
 ;   %free%
 ;   %used%
 ; Default: %mountpoint% %percentage_free%%
-label-mounted =  %percentage_used%%
+label-mounted = 󰋊 %percentage_used%%
 label-mounted-foreground = ${colors.filesystem-foreground}
 label-mounted-background = ${colors.filesystem-background}
 label-mounted-underline  = ${colors.filesystem-underline}
@@ -6868,7 +6868,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/deadd-notification-center]
 type = custom/text
-content = ""
+content = "󰂚"
 
 ; "content" has the same properties as "format-NAME"
 ; content-background = #000
@@ -6956,18 +6956,17 @@ format-muted-overline   = ${colors.volume-overline}
 ; Available tokens:
 ;   %percentage% (default)
 ;   %decibels%
-label-muted = ﱝ muted
+label-muted = 󰝟 muted
 
 ; Only applies if <ramp-volume> is used
-ramp-volume-0 = 奄
-ramp-volume-1 = 奔
-ramp-volume-2 = 墳
+ramp-volume-0 = 󰕿
+ramp-volume-1 = 󰖀
+ramp-volume-2 = 󰕾
 
 ; Right and Middle click
 click-right = pavucontrol
 ; click-middle =
 #+END_SRC
-
 
 *** Launch Script
 
