@@ -13,6 +13,8 @@ else
         echo "󰠩"
     elif grep -q -i "prime video" <<< "$title"; then
         echo ""
+    elif grep -q -i "youtube tv" <<< "$title"; then
+        echo "󰑈"
     elif grep -q -i "chromium" <<< "$trackid"; then
         echo ""
     elif grep -q -i "vlc" <<< "$trackid"; then

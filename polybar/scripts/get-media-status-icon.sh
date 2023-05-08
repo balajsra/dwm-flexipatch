@@ -9,6 +9,4 @@ else
     elif [[ "$mediaStatus" == "Paused" ]]; then
         echo "󰐊"
     fi
-
-    echo $status
 fi
