@@ -478,7 +478,7 @@ static const Rule rules[] = {
         RULE(.class = "Emacs", .tags = 1 << 6)
         RULE(.class = "Code", .tags = 1 << 6)
         RULE(.class = "GNU Octave", .tags = 1 << 6)
-        RULE(.class = "Steam", .tags = 1 << 7)
+        RULE(.title = "Steam", .tags = 1 << 7)
         RULE(.class = "Lutris", .tags = 1 << 7)
         RULE(.title = "Origin", .tags = 1 << 7, .isfloating = 1)
         RULE(.title = "Ubisoft Connect", .tags = 1 << 7, .isfloating = 1)
