@@ -15,5 +15,5 @@ else
             title="N/A"
         fi
 
-        echo " $title | 󰠃 $artist"
+        echo "󰝚 $title | 󰠃 $artist"
 fi
