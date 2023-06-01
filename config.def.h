@@ -468,6 +468,7 @@ static const Rule rules[] = {
         RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
         RULE(.title = "Picture in picture", .isfloating = 1)
         RULE(.class = "Ferdium", .tags = 1 << 0)
+        RULE(.class = "Beeper", .tags = 1 << 0)
         RULE(.class = "Signal", .tags = 1 << 0)
         RULE(.class = "discord", .tags = 1 << 0)
         RULE(.class = "notion-app-enhanced", .tags = 1 << 1)
