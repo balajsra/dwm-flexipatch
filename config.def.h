@@ -937,6 +937,10 @@ static const Key keys[] = {
 
         { MODKEY,                       XK_s,          togglebar,              {0} },
 
+        #if TOGGLETOPBAR_PATCH
+        { MODKEY|ShiftMask,             XK_b,          toggletopbar,           {0} },
+        #endif // TOGGLETOPBAR_PATCH
+
         #if TAB_PATCH
         { MODKEY|ControlMask,           XK_b,          tabmode,                {-1} },
         #endif // TAB_PATCH
@@ -1503,6 +1507,9 @@ static const Signal signals[] = {
         { "focusstack",              focusstack },
         { "setmfact",                setmfact },
         { "togglebar",               togglebar },
+        #if TOGGLETOPBAR_PATCH
+        { "toggletopbar",            toggletopbar },
+        #endif // TOGGLETOPBAR_PATCH
         { "incnmaster",              incnmaster },
         { "togglefloating",          togglefloating },
         { "focusmon",                focusmon },
@@ -1698,6 +1705,9 @@ static IPCCommand ipccommands[] = {
         IPCCOMMAND( tag, 1, {ARG_TYPE_UINT} ),
         IPCCOMMAND( tagmon, 1, {ARG_TYPE_UINT} ),
         IPCCOMMAND( togglebar, 1, {ARG_TYPE_NONE} ),
+        #if TOGGLETOPBAR_PATCH
+        IPCCOMMAND( toggletopbar, 1, {ARG_TYPE_NONE} ),
+        #endif // TOGGLETOPBAR_PATCH
         IPCCOMMAND( togglefloating, 1, {ARG_TYPE_NONE} ),
         IPCCOMMAND( toggletag, 1, {ARG_TYPE_UINT} ),
         IPCCOMMAND( toggleview, 1, {ARG_TYPE_UINT} ),

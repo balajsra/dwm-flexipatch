@@ -162,6 +162,7 @@
     - [[#tag-swap-monitor][Tag Swap Monitor]]
     - [[#tap-resize][Tap Resize]]
     - [[#toggle-fullscreen][Toggle Fullscreen]]
+    - [[#toggle-top-bar][Toggle Top Bar]]
     - [[#toggle-layout][Toggle Layout]]
     - [[#toggle-tag][Toggle Tag]]
     - [[#transfer][Transfer]]
@@ -299,6 +300,8 @@ If you are experiencing issues then you may want to check out the [[https://gith
 Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map of patches]] diagram which tries to organize patches into categories.
 
 ** Changelog
+
+2023-06-25 - Added the toggletopbar patch
 
 2023-01-18 - Added the view history patch
 
@@ -981,13 +984,16 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
    - [[https://github.com/bakkeby/patches/wiki/togglefullscreen/][togglefullscreen]]
      - allows you to toggle fullscreen on and off using a single shortcut key
 
+   - [[https://github.com/bakkeby/patches/wiki/togglelayout][togglelayout]]
+     - toggle layout using the same keyboard shortcuts to set the layout
+     - e.g. hitting ~MOD+m~ switches to monocle layout, hitting the same keybinding again brings you back to the previous layout
+
    - [[https://github.com/bakkeby/patches/wiki/toggletag][toggletag]]
      - toggle tags using the same keyboard shortcuts to view tags
      - e.g. hitting ~MOD+4~ lets you view tag 4 and hitting the keybinding a second time brings you back to where you were before
 
-   - [[https://github.com/bakkeby/patches/wiki/togglelayout][togglelayout]]
-     - toggle layout using the same keyboard shortcuts to set the layout
-     - e.g. hitting ~MOD+m~ switches to monocle layout, hitting the same keybinding again brings you back to the previous layout
+   - [[https://dwm.suckless.org/patches/toggletopbar/][toggletopbar]]
+     - allows for the bar position (top or bottom) to be toggled during runtime
 
    - [[https://dwm.suckless.org/patches/transfer/][transfer]]
      - lets you transfer the currently focused client between the master and stack area while increasing or decreasing the master area (nmaster) accordingly
@@ -3031,6 +3037,16 @@ https://github.com/bakkeby/patches/blob/master/dwm/dwm-togglefullscreen-6.2.diff
 #define TOGGLEFULLSCREEN_PATCH 1
 #+END_SRC
 
+*** Toggle Top Bar
+
+This patch allows for the bar position (top or bottom) to be toggled during runtime.
+
+https://dwm.suckless.org/patches/toggletopbar/
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define TOGGLETOPBAR_PATCH 0
+#+END_SRC
+
 *** Toggle Layout
 
 Minor patch that lets you use the same keyboard shortcut to toggle to the previous layout if the designated layout is already active.
@@ -3038,7 +3054,6 @@ Minor patch that lets you use the same keyboard shortcut to toggle to the previo
 This allows you to use e.g. MOD+m to change to the monocle layout and use the same keybinding to toggle back to what it was previously. The default behaviour in dwm forces you to use either MOD+space or MOD+t to change back to tiled layout.
 
 https://github.com/bakkeby/patches/wiki/togglelayout
-
 
 #+BEGIN_SRC c :tangle patches.def.h
 #define TOGGLELAYOUT_PATCH 0
@@ -4713,6 +4728,10 @@ static const Key keys[] = {
 
         { MODKEY,                       XK_s,          togglebar,              {0} },
 
+        #if TOGGLETOPBAR_PATCH
+        { MODKEY|ShiftMask,             XK_b,          toggletopbar,           {0} },
+        #endif // TOGGLETOPBAR_PATCH
+
         #if TAB_PATCH
         { MODKEY|ControlMask,           XK_b,          tabmode,                {-1} },
         #endif // TAB_PATCH
@@ -5285,6 +5304,9 @@ static const Signal signals[] = {
         { "focusstack",              focusstack },
         { "setmfact",                setmfact },
         { "togglebar",               togglebar },
+        #if TOGGLETOPBAR_PATCH
+        { "toggletopbar",            toggletopbar },
+        #endif // TOGGLETOPBAR_PATCH
         { "incnmaster",              incnmaster },
         { "togglefloating",          togglefloating },
         { "focusmon",                focusmon },
@@ -5482,6 +5504,9 @@ static IPCCommand ipccommands[] = {
         IPCCOMMAND( tag, 1, {ARG_TYPE_UINT} ),
         IPCCOMMAND( tagmon, 1, {ARG_TYPE_UINT} ),
         IPCCOMMAND( togglebar, 1, {ARG_TYPE_NONE} ),
+        #if TOGGLETOPBAR_PATCH
+        IPCCOMMAND( toggletopbar, 1, {ARG_TYPE_NONE} ),
+        #endif // TOGGLETOPBAR_PATCH
         IPCCOMMAND( togglefloating, 1, {ARG_TYPE_NONE} ),
         IPCCOMMAND( toggletag, 1, {ARG_TYPE_UINT} ),
         IPCCOMMAND( toggleview, 1, {ARG_TYPE_UINT} ),
