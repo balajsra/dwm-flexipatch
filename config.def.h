@@ -5,6 +5,13 @@ static const int corner_radius           = 10;
 static const unsigned int borderpx       = 2;   /* border pixel of windows */
 #endif // ROUNDED_CORNERS_PATCH
 
+#if BAR_BORDER_PATCH
+/* This allows the bar border size to be explicitly set separately from borderpx.
+ * If left as 0 then it will default to the borderpx value of the monitor and will
+ * automatically update with setborderpx. */
+static const unsigned int barborderpx    = 0;  /* border pixel of bar */
+#endif // BAR_BORDER_PATCH
+
 static const unsigned int snap           = 10;  /* snap pixel */
 
 #if SWALLOW_PATCH
@@ -529,13 +536,13 @@ static const BarRule barrules[] = {
         { -1,        0,     BAR_ALIGN_LEFT,   width_stbutton,           draw_stbutton,          click_stbutton,          NULL,                    "statusbutton" },
         #endif // BAR_STATUSBUTTON_PATCH
         #if BAR_POWERLINE_TAGS_PATCH
-        {  0,        0,     BAR_ALIGN_LEFT,   width_pwrl_tags,          draw_pwrl_tags,         click_pwrl_tags,         NULL,                    "powerline_tags" },
+        {  0,        0,     BAR_ALIGN_LEFT,   width_pwrl_tags,          draw_pwrl_tags,         click_pwrl_tags,         hover_pwrl_tags,         "powerline_tags" },
         #endif // BAR_POWERLINE_TAGS_PATCH
         #if BAR_TAGS_PATCH
         { -1,        0,     BAR_ALIGN_LEFT,   width_tags,               draw_tags,              click_tags,              hover_tags,              "tags" },
         #endif // BAR_TAGS_PATCH
         #if BAR_TAGLABELS_PATCH
-        { -1,        0,     BAR_ALIGN_LEFT,   width_taglabels,          draw_taglabels,         click_taglabels,         NULL,                    "taglabels" },
+        { -1,        0,     BAR_ALIGN_LEFT,   width_taglabels,          draw_taglabels,         click_taglabels,         hover_taglabels,         "taglabels" },
         #endif // BAR_TAGLABELS_PATCH
         #if BAR_TAGGRID_PATCH
         { -1,        0,     BAR_ALIGN_LEFT,   width_taggrid,            draw_taggrid,           click_taggrid,           NULL,                    "taggrid" },
@@ -945,9 +952,9 @@ static const Key keys[] = {
         { MODKEY|ControlMask,           XK_b,          tabmode,                {-1} },
         #endif // TAB_PATCH
 
-        #if FOCUSMASTER_PATCH
+        #if FOCUSMASTER_PATCH || FOCUSMASTER_RETURN_PATCH
         { MODKEY|ControlMask,           XK_space,      focusmaster,            {0} },
-        #endif // FOCUSMASTER_PATCH
+        #endif // FOCUSMASTER_PATCH / FOCUSMASTER_RETURN_PATCH
 
         #if STACKER_PATCH
         STACKKEYS(MODKEY,                              focus)

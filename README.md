@@ -1,4 +1,4 @@
-This dwm 6.4 (e81f17d, 2023-04-09) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [dwm-flexipatch-1.0](https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0).
+This dwm 6.4 (9f88553, 2023-09-22) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [dwm-flexipatch-1.0](https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0).
 
 For example to include the `alpha` patch then you would only need to flip this setting from 0 to 1 in [patches.h](https://github.com/bakkeby/dwm-flexipatch/blob/master/patches.def.h):
 ```c
@@ -18,6 +18,10 @@ Browsing patches? There is a [map of patches](https://coggle.it/diagram/X9IiSSM6
 ---
 
 ### Changelog:
+
+2023-11-12 - Added the focusmaster-return patch variant
+
+2023-06-27 - Added the focusfollowmouse and unmanaged patches
 
 2023-06-25 - Added the toggletopbar patch
 
@@ -433,8 +437,16 @@ Browsing patches? There is a [map of patches](https://coggle.it/diagram/X9IiSSM6
       - allows focusing on clients based on direction (up, down, left, right) instead of client
         order
 
+   - [focusfollowmouse](https://github.com/bakkeby/patches/wiki/focusfollowmouse)
+      - the window under the mouse cursor will receive focus when changing tags, closing windows or
+        moving client out of view (as opposed to the most recently focused client)
+
    - [focusmaster](https://dwm.suckless.org/patches/focusmaster/)
       - a simple patch that just puts focus back to the master client
+
+   - [focusmaster-return](https://dwm.suckless.org/patches/focusmaster/)
+      - a simple patch that just puts focus back to the master client
+      - additionally allows focus to be switched back to the previous client
 
    - [focusonclick](https://dwm.suckless.org/patches/focusonclick/)
       - this patch makes you switch focus only by mouse click and not sloppy (focus follows mouse
@@ -801,6 +813,10 @@ Browsing patches? There is a [map of patches](https://coggle.it/diagram/X9IiSSM6
    - [unfloatvisible](https://dwm.suckless.org/patches/unfloatvisible/)
       - resets isfloating on any visible windows that have it set and optionally also applies a
         layout
+
+   - [unmanaged](https://github.com/bakkeby/patches/wiki/unmanaged)
+      - adds a client rule that allows for windows to not be managed by the window manager
+      - this can be useful for external bars, widgets, launchers, docks, desktop icons and more
 
    - [~urgentborder~](https://dwm.suckless.org/patches/urgentborder/)
       - ~this patch makes "urgent" windows have different colors~

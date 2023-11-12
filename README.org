@@ -89,7 +89,9 @@
     - [[#float-position][Float Position]]
     - [[#focus-adjacent-tag][Focus Adjacent Tag]]
     - [[#focus-direction][Focus Direction]]
+    - [[#focus-follow-mouse][Focus Follow Mouse]]
     - [[#focus-master][Focus Master]]
+    - [[#focus-master-return][Focus Master Return]]
     - [[#focus-on-click][Focus On Click]]
     - [[#focus-urgent][Focus Urgent]]
     - [[#focus-on-net-active][Focus On Net Active]]
@@ -167,6 +169,7 @@
     - [[#toggle-tag][Toggle Tag]]
     - [[#transfer][Transfer]]
     - [[#unfloat-visible][Unfloat Visible]]
+    - [[#unmanaged][Unmanaged]]
     - [[#vanity-gaps][Vanity Gaps]]
     - [[#view-history][View History]]
     - [[#view-on-tag][View On Tag]]
@@ -281,7 +284,7 @@ exec dwm
 
 * dwm flexipatch
 
-This dwm 6.4 (e81f17d, 2023-04-09) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [[https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0][dwm-flexipatch-1.0]].
+This dwm 6.4 (9f88553, 2023-09-22) side project has a different take on dwm patching. It uses preprocessor directives to decide whether or not to include a patch during build time. Essentially this means that this build, for better or worse, contains both the patched _and_ the original code. The aim being that you can select which patches to include and the build will contain that code and nothing more. Due to the complexity of some of the patches dwm-flexipatch has diverged from mainstream dwm by making some core patches non-optional for maintenance reasons. For the classic dwm-flexipatch build refer to branch [[https://github.com/bakkeby/dwm-flexipatch/tree/dwm-flexipatch-1.0][dwm-flexipatch-1.0]].
 
 For example to include the ~alpha~ patch then you would only need to flip this setting from 0 to 1 in [[https://github.com/bakkeby/dwm-flexipatch/blob/master/patches.def.h][patches.h]]:
 
@@ -300,6 +303,10 @@ If you are experiencing issues then you may want to check out the [[https://gith
 Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map of patches]] diagram which tries to organize patches into categories.
 
 ** Changelog
+
+2023-11-12 - Added the focusmaster-return patch variant
+
+2023-06-27 - Added the focusfollowmouse and unmanaged patches
 
 2023-06-25 - Added the toggletopbar patch
 
@@ -684,8 +691,16 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
    - [[https://github.com/bakkeby/patches/wiki/focusdir][focusdir]]
      - allows focusing on clients based on direction (up, down, left, right) instead of client order
 
+   - [[https://github.com/bakkeby/patches/wiki/focusfollowmouse][focusfollowmouse]]
+     - the window under the mouse cursor will receive focus when changing tags, closing windows or
+       moving client out of view (as opposed to the most recently focused client)
+
    - [[https://dwm.suckless.org/patches/focusmaster/][focusmaster]]
      - a simple patch that just puts focus back to the master client
+
+   - [[https://dwm.suckless.org/patches/focusmaster/][focusmaster-return]]
+     - a simple patch that just puts focus back to the master client
+     - additionally allows focus to be switched back to the previous client
 
    - [[https://dwm.suckless.org/patches/focusonclick/][focusonclick]]
      - this patch makes you switch focus only by mouse click and not sloppy (focus follows mouse pointer)
@@ -1006,6 +1021,10 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://dwm.suckless.org/patches/unfloatvisible/][unfloatvisible]]
      - resets isfloating on any visible windows that have it set and optionally also applies a layout
+
+   - [[https://github.com/bakkeby/patches/wiki/unmanaged][unmanaged]]
+     - adds a client rule that allows for windows to not be managed by the window manager
+     - this can be useful for external bars, widgets, launchers, docks, desktop icons and more
 
    - +[[https://dwm.suckless.org/patches/urgentborder/][urgentborder]]+
      - +this patch makes "urgent" windows have different colors+
@@ -2087,6 +2106,17 @@ https://github.com/bakkeby/patches/wiki/focusdir/
 #define FOCUSDIR_PATCH 0
 #+END_SRC
 
+*** Focus Follow Mouse
+
+When changing tags, closing windows or moving clients out of view then focus will revert to the
+client window that remains under the mouse cursor rather than the most recently focused window.
+
+https://github.com/bakkeby/patches/wiki/focusfollowmouse
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define FOCUSFOLLOWMOUSE_PATCH 0
+#+END_SRC
+
 *** Focus Master
 
 A simple patch that just puts focus back to the master client.
@@ -2095,6 +2125,17 @@ https://dwm.suckless.org/patches/focusmaster/
 
 #+BEGIN_SRC c :tangle patches.def.h
 #define FOCUSMASTER_PATCH 0
+#+END_SRC
+
+*** Focus Master Return
+
+A variant of the focusmaster patch that additionally allows the focus to be returned to the
+previously focused client
+
+https://dwm.suckless.org/patches/focusmaster/
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define FOCUSMASTER_RETURN_PATCH 0
 #+END_SRC
 
 *** Focus On Click
@@ -3107,6 +3148,18 @@ https://dwm.suckless.org/patches/unfloatvisible/
 #define UNFLOATVISIBLE_PATCH 1
 #+END_SRC
 
+*** Unmanaged
+
+This patch adds a client rule that allows for windows that do not specify the override-redirect
+to not be managed by the window manager. This can be useful for external bars, widgets,
+launchers, docks, desktop icons and more.
+
+https://github.com/bakkeby/patches/wiki/unmanaged
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define UNMANAGED_PATCH 0
+#+END_SRC
+
 *** Vanity Gaps
 
 **** Main
@@ -3446,8 +3499,8 @@ XCBLIBS = -lX11-xcb -lxcb -lxcb-res
 #IMLIB2LIBS = -lImlib2
 
 # Uncomment for the bidi patch
-#BDINC = -I/usr/include/fribidi
-#BDLIBS = -lfribidi
+#BDINC = `pkg-config --cflags fribidi`
+#BDLIBS = `pkg-config --libs fribidi`
 
 # includes and libs
 INCS = -I${X11INC} -I${FREETYPEINC} ${YAJLINC} ${PANGOINC} ${BDINC}
@@ -3480,16 +3533,10 @@ OBJ = ${SRC:.c=.o}
 # FreeBSD users, prefix all ifdef, else and endif statements with a . for this to work (e.g. .ifdef)
 
 ifdef YAJLLIBS
-all: options dwm dwm-msg
+all: dwm dwm-msg
 else
-all: options dwm
+all: dwm
 endif
-
-options:
-	@echo dwm build options:
-	@echo "CFLAGS	= ${CFLAGS}"
-	@echo "LDFLAGS	= ${LDFLAGS}"
-	@echo "CC	= ${CC}"
 
 .c.o:
 	${CC} -c ${CFLAGS} $<
@@ -3547,7 +3594,7 @@ uninstall:
 		${DESTDIR}${MANPREFIX}/man1/dwm.1\
 		${DESTDIR}${PREFIX}/share/xsessions/dwm.desktop
 
-.PHONY: all options clean dist install uninstall
+.PHONY: all clean dist install uninstall
 #+END_SRC
 
 * DWM Configuration
@@ -3561,6 +3608,15 @@ static const int corner_radius           = 10;
 #else
 static const unsigned int borderpx       = 2;   /* border pixel of windows */
 #endif // ROUNDED_CORNERS_PATCH
+#+END_SRC
+
+#+BEGIN_SRC c :tangle config.def.h
+#if BAR_BORDER_PATCH
+/* This allows the bar border size to be explicitly set separately from borderpx.
+ * If left as 0 then it will default to the borderpx value of the monitor and will
+ * automatically update with setborderpx. */
+static const unsigned int barborderpx    = 0;  /* border pixel of bar */
+#endif // BAR_BORDER_PATCH
 #+END_SRC
 
 #+BEGIN_SRC c :tangle config.def.h
@@ -4280,13 +4336,13 @@ static const BarRule barrules[] = {
         { -1,        0,     BAR_ALIGN_LEFT,   width_stbutton,           draw_stbutton,          click_stbutton,          NULL,                    "statusbutton" },
         #endif // BAR_STATUSBUTTON_PATCH
         #if BAR_POWERLINE_TAGS_PATCH
-        {  0,        0,     BAR_ALIGN_LEFT,   width_pwrl_tags,          draw_pwrl_tags,         click_pwrl_tags,         NULL,                    "powerline_tags" },
+        {  0,        0,     BAR_ALIGN_LEFT,   width_pwrl_tags,          draw_pwrl_tags,         click_pwrl_tags,         hover_pwrl_tags,         "powerline_tags" },
         #endif // BAR_POWERLINE_TAGS_PATCH
         #if BAR_TAGS_PATCH
         { -1,        0,     BAR_ALIGN_LEFT,   width_tags,               draw_tags,              click_tags,              hover_tags,              "tags" },
         #endif // BAR_TAGS_PATCH
         #if BAR_TAGLABELS_PATCH
-        { -1,        0,     BAR_ALIGN_LEFT,   width_taglabels,          draw_taglabels,         click_taglabels,         NULL,                    "taglabels" },
+        { -1,        0,     BAR_ALIGN_LEFT,   width_taglabels,          draw_taglabels,         click_taglabels,         hover_taglabels,         "taglabels" },
         #endif // BAR_TAGLABELS_PATCH
         #if BAR_TAGGRID_PATCH
         { -1,        0,     BAR_ALIGN_LEFT,   width_taggrid,            draw_taggrid,           click_taggrid,           NULL,                    "taggrid" },
@@ -4736,9 +4792,9 @@ static const Key keys[] = {
         { MODKEY|ControlMask,           XK_b,          tabmode,                {-1} },
         #endif // TAB_PATCH
 
-        #if FOCUSMASTER_PATCH
+        #if FOCUSMASTER_PATCH || FOCUSMASTER_RETURN_PATCH
         { MODKEY|ControlMask,           XK_space,      focusmaster,            {0} },
-        #endif // FOCUSMASTER_PATCH
+        #endif // FOCUSMASTER_PATCH / FOCUSMASTER_RETURN_PATCH
 
         #if STACKER_PATCH
         STACKKEYS(MODKEY,                              focus)
