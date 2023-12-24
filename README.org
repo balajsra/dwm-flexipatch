@@ -79,6 +79,7 @@
     - [[#cycle-layouts][Cycle Layouts]]
     - [[#decoration-hints][Decoration Hints]]
     - [[#distribute-tags][Distribute Tags]]
+    - [[#do-not-die-on-color-allocation-failure][Do Not Die on Color Allocation Failure]]
     - [[#drag-cfact][Drag CFact]]
     - [[#drag-mfact][Drag MFact]]
     - [[#dwmc][DWMC]]
@@ -137,6 +138,7 @@
     - [[#seamless-restart][Seamless Restart]]
     - [[#selective-fake-fullscreen][Selective Fake Fullscreen]]
     - [[#self-restart][Self Restart]]
+    - [[#send-monitor-center][Send Monitor Center]]
     - [[#send-monitor-keep-focus][Send Monitor Keep Focus]]
     - [[#set-border-pixels][Set Border Pixels]]
     - [[#shift-both][Shift Both]]
@@ -303,6 +305,10 @@ If you are experiencing issues then you may want to check out the [[https://gith
 Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map of patches]] diagram which tries to organize patches into categories.
 
 ** Changelog
+
+2023-12-22 - Added the do-not-die-on-color-allocation-failure patch
+
+2023-12-01 - Added the sendmoncenter patch
 
 2023-11-12 - Added the focusmaster-return patch variant
 
@@ -627,6 +633,10 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
      - updates the position of dmenu to match that of the bar
      - i.e. if topbar is 0 then dmenu will appear at the bottom and if 1 then dmenu will appear at the top
 
+   - do-not-die-on-color-allocation-failure
+     - avoids dwm terminating (dying) on color allocation failures
+     - useful for the xrdb (xresources) and status2d patches
+
    - [[https://github.com/bakkeby/patches/wiki/dragcfact/][dragcfact]]
      - lets you resize clients' size (i.e. modify cfact) by holding modkey + shift + right-click and dragging the mouse
 
@@ -877,6 +887,9 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://dwm.suckless.org/patches/selfrestart/][selfrestart]]
      - restart dwm without the unnecessary dependency of an external script
+
+   - [[https://dwm.suckless.org/patches/sendmoncenter/][sendmoncenter]]
+     - floating windows being sent to another monitor will be centered
 
    - [[https://github.com/bakkeby/patches/wiki/sendmon_keepfocus/][sendmon_keepfocus]]
      - minor patch that allow clients to keep focus when being sent to another monitor
@@ -1984,6 +1997,18 @@ https://dwm.suckless.org/patches/reorganizetags/
 #define DISTRIBUTETAGS_PATCH 0
 #+END_SRC
 
+*** Do Not Die on Color Allocation Failure
+
+By default dwm will terminate on color allocation failure and the behaviour is intended to catch and inform the user of color configuration issues.
+
+Some patches like status2d and xresources / xrdb can change colours during runtime, which means that if a color can't be allocated at this time then the window manager will abruptly terminate.
+
+This patch will ignore color allocation failures and continue on as normal. The effect of this is that the existing color, that was supposed to be replaced, will remain as-is.
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define DO_NOT_DIE_ON_COLOR_ALLOCATION_FAILURE_PATCH 0
+#+END_SRC
+
 *** Drag CFact
 
 Similarly to the dragmfact patch this allows you to click and drag clients to change the cfact to adjust the client's size in the stack. This patch depends on the cfacts patch.
@@ -2738,6 +2763,16 @@ https://dwm.suckless.org/patches/selfrestart/
 
 #+BEGIN_SRC c :tangle patches.def.h
 #define SELFRESTART_PATCH 0
+#+END_SRC
+
+*** Send Monitor Center
+
+Floating windows being sent to another monitor will be centered.
+
+https://dwm.suckless.org/patches/sendmoncenter/
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define SENDMON_CENTER_PATCH 0
 #+END_SRC
 
 *** Send Monitor Keep Focus
