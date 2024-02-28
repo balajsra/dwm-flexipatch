@@ -123,6 +123,7 @@
     - [[#only-one-rule-match][Only One Rule Match]]
     - [[#only-quit-on-empty][Only Quit On Empty]]
     - [[#per-tag][Per Tag]]
+    - [[#place-direction][Place Direction]]
     - [[#place-mouse][Place Mouse]]
     - [[#push][Push]]
     - [[#renamed-scratchpads][Renamed Scratchpads]]
@@ -305,6 +306,8 @@ If you are experiencing issues then you may want to check out the [[https://gith
 Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map of patches]] diagram which tries to organize patches into categories.
 
 ** Changelog
+
+2024-01-31 - Added the placedir patch
 
 2023-12-22 - Added the do-not-die-on-color-allocation-failure patch
 
@@ -834,6 +837,9 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
 
    - [[https://dwm.suckless.org/patches/pertag/][pertag]]
      - adds nmaster, mfact, layouts and more per tag rather than per monitor
+
+   - [[https://github.com/bakkeby/patches/wiki/placedir][placedir]]
+     - allows tiled windows to be moved in any direction (up, down, left, right)
 
    - [[https://github.com/bakkeby/patches/wiki/placemouse][placemouse]]
      - lets the user change the position of a client in the stack using the mouse.
@@ -2539,6 +2545,16 @@ This controls whether or not to also store bar position on a per tag basis, or l
 
 #+BEGIN_SRC c :tangle patches.def.h
 #define PERTAGBAR_PATCH 0
+#+END_SRC
+
+*** Place Direction
+
+Similar to the focusdir patch this patch allow users to move a window in any direction in the tiled stack (up, down, left, right).
+
+https://github.com/bakkeby/patches/wiki/placedir
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define PLACEDIR_PATCH 0
 #+END_SRC
 
 *** Place Mouse
@@ -4848,6 +4864,13 @@ static const Key keys[] = {
         { MODKEY,                       XK_Down,       focusdir,               {.i = 3 } }, // down
         #endif // FOCUSDIR_PATCH
 
+        #if PLACEDIR_PATCH
+        { MODKEY|ControlMask,           XK_Left,       placedir,               {.i = 0 } }, // left
+        { MODKEY|ControlMask,           XK_Right,      placedir,               {.i = 1 } }, // right
+        { MODKEY|ControlMask,           XK_Up,         placedir,               {.i = 2 } }, // up
+        { MODKEY|ControlMask,           XK_Down,       placedir,               {.i = 3 } }, // down
+        #endif // PLACEDIR_PATCH
+
         #if SWAPFOCUS_PATCH && PERTAG_PATCH
         { MODKEY,                       XK_s,          swapfocus,              {.i = -1 } },
         #endif // SWAPFOCUS_PATCH
@@ -4978,8 +5001,8 @@ static const Key keys[] = {
         #endif // SHIFTVIEW_CLIENTS_PATCH
 
         #if SHIFTBOTH_PATCH
-        { MODKEY|ControlMask,           XK_Left,       shiftboth,              { .i = -1 } }, // note keybinding conflict with focusadjacenttag tagandviewtoleft
-        { MODKEY|ControlMask,           XK_Right,      shiftboth,              { .i = +1 } }, // note keybinding conflict with focusadjacenttag tagandviewtoright
+        { MODKEY|ControlMask,           XK_Left,       shiftboth,              { .i = -1 } }, // note keybinding conflict with focusadjacenttag tagandviewtoleft placedir
+        { MODKEY|ControlMask,           XK_Right,      shiftboth,              { .i = +1 } }, // note keybinding conflict with focusadjacenttag tagandviewtoright placedir
         #endif // SHIFTBOTH_PATCH
 
         #if SHIFTSWAPTAGS_PATCH && SWAPTAGS_PATCH
@@ -5117,8 +5140,8 @@ static const Key keys[] = {
         { MODKEY,                       XK_Right,      viewtoright,            {0} }, // note keybinding conflict with focusdir
         { MODKEY|ShiftMask,             XK_Left,       tagtoleft,              {0} }, // note keybinding conflict with shifttag
         { MODKEY|ShiftMask,             XK_Right,      tagtoright,             {0} }, // note keybinding conflict with shifttag
-        { MODKEY|ControlMask,           XK_Left,       tagandviewtoleft,       {0} },
-        { MODKEY|ControlMask,           XK_Right,      tagandviewtoright,      {0} },
+        { MODKEY|ControlMask,           XK_Left,       tagandviewtoleft,       {0} }, // note keybinding conflict with placedir
+        { MODKEY|ControlMask,           XK_Right,      tagandviewtoright,      {0} }, // note keybinding conflict with placedir
         #endif // FOCUSADJACENTTAG_PATCH
 
         #if TAGALL_PATCH
@@ -5163,8 +5186,8 @@ static const Key keys[] = {
         #if BAR_TAGGRID_PATCH
         { MODKEY|ControlMask,           XK_Up,         switchtag,              { .ui = SWITCHTAG_UP    | SWITCHTAG_VIEW } },
         { MODKEY|ControlMask,           XK_Down,       switchtag,              { .ui = SWITCHTAG_DOWN  | SWITCHTAG_VIEW } },
-        { MODKEY|ControlMask,           XK_Right,      switchtag,              { .ui = SWITCHTAG_RIGHT | SWITCHTAG_VIEW } },
-        { MODKEY|ControlMask,           XK_Left,       switchtag,              { .ui = SWITCHTAG_LEFT  | SWITCHTAG_VIEW } },
+        { MODKEY|ControlMask,           XK_Right,      switchtag,              { .ui = SWITCHTAG_RIGHT | SWITCHTAG_VIEW } }, // note keybinding conflict with placedir
+        { MODKEY|ControlMask,           XK_Left,       switchtag,              { .ui = SWITCHTAG_LEFT  | SWITCHTAG_VIEW } }, // note keybinding conflict with placedir
         { MODKEY|Mod1Mask,              XK_Up,         switchtag,              { .ui = SWITCHTAG_UP    | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
         { MODKEY|Mod1Mask,              XK_Down,       switchtag,              { .ui = SWITCHTAG_DOWN  | SWITCHTAG_TAG | SWITCHTAG_VIEW } },
         { MODKEY|Mod1Mask,              XK_Right,      switchtag,              { .ui = SWITCHTAG_RIGHT | SWITCHTAG_TAG | SWITCHTAG_VIEW } },

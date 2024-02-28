@@ -241,6 +241,8 @@
 
 #define PERTAGBAR_PATCH 0
 
+#define PLACEDIR_PATCH 0
+
 #define PLACEMOUSE_PATCH 1
 
 #define PUSH_PATCH 0
