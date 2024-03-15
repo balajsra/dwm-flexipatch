@@ -123,6 +123,7 @@
     - [[#only-one-rule-match][Only One Rule Match]]
     - [[#only-quit-on-empty][Only Quit On Empty]]
     - [[#per-tag][Per Tag]]
+    - [[#per-monitor][Per Monitor]]
     - [[#place-direction][Place Direction]]
     - [[#place-mouse][Place Mouse]]
     - [[#push][Push]]
@@ -2545,6 +2546,16 @@ This controls whether or not to also store bar position on a per tag basis, or l
 
 #+BEGIN_SRC c :tangle patches.def.h
 #define PERTAGBAR_PATCH 0
+#+END_SRC
+
+*** Per Monitor
+
+**** Vanity Gaps
+
+This patch allows configuring vanity gaps on a per-monitor basis rather than all monitors (default).
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define PERMON_VANITYGAPS_PATCH 0
 #+END_SRC
 
 *** Place Direction
