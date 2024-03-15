@@ -224,6 +224,7 @@
     - [[#bars][Bars]]
     - [[#modules][Modules]]
     - [[#launch-script][Launch Script]]
+- [[#justfile][Justfile]]
 
 * Welcome
 
@@ -7156,4 +7157,22 @@ else
 fi
 
 echo "$!" >>/tmp/polybar.pids
+#+END_SRC
+
+* Justfile
+
+#+BEGIN_SRC just :tangle justfile
+set shell := ["bash", "-c"]
+
+# List just commands by default
+default:
+    @just --list
+
+# Update doom emacs and sync config
+dwm-rebuild:
+    sudo make clean install
+
+# Run polybar launch script
+dwm-launch-polybar:
+    ./polybar/launch.sh
 #+END_SRC
