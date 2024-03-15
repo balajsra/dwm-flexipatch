@@ -5885,6 +5885,9 @@ media-playing-background  = ${self.green}
 media-playing-underline   = ${self.background}
 media-playing-overline    = ${self.background}
 
+; center
+tray-background           = ${self.background}
+
 ; right
 kernel-foreground         = ${self.background}
 kernel-background         = ${self.orange}
@@ -6150,7 +6153,7 @@ tray-maxsize = ${sizes.tray-maxsize}
 ; ARGB color (e.g. #f00, #ff992a, #ddff1023)
 ; By default the tray container will use the bar
 ; background color.
-tray-background = ${colors.background}
+tray-background = ${colors.tray-background}
 
 ; Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
 tray-offset-x = 0
