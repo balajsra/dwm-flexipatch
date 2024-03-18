@@ -1479,7 +1479,7 @@ Set the tagindicatortype variable in config.h to INDICATOR_TOP_BAR to enable thi
 https://dwm.suckless.org/patches/activetagindicatorbar/
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define BAR_ACTIVETAGINDICATORBAR_PATCH N/A
+#define BAR_ACTIVETAGINDICATORBAR_PATCH 0
 #+END_SRC
 
 **** Alternative
@@ -1489,7 +1489,7 @@ Alternative patch to the activetagindicatorbar patch, adds the bar below the tag
 Set the tagindicatortype variable in config.h to INDICATOR_BOTTOM_BAR to enable this.
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define BAR_ACTIVETAGINDICATORBAR_ALT1_PATCH N/A
+#define BAR_ACTIVETAGINDICATORBAR_ALT1_PATCH 0
 #+END_SRC
 
 *** Alpha
@@ -1587,7 +1587,7 @@ Set the tagindicatortype variable in config.h to INDICATOR_CLIENT_DOTS to enable
 https://dwm.suckless.org/patches/clientindicators/
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define BAR_CLIENTINDICATOR_PATCH N/A
+#define BAR_CLIENTINDICATOR_PATCH 0
 #+END_SRC
 
 *** Dmenu Match Top
