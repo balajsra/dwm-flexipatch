@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 zscroll \
     --length $(xrdb -get polybar.maxlen) \
     --delay 0.2 \

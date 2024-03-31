@@ -6469,7 +6469,7 @@ click-left = "/home/sravan/.scripts/playerctl.sh --next"
 
 ***** Script
 
-#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/get-media-source-icon.sh
+#+BEGIN_SRC shell :shebang #!/usr/bin/env bash :tangle polybar/scripts/get-media-source-icon.sh
 mediaStatus=$(playerctl --player=playerctld metadata 2>&1)
 
 if [[ "$mediaStatus" == "No player could handle this command" ]]; then
@@ -6498,7 +6498,7 @@ else
 fi
 #+END_SRC
 
-#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/get-media-status-icon.sh
+#+BEGIN_SRC shell :shebang #!/usr/bin/env bash :tangle polybar/scripts/get-media-status-icon.sh
 mediaStatus=$(/home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-status.sh)
 
 if [[ "$mediaStatus" == "N/A" ]]; then
@@ -6512,7 +6512,7 @@ else
 fi
 #+END_SRC
 
-#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/get-media-status.sh
+#+BEGIN_SRC shell :shebang #!/usr/bin/env bash :tangle polybar/scripts/get-media-status.sh
 mediaStatus=$(playerctl --player=playerctld metadata 2>&1)
 
 if [[ "$mediaStatus" == "No player could handle this command" ]]; then
@@ -6524,7 +6524,7 @@ else
 fi
 #+END_SRC
 
-#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/get-media-playing.sh
+#+BEGIN_SRC shell :shebang #!/usr/bin/env bash :tangle polybar/scripts/get-media-playing.sh
 mediaStatus=$(playerctl --player=playerctld metadata 2>&1)
 
 if [[ "$mediaStatus" == "No player could handle this command" ]]; then
@@ -6545,7 +6545,7 @@ else
 fi
 #+END_SRC
 
-#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/scripts/scroll-media-playing.sh
+#+BEGIN_SRC shell :shebang #!/usr/bin/env bash :tangle polybar/scripts/scroll-media-playing.sh
 zscroll \
     --length $(xrdb -get polybar.maxlen) \
     --delay 0.2 \
@@ -7126,7 +7126,7 @@ click-right = pavucontrol
 
 *** Launch Script
 
-#+BEGIN_SRC shell :shebang #!/bin/bash :tangle polybar/launch.sh
+#+BEGIN_SRC shell :shebang #!/usr/bin/env bash :tangle polybar/launch.sh
 BAR="mybar"
 CONFIG="~/.config/dwm-flexipatch/polybar/config.ini"
 NUM_MONITORS=0

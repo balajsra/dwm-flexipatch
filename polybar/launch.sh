@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 BAR="mybar"
 CONFIG="~/.config/dwm-flexipatch/polybar/config.ini"
 NUM_MONITORS=0
