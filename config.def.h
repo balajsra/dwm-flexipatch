@@ -478,6 +478,7 @@ static const Rule rules[] = {
         RULE(.class = "Signal", .tags = 1 << 0)
         RULE(.class = "discord", .tags = 1 << 0)
         RULE(.class = "Logseq", .tags = 1 << 1)
+        RULE(.class = "obsidian", .tags = 1 << 1)
         RULE(.class = "anytype", .tags = 1 << 1)
         RULE(.class = "pocket-casts-linux", .tags = 1 << 2)
         RULE(.class = "Spotify", .tags = 1 << 3)
