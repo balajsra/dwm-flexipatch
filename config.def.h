@@ -449,7 +449,7 @@ static char *tagicons[][NUMTAGS] =
 #endif // NAMETAG_PATCH
 {
         /* [DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }, */
-        [DEFAULT_TAGS]        = { "󰍩 ₁", "󰗚 ₂", " ₃", " ₄", "󰖟 ₅", " ₆", "󰊢 ₇", " ₈", " ₉" },
+        [DEFAULT_TAGS]        = { "󰍩 ₁", "󰠮 ₂", " ₃", "󰿎 ₄", "󰖟 ₅", " ₆", "󰊢 ₇", "󰊖 ₈", " ₉" },
         [ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
         [ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
@@ -477,11 +477,24 @@ static const Rule rules[] = {
         RULE(.class = "Beeper", .tags = 1 << 0)
         RULE(.class = "Signal", .tags = 1 << 0)
         RULE(.class = "discord", .tags = 1 << 0)
+        RULE(.class = "zoom", .tags = 1 << 0)
         RULE(.class = "Logseq", .tags = 1 << 1)
         RULE(.class = "obsidian", .tags = 1 << 1)
         RULE(.class = "anytype", .tags = 1 << 1)
         RULE(.class = "pocket-casts-linux", .tags = 1 << 2)
-        RULE(.class = "Spotify", .tags = 1 << 3)
+        RULE(.class = "Spotify", .tags = 1 << 2)
+        RULE(.class = "Pavucontrol", .tags = 1 << 2)
+        RULE(.class = "easyeffects", .tags = 1 << 2)
+        RULE(.class = "NoiseTorch", .tags = 1 << 2)
+        RULE(.class = "Audacity", .tags = 1 << 2)
+        RULE(.class = "mpv", .tags = 1 << 3)
+        RULE(.class = "vlc", .tags = 1 << 3)
+        RULE(.class = "Ristretto", .tags = 1 << 3)
+        RULE(.class = "trackma-qt", .tags = 1 << 3)
+        RULE(.class = "Trackma-gtk", .tags = 1 << 3)
+        RULE(.class = "obs", .tags = 1 << 3)
+        RULE(.class = "kdenlive", .tags = 1 << 3)
+        RULE(.class = "Blender", .tags = 1 << 3)
         RULE(.class = "Vivaldi-stable", .tags = 1 << 4)
         RULE(.class = "kitty", .tags = 1 << 5, .isterminal = 1)
         RULE(.class = "Emacs", .tags = 1 << 6)
@@ -490,12 +503,11 @@ static const Rule rules[] = {
         RULE(.title = "Steam", .tags = 1 << 7)
         RULE(.class = "Lutris", .tags = 1 << 7)
         RULE(.class = "gamescope", .tags = 1 << 7)
+        RULE(.class = "Oversteer", .tags = 1 << 7)
+        RULE(.class = "PrismLauncher", .tags = 1 << 7)
+        RULE(.class = "antimicrox", .tags = 1 << 7)
+        RULE(.class = "ProtonUp-Qt", .tags = 1 << 7)
         RULE(.class = "Thunar", .tags = 1 << 8)
-        RULE(.class = "trackma", .tags = 1 << 8)
-        RULE(.class = "Trackma-gtk", .tags = 1 << 8)
-        RULE(.class = "obs", .tags = 1 << 8)
-        RULE(.class = "NoiseTorch", .tags = 1 << 8)
-        RULE(.class = "kdenlive", .tags = 1 << 8)
         RULE(.class = "Syncthing GTK", .tags = 1 << 8)
         RULE(.class = "Nyrna", .tags = 1 << 8)
         RULE(.class = "openrgb", .tags = 1 << 8)
