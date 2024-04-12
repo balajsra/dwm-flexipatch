@@ -5849,8 +5849,8 @@ secondary                 = ${self.blue}
 alert                     = ${self.red}
 
 ; left
-powermenu-foreground      = ${self.background}
-powermenu-background      = ${self.blue}
+powermenu-foreground      = ${self.blue}
+powermenu-background      = ${self.background}
 powermenu-underline       = ${self.background}
 powermenu-overline        = ${self.background}
 
@@ -5894,8 +5894,8 @@ dwm-empty-background      = ${self.background}
 dwm-empty-underline       = ${self.background}
 dwm-empty-overline        = ${self.background}
 
-media-playing-foreground  = ${self.background}
-media-playing-background  = ${self.green}
+media-playing-foreground  = ${self.green}
+media-playing-background  = ${self.background}
 media-playing-underline   = ${self.background}
 media-playing-overline    = ${self.background}
 
@@ -5903,43 +5903,43 @@ media-playing-overline    = ${self.background}
 tray-background           = ${self.background}
 
 ; right
-kernel-foreground         = ${self.background}
-kernel-background         = ${self.orange}
+kernel-foreground         = ${self.orange}
+kernel-background         = ${self.background}
 kernel-underline          = ${self.background}
 kernel-overline           = ${self.background}
 
-cpu-foreground            = ${self.background}
-cpu-background            = ${self.purple}
+cpu-foreground            = ${self.purple}
+cpu-background            = ${self.background}
 cpu-underline             = ${self.background}
 cpu-overline              = ${self.background}
 
-memory-foreground         = ${self.background}
-memory-background         = ${self.blue}
+memory-foreground         = ${self.blue}
+memory-background         = ${self.background}
 memory-underline          = ${self.background}
 memory-overline           = ${self.background}
 
-filesystem-foreground     = ${self.background}
-filesystem-background     = ${self.pink}
+filesystem-foreground     = ${self.pink}
+filesystem-background     = ${self.background}
 filesystem-underline      = ${self.background}
 filesystem-overline       = ${self.background}
 
-date-foreground           = ${self.background}
-date-background           = ${self.yellow}
+date-foreground           = ${self.yellow}
+date-background           = ${self.background}
 date-underline            = ${self.background}
 date-overline             = ${self.background}
 
-time-foreground           = ${self.background}
-time-background           = ${self.purple}
+time-foreground           = ${self.purple}
+time-background           = ${self.background}
 time-underline            = ${self.background}
 time-overline             = ${self.background}
 
-deadd-notification-center-foreground = ${self.background}
-deadd-notification-center-background = ${self.green}
+deadd-notification-center-foreground = ${self.green}
+deadd-notification-center-background = ${self.background}
 deadd-notification-center-underline  = ${self.background}
 deadd-notification-center-overline   = ${self.background}
 
-volume-foreground           = ${self.background}
-volume-background           = ${self.red}
+volume-foreground           = ${self.red}
+volume-background           = ${self.background}
 volume-underline            = ${self.background}
 volume-overline             = ${self.background}
 #+END_SRC
@@ -6226,7 +6226,7 @@ cursor-scroll = ns-resize
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/powermenu-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.powermenu-background}
 content-underline  = ${colors.powermenu-underline}
 content-overline   = ${colors.powermenu-overline}
@@ -6236,7 +6236,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/powermenu-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.powermenu-background}
 content-underline  = ${colors.powermenu-underline}
 content-overline   = ${colors.powermenu-overline}
@@ -6386,7 +6386,7 @@ label-empty-padding    = ${sizes.module-dwm-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.media-playing-background}
 content-underline  = ${colors.media-playing-underline}
 content-overline   = ${colors.media-playing-overline}
@@ -6396,7 +6396,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.media-playing-background}
 content-underline  = ${colors.media-playing-underline}
 content-overline   = ${colors.media-playing-overline}
@@ -6576,7 +6576,7 @@ wait
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/date-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.date-background}
 content-underline  = ${colors.date-underline}
 content-overline   = ${colors.date-overline}
@@ -6586,7 +6586,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/date-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.date-background}
 content-underline  = ${colors.date-underline}
 content-overline   = ${colors.date-overline}
@@ -6635,7 +6635,7 @@ label-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/time-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.time-background}
 content-underline  = ${colors.time-underline}
 content-overline   = ${colors.time-overline}
@@ -6645,7 +6645,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/time-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.time-background}
 content-underline  = ${colors.time-underline}
 content-overline   = ${colors.time-overline}
@@ -6694,7 +6694,7 @@ label-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/kernel-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.kernel-background}
 content-underline  = ${colors.kernel-underline}
 content-overline   = ${colors.kernel-overline}
@@ -6704,7 +6704,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/kernel-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.kernel-background}
 content-underline  = ${colors.kernel-underline}
 content-overline   = ${colors.kernel-overline}
@@ -6774,7 +6774,7 @@ label-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/cpu-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.cpu-background}
 content-underline  = ${colors.cpu-underline}
 content-overline   = ${colors.cpu-overline}
@@ -6784,7 +6784,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/cpu-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.cpu-background}
 content-underline  = ${colors.cpu-underline}
 content-overline   = ${colors.cpu-overline}
@@ -6836,7 +6836,7 @@ ramp-coreload-foreground = ${colors.cpu}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/memory-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.memory-background}
 content-underline  = ${colors.memory-underline}
 content-overline   = ${colors.memory-overline}
@@ -6846,7 +6846,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/memory-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.memory-background}
 content-underline  = ${colors.memory-underline}
 content-overline   = ${colors.memory-overline}
@@ -6937,7 +6937,7 @@ ramp-free-foreground = ${colors.memory}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/filesystem-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.filesystem-background}
 content-underline  = ${colors.filesystem-underline}
 content-overline   = ${colors.filesystem-overline}
@@ -6947,7 +6947,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/filesystem-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.filesystem-background}
 content-underline  = ${colors.filesystem-underline}
 content-overline   = ${colors.filesystem-overline}
@@ -7017,7 +7017,7 @@ label-unmounted-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/deadd-notification-center-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.deadd-notification-center-background}
 content-underline  = ${colors.deadd-notification-center-underline}
 content-overline   = ${colors.deadd-notification-center-overline}
@@ -7027,7 +7027,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/deadd-notification-center-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.deadd-notification-center-background}
 content-underline  = ${colors.deadd-notification-center-underline}
 content-overline   = ${colors.deadd-notification-center-overline}
@@ -7062,7 +7062,7 @@ click-right = "/home/sravan/.scripts/deadd.sh --rofi"
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/volume-left]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.volume-background}
 content-underline  = ${colors.volume-underline}
 content-overline   = ${colors.volume-overline}
@@ -7072,7 +7072,7 @@ content-padding    = ${sizes.module-padding}
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/volume-right]
 type = custom/text
-content = ""
+content = " "
 content-foreground = ${colors.volume-background}
 content-underline  = ${colors.volume-underline}
 content-overline   = ${colors.volume-overline}
