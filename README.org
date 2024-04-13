@@ -5840,7 +5840,7 @@ yellow                    = ${xrdb:color3:#F1FA8C}
 green                     = ${xrdb:color2:#50FA7B}
 orange                    = ${xrdb:color16:#FFB86C}
 
-background                = ${self.dark-gray}
+background                = #CC282A36
 background-alt            = ${self.light-gray}
 foreground                = ${self.white}
 foreground-alt            = ${self.lighter-gray}
@@ -6065,8 +6065,8 @@ radius = 10.0
 ; Individual values can be defined using:
 ;   {overline,underline}-size
 ;   {overline,underline}-color
-overline-size  = 4
-underline-size = 4
+overline-size  = 0
+underline-size = 0
 
 ; Values applied to all borders
 ; Individual side values can be defined using:
