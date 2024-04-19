@@ -1150,7 +1150,6 @@ Awesomebar takes precedence over fancybar.
 
 https://dwm.suckless.org/patches/awesomebar/
 
-
 #+BEGIN_SRC c :tangle patches.def.h
 #define BAR_AWESOMEBAR_PATCH 0
 #+END_SRC
@@ -1682,12 +1681,30 @@ This patch adds back in the workaround for a BadLength error in the Xft library 
 
 *** Padding
 
+**** Main
+
 This patch adds vertical and horizontal space between the statusbar and the edge of the screen.
 
 https://dwm.suckless.org/patches/barpadding/
 
 #+BEGIN_SRC c :tangle patches.def.h
 #define BAR_PADDING_PATCH 0
+#+END_SRC
+
+**** Vanity Gaps
+
+Same as barpadding patch but specifically tailored for the vanitygaps patch in that the outer bar padding is derived from the vanitygaps settings. In addition to this the bar padding is toggled in unison when vanitygaps are toggled. Increasing or decreasing gaps during runtime will not affect the bar padding.
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define BAR_PADDING_VANITYGAPS_PATCH 0
+#+END_SRC
+
+**** Smart
+
+Smart bar padding patch that automatically adjusts the padding when there is only one client on the monitor. Works well with vanitygaps and barpadding patches.
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define BAR_PADDING_SMART_PATCH 0
 #+END_SRC
 
 *** Pango
