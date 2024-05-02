@@ -4796,7 +4796,7 @@ static const char *clipboardcmd[]        = { "rofi", "-show", "clipboard", NULL 
 static const char *rbwcmd[]              = { "rofi-rbw", NULL };
 static const char *volumecmd[]           = { "/home/sravan/.scripts/pactl.sh", "--rofi", NULL };
 static const char *mediacmd[]            = { "/home/sravan/.scripts/playerctl.sh", "--rofi", NULL };
-static const char *notificationcmd[]     = { "/home/sravan/.scripts/xfce4-notifyd.sh", "--rofi", NULL };
+static const char *notificationcmd[]     = { "/home/sravan/.scripts/dunst.sh", "--rofi", NULL };
 static const char *sessioncmd[]          = { "/home/sravan/.scripts/session.sh", "--rofi", NULL };
 static const char *compositorcmd[]       = { "/home/sravan/.scripts/picom.sh", "--rofi", NULL };
 static const char *lowervolumecmd[]      = { "/home/sravan/.scripts/pactl.sh", "--lower", NULL };
@@ -5954,6 +5954,11 @@ deadd-notification-center-background = ${self.background}
 deadd-notification-center-underline  = ${self.background}
 deadd-notification-center-overline   = ${self.background}
 
+dunst-foreground = ${self.green}
+dunst-background = ${self.background}
+dunst-underline  = ${self.background}
+dunst-overline   = ${self.background}
+
 xfce4-notifyd-foreground = ${self.green}
 xfce4-notifyd-background = ${self.background}
 xfce4-notifyd-underline  = ${self.background}
@@ -6138,7 +6143,7 @@ font-5 = "IPAPGothic:size=11;3"
 ;   modules-right = ipc clock
 modules-left   = powermenu-left powermenu powermenu-right dwm volume-left volume volume-right media-playing-left media-playing-change media-playing-prev media-playing-play-pause media-playing-next media-playing media-playing-right
 ; modules-center =
-modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right xfce4-notifyd-left xfce4-notifyd xfce4-notifyd-right
+modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right dunst-left dunst dunst-right
 
 ; The separator will be inserted between the output of each module
 separator = ""
@@ -7072,6 +7077,51 @@ content-padding    = ${sizes.module-padding}
 click-left = "/home/sravan/.scripts/deadd.sh --toggle-center"
 ; click-middle = notify-send middle
 click-right = "/home/sravan/.scripts/deadd.sh --rofi"
+
+; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
+; scroll-up = notify-send scroll up
+; scroll-down = notify-send scroll down
+#+END_SRC
+
+**** Dunst
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/dunst-left]
+type = custom/text
+content = " "
+content-foreground = ${colors.dunst-background}
+content-underline  = ${colors.dunst-underline}
+content-overline   = ${colors.dunst-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/dunst-right]
+type = custom/text
+content = " "
+content-foreground = ${colors.dunst-background}
+content-underline  = ${colors.dunst-underline}
+content-overline   = ${colors.dunst-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/dunst]
+type = custom/text
+content = "󰂚"
+
+; "content" has the same properties as "format-NAME"
+; content-background = #000
+content-foreground = ${colors.dunst-foreground}
+content-background = ${colors.dunst-background}
+content-underline  = ${colors.dunst-underline}
+content-overline   = ${colors.dunst-overline}
+content-padding    = ${sizes.module-padding}
+
+; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
+click-left = "/home/sravan/.scripts/dunst.sh --history"
+; click-middle = notify-send middle
+click-right = "/home/sravan/.scripts/dunst.sh --rofi"
 
 ; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
 ; scroll-up = notify-send scroll up
