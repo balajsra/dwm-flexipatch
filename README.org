@@ -3230,14 +3230,12 @@ https://dwm.suckless.org/patches/unfloatvisible/
 
 *** Unmanaged
 
-This patch adds a client rule that allows for windows that do not specify the override-redirect
-to not be managed by the window manager. This can be useful for external bars, widgets,
-launchers, docks, desktop icons and more.
+This patch adds a client rule that allows for windows that do not specify the override-redirect to not be managed by the window manager. This can be useful for external bars, widgets, launchers, docks, desktop icons and more.
 
 https://github.com/bakkeby/patches/wiki/unmanaged
 
 #+BEGIN_SRC c :tangle patches.def.h
-#define UNMANAGED_PATCH 0
+#define UNMANAGED_PATCH 1
 #+END_SRC
 
 *** Vanity Gaps
@@ -4329,7 +4327,7 @@ static const Rule rules[] = {
         RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
         RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
         RULE(.title = "Picture in picture", .isfloating = 1)
-        RULE(.class = "Xfce4-notifyd", .isfloating = 1)
+        RULE(.class = "Xfce4-notifyd", .unmanaged = 1) // 1 - the window will be placed above all other windows
         RULE(.class = "Beeper", .tags = 1 << 0)
         RULE(.class = "Signal", .tags = 1 << 0)
         RULE(.class = "discord", .tags = 1 << 0)
@@ -4798,7 +4796,7 @@ static const char *clipboardcmd[]        = { "rofi", "-show", "clipboard", NULL 
 static const char *rbwcmd[]              = { "rofi-rbw", NULL };
 static const char *volumecmd[]           = { "/home/sravan/.scripts/pactl.sh", "--rofi", NULL };
 static const char *mediacmd[]            = { "/home/sravan/.scripts/playerctl.sh", "--rofi", NULL };
-static const char *notificationcmd[]     = { "/home/sravan/.scripts/deadd.sh", "--rofi", NULL };
+static const char *notificationcmd[]     = { "/home/sravan/.scripts/xfce4-notifyd.sh", "--rofi", NULL };
 static const char *sessioncmd[]          = { "/home/sravan/.scripts/session.sh", "--rofi", NULL };
 static const char *compositorcmd[]       = { "/home/sravan/.scripts/picom.sh", "--rofi", NULL };
 static const char *lowervolumecmd[]      = { "/home/sravan/.scripts/pactl.sh", "--lower", NULL };
@@ -5956,6 +5954,11 @@ deadd-notification-center-background = ${self.background}
 deadd-notification-center-underline  = ${self.background}
 deadd-notification-center-overline   = ${self.background}
 
+xfce4-notifyd-foreground = ${self.green}
+xfce4-notifyd-background = ${self.background}
+xfce4-notifyd-underline  = ${self.background}
+xfce4-notifyd-overline   = ${self.background}
+
 volume-foreground           = ${self.red}
 volume-background           = ${self.background}
 volume-underline            = ${self.background}
@@ -6135,7 +6138,7 @@ font-5 = "IPAPGothic:size=11;3"
 ;   modules-right = ipc clock
 modules-left   = powermenu-left powermenu powermenu-right dwm volume-left volume volume-right media-playing-left media-playing-change media-playing-prev media-playing-play-pause media-playing-next media-playing media-playing-right
 ; modules-center =
-modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right deadd-notification-center-left deadd-notification-center deadd-notification-center-right
+modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right xfce4-notifyd-left xfce4-notifyd xfce4-notifyd-right
 
 ; The separator will be inserted between the output of each module
 separator = ""
@@ -7069,6 +7072,51 @@ content-padding    = ${sizes.module-padding}
 click-left = "/home/sravan/.scripts/deadd.sh --toggle-center"
 ; click-middle = notify-send middle
 click-right = "/home/sravan/.scripts/deadd.sh --rofi"
+
+; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
+; scroll-up = notify-send scroll up
+; scroll-down = notify-send scroll down
+#+END_SRC
+
+**** xfce4-notifyd
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/xfce4-notifyd-left]
+type = custom/text
+content = " "
+content-foreground = ${colors.xfce4-notifyd-background}
+content-underline  = ${colors.xfce4-notifyd-underline}
+content-overline   = ${colors.xfce4-notifyd-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/xfce4-notifyd-right]
+type = custom/text
+content = " "
+content-foreground = ${colors.xfce4-notifyd-background}
+content-underline  = ${colors.xfce4-notifyd-underline}
+content-overline   = ${colors.xfce4-notifyd-overline}
+content-padding    = ${sizes.module-padding}
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/xfce4-notifyd]
+type = custom/text
+content = "󰂚"
+
+; "content" has the same properties as "format-NAME"
+; content-background = #000
+content-foreground = ${colors.xfce4-notifyd-foreground}
+content-background = ${colors.xfce4-notifyd-background}
+content-underline  = ${colors.xfce4-notifyd-underline}
+content-overline   = ${colors.xfce4-notifyd-overline}
+content-padding    = ${sizes.module-padding}
+
+; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
+click-left = "/home/sravan/.scripts/xfce4-notifyd.sh --toggle-center"
+; click-middle = notify-send middle
+click-right = "/home/sravan/.scripts/xfce4-notifyd.sh --rofi"
 
 ; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
 ; scroll-up = notify-send scroll up
