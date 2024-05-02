@@ -473,8 +473,8 @@ static const Rule rules[] = {
         RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
         RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
         RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
+        RULE(.wintype = WTYPE "NOTIFICATION", .unmanaged = 1) // 1 - the window will be placed above all other windows
         RULE(.title = "Picture in picture", .isfloating = 1)
-        RULE(.class = "Xfce4-notifyd", .unmanaged = 1) // 1 - the window will be placed above all other windows
         RULE(.class = "Beeper", .tags = 1 << 0)
         RULE(.class = "Signal", .tags = 1 << 0)
         RULE(.class = "discord", .tags = 1 << 0)
