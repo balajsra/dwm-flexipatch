@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-mediaStatus=$(/home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-status.sh)
+mediaStatus=$(~/.config/dwm-flexipatch/polybar/scripts/get-media-status.sh)
 
 if [[ "$mediaStatus" == "N/A" ]]; then
     echo "󰐎"

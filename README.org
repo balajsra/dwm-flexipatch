@@ -6145,7 +6145,7 @@ font-5 = "IPAPGothic:size=11;3"
 ;   modules-right = ipc clock
 modules-left   = powermenu-left powermenu powermenu-right dwm volume-left volume volume-right media-playing-left media-playing-change media-playing-prev media-playing-play-pause media-playing-next media-playing media-playing-right
 ; modules-center =
-modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right dunst-left dunst-status dunst-history-view dunst-history-clear dunst-history-length dunst-right
+modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right dunst-left dunst-status dunst-clear dunst-history-view dunst-history-clear dunst-history-length dunst-right
 
 ; The separator will be inserted between the output of each module
 separator = ""
@@ -6290,7 +6290,7 @@ content-padding    = ${sizes.module-padding}
 ; click-middle = notify-send middle
 ; click-right = notify-send right
 click-left  = "rofi -show combi"
-click-right = "/home/sravan/.scripts/control-center.sh --rofi"
+click-right = "~/.scripts/control-center.sh --rofi"
 
 ; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
 ; scroll-up = notify-send scroll up
@@ -6450,7 +6450,7 @@ label-padding    = 1
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing-change]
 type = custom/script
-exec = /home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-source-icon.sh
+exec = ~/.config/dwm-flexipatch/polybar/scripts/get-media-source-icon.sh
 interval = ${intervals.media-playing}
 format = <label>
 label = %output%
@@ -6460,7 +6460,7 @@ label-underline  = ${colors.media-playing-underline}
 label-overline   = ${colors.media-playing-overline}
 label-maxlen     = ${sizes.maxlen}
 label-padding    = 1
-click-left = "/home/sravan/.scripts/playerctl.sh --change"
+click-left = "~/.scripts/playerctl.sh --change"
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
@@ -6473,13 +6473,13 @@ content-underline  = ${colors.media-playing-underline}
 content-overline   = ${colors.media-playing-overline}
 content-maxlen     = ${sizes.maxlen}
 content-padding    = 1
-click-left = "/home/sravan/.scripts/playerctl.sh --prev"
+click-left = "~/.scripts/playerctl.sh --prev"
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing-play-pause]
 type = custom/script
-exec = /home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-status-icon.sh
+exec = ~/.config/dwm-flexipatch/polybar/scripts/get-media-status-icon.sh
 format = <label>
 label = %output%
 label-foreground = ${colors.media-playing-foreground}
@@ -6488,7 +6488,7 @@ label-underline  = ${colors.media-playing-underline}
 label-overline   = ${colors.media-playing-overline}
 label-maxlen     = ${sizes.maxlen}
 label-padding    = 1
-click-left = "/home/sravan/.scripts/playerctl.sh --play-pause"
+click-left = "~/.scripts/playerctl.sh --play-pause"
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
@@ -6501,7 +6501,7 @@ content-underline  = ${colors.media-playing-underline}
 content-overline   = ${colors.media-playing-overline}
 content-maxlen     = ${sizes.maxlen}
 content-padding    = 1
-click-left = "/home/sravan/.scripts/playerctl.sh --next"
+click-left = "~/.scripts/playerctl.sh --next"
 #+END_SRC
 
 ***** Script
@@ -6536,7 +6536,7 @@ fi
 #+END_SRC
 
 #+BEGIN_SRC shell :shebang #!/usr/bin/env bash :tangle polybar/scripts/get-media-status-icon.sh
-mediaStatus=$(/home/sravan/.config/dwm-flexipatch/polybar/scripts/get-media-status.sh)
+mediaStatus=$(~/.config/dwm-flexipatch/polybar/scripts/get-media-status.sh)
 
 if [[ "$mediaStatus" == "N/A" ]]; then
     echo "󰐎"
@@ -7072,9 +7072,9 @@ content-overline   = ${colors.deadd-notification-center-overline}
 content-padding    = ${sizes.module-padding}
 
 ; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
-click-left = "/home/sravan/.scripts/deadd.sh --toggle-center"
+click-left = "~/.scripts/deadd.sh --toggle-center"
 ; click-middle = notify-send middle
-click-right = "/home/sravan/.scripts/deadd.sh --rofi"
+click-right = "~/.scripts/deadd.sh --rofi"
 
 ; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
 ; scroll-up = notify-send scroll up
@@ -7118,6 +7118,19 @@ label-underline  = ${colors.dunst-underline}
 label-overline   = ${colors.dunst-overline}
 label-padding    = ${sizes.module-padding}
 click-left = "dunstctl set-paused toggle"
+click-right = "~/.scripts/dunst.sh --rofi"
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/dunst-clear]
+type = custom/text
+content = ""
+content-foreground = ${colors.dunst-foreground}
+content-background = ${colors.dunst-background}
+content-underline  = ${colors.dunst-underline}
+content-overline   = ${colors.dunst-overline}
+content-padding    = 1
+click-left = "dunstctl close-all"
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
@@ -7129,7 +7142,7 @@ content-background = ${colors.dunst-background}
 content-underline  = ${colors.dunst-underline}
 content-overline   = ${colors.dunst-overline}
 content-padding    = 1
-click-left = "/home/sravan/.scripts/dunst.sh --history"
+click-left = "~/.scripts/dunst.sh --history"
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
@@ -7206,9 +7219,9 @@ content-overline   = ${colors.xfce4-notifyd-overline}
 content-padding    = ${sizes.module-padding}
 
 ; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
-click-left = "/home/sravan/.scripts/xfce4-notifyd.sh --toggle-center"
+click-left = "~/.scripts/xfce4-notifyd.sh --toggle-center"
 ; click-middle = notify-send middle
-click-right = "/home/sravan/.scripts/xfce4-notifyd.sh --rofi"
+click-right = "~/.scripts/xfce4-notifyd.sh --rofi"
 
 ; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
 ; scroll-up = notify-send scroll up
