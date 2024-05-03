@@ -5989,18 +5989,20 @@ Define module update intervals in seconds.
 
 | Seconds | Minutes | Hours |
 |---------+---------+-------|
+|     600 |      10 |  0.17 |
 |     900 |      15 |  0.25 |
 |   86400 |    1440 |    24 |
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [intervals]
-cpu                       = 1
-date                      = 1
-time                      = 1
-filesystem                = 900
-memory                    = 1
-media-playing             = 1
-kernel                    = 86400
+media-playing = 1
+kernel        = 86400
+cpu           = 1
+memory        = 1
+filesystem    = 600
+date          = 1
+time          = 1
+dunst         = 1
 #+END_SRC
 
 **** Global Window Manager
@@ -6143,7 +6145,7 @@ font-5 = "IPAPGothic:size=11;3"
 ;   modules-right = ipc clock
 modules-left   = powermenu-left powermenu powermenu-right dwm volume-left volume volume-right media-playing-left media-playing-change media-playing-prev media-playing-play-pause media-playing-next media-playing media-playing-right
 ; modules-center =
-modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right dunst-left dunst dunst-right
+modules-right  = kernel-left kernel kernel-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right dunst-left dunst-status dunst-history-view dunst-history-clear dunst-history-length dunst-right
 
 ; The separator will be inserted between the output of each module
 separator = ""
@@ -6273,7 +6275,7 @@ content-padding    = ${sizes.module-padding}
 [module/powermenu]
 type = custom/text
 ; content = " Menu"
-content = ""
+content = "󰀻"
 ; content = ""
 
 ; "content" has the same properties as "format-NAME"
@@ -6463,16 +6465,14 @@ click-left = "/home/sravan/.scripts/playerctl.sh --change"
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing-prev]
-type = custom/script
-exec = echo "󰒮"
-format = <label>
-label = %output%
-label-foreground = ${colors.media-playing-foreground}
-label-background = ${colors.media-playing-background}
-label-underline  = ${colors.media-playing-underline}
-label-overline   = ${colors.media-playing-overline}
-label-maxlen     = ${sizes.maxlen}
-label-padding    = 1
+type = custom/text
+content = "󰒮"
+content-foreground = ${colors.media-playing-foreground}
+content-background = ${colors.media-playing-background}
+content-underline  = ${colors.media-playing-underline}
+content-overline   = ${colors.media-playing-overline}
+content-maxlen     = ${sizes.maxlen}
+content-padding    = 1
 click-left = "/home/sravan/.scripts/playerctl.sh --prev"
 #+END_SRC
 
@@ -6493,16 +6493,14 @@ click-left = "/home/sravan/.scripts/playerctl.sh --play-pause"
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/media-playing-next]
-type = custom/script
-exec = echo "󰒭"
-format = <label>
-label = %output%
-label-foreground = ${colors.media-playing-foreground}
-label-background = ${colors.media-playing-background}
-label-underline  = ${colors.media-playing-underline}
-label-overline   = ${colors.media-playing-overline}
-label-maxlen     = ${sizes.maxlen}
-label-padding    = 1
+type = custom/text
+content = "󰒭"
+content-foreground = ${colors.media-playing-foreground}
+content-background = ${colors.media-playing-background}
+content-underline  = ${colors.media-playing-underline}
+content-overline   = ${colors.media-playing-overline}
+content-maxlen     = ${sizes.maxlen}
+content-padding    = 1
 click-left = "/home/sravan/.scripts/playerctl.sh --next"
 #+END_SRC
 
@@ -7085,6 +7083,8 @@ click-right = "/home/sravan/.scripts/deadd.sh --rofi"
 
 **** Dunst
 
+***** Module
+
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [module/dunst-left]
 type = custom/text
@@ -7106,26 +7106,68 @@ content-padding    = ${sizes.module-padding}
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
-[module/dunst]
-type = custom/text
-content = "󰂚"
+[module/dunst-status]
+type = custom/script
+exec = ~/.config/dwm-flexipatch/polybar/scripts/dunst-status.sh
+interval = ${intervals.dunst}
+format = <label>
+label = %output%
+label-foreground = ${colors.dunst-foreground}
+label-background = ${colors.dunst-background}
+label-underline  = ${colors.dunst-underline}
+label-overline   = ${colors.dunst-overline}
+label-padding    = ${sizes.module-padding}
+click-left = "dunstctl set-paused toggle"
+#+END_SRC
 
-; "content" has the same properties as "format-NAME"
-; content-background = #000
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/dunst-history-view]
+type = custom/text
+content = "󰋚"
 content-foreground = ${colors.dunst-foreground}
 content-background = ${colors.dunst-background}
 content-underline  = ${colors.dunst-underline}
 content-overline   = ${colors.dunst-overline}
-content-padding    = ${sizes.module-padding}
-
-; "click-(left|middle|right)" will be executed using "/bin/sh -c $COMMAND"
+content-padding    = 1
 click-left = "/home/sravan/.scripts/dunst.sh --history"
-; click-middle = notify-send middle
-click-right = "/home/sravan/.scripts/dunst.sh --rofi"
+#+END_SRC
 
-; "scroll-(up|down)" will be executed using "/bin/sh -c $COMMAND"
-; scroll-up = notify-send scroll up
-; scroll-down = notify-send scroll down
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/dunst-history-clear]
+type = custom/text
+content = "󰎟"
+content-foreground = ${colors.dunst-foreground}
+content-background = ${colors.dunst-background}
+content-underline  = ${colors.dunst-underline}
+content-overline   = ${colors.dunst-overline}
+content-padding    = 1
+click-left = "dunstctl history-clear"
+#+END_SRC
+
+#+BEGIN_SRC conf :tangle polybar/config.ini
+[module/dunst-history-length]
+type = custom/script
+exec = "dunstctl count history"
+interval = ${intervals.dunst}
+format = <label>
+label = %output%
+label-foreground = ${colors.dunst-foreground}
+label-background = ${colors.dunst-background}
+label-underline  = ${colors.dunst-underline}
+label-overline   = ${colors.dunst-overline}
+label-padding    = 1
+#+END_SRC
+
+***** Script
+
+#+BEGIN_SRC shell :shebang #!/usr/bin/env bash :tangle polybar/scripts/dunst-status.sh
+isPaused=$(dunstctl is-paused)
+
+if [[ "$isPaused" == "true" ]]; then
+    echo "󰂛"
+else
+    echo "󰂚"
+fi
 #+END_SRC
 
 **** xfce4-notifyd
