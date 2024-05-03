@@ -6760,7 +6760,7 @@ interval = ${intervals.kernel}
 ; Available tags:
 ;   <output> - deprecated
 ;   <label> (default)
-format = <label>
+format = %{A1:kitty fastfetch:}<label>%{A}
 format-foreground = ${colors.kernel-foreground}
 format-background = ${colors.kernel-background}
 format-underline  = ${colors.kernel-underline}
