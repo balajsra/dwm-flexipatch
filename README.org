@@ -7203,7 +7203,7 @@ label-background = ${colors.dunst-background}
 label-underline  = ${colors.dunst-underline}
 label-overline   = ${colors.dunst-overline}
 label-padding    = ${sizes.module-padding}
-click-left = "dunstctl set-paused toggle"
+click-left = "~/.scripts/dunst.sh --dnd"
 click-right = "~/.scripts/dunst.sh --rofi"
 #+END_SRC
 
@@ -7216,7 +7216,7 @@ content-background = ${colors.dunst-background}
 content-underline  = ${colors.dunst-underline}
 content-overline   = ${colors.dunst-overline}
 content-padding    = 1
-click-left = "dunstctl close-all"
+click-left = "~/.scripts/dunst.sh --close-all"
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
@@ -7240,7 +7240,7 @@ content-background = ${colors.dunst-background}
 content-underline  = ${colors.dunst-underline}
 content-overline   = ${colors.dunst-overline}
 content-padding    = 1
-click-left = "dunstctl history-clear"
+click-left = "~/.scripts/dunst.sh --history-clear"
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
