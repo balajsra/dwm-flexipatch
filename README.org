@@ -6144,6 +6144,9 @@ font-2 = "DroidSansM Nerd Font:size=11;3"
 font-3 = "IPAPGothic:size=11;3"
 font-4 = "Baekmuk Dotum:size=11;3"
 font-5 = "IPAPGothic:size=11;3"
+font-6 = "NotoSansNerdFont:size=11;3"
+font-7 = "NotoSansCJK:size=11;3"
+font-8 = "NotoSansYi:size=11;3"
 
 ; Modules are added to one of the available blocks
 ;   modules-left = cpu ram
