@@ -5920,10 +5920,10 @@ media-playing-overline    = ${self.background}
 tray-background           = ${self.background}
 
 ; right
-graphics-foreground         = ${self.green}
-graphics-background         = ${self.background}
-graphics-underline          = ${self.background}
-graphics-overline           = ${self.background}
+system76-power-foreground = ${self.green}
+system76-power-background = ${self.background}
+system76-power-underline  = ${self.background}
+system76-power-overline   = ${self.background}
 
 kernel-foreground         = ${self.orange}
 kernel-background         = ${self.background}
@@ -6001,15 +6001,15 @@ Define module update intervals in seconds.
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
 [intervals]
-media-playing = 1
-graphics      = 86400
-kernel        = 86400
-cpu           = 1
-memory        = 1
-filesystem    = 600
-date          = 1
-time          = 1
-dunst         = 1
+media-playing  = 1
+system76-power = 86400
+kernel         = 86400
+cpu            = 1
+memory         = 1
+filesystem     = 600
+date           = 1
+time           = 1
+dunst          = 1
 #+END_SRC
 
 **** Global Window Manager
@@ -6155,7 +6155,7 @@ font-8 = "NotoSansYi:size=11;3"
 ;   modules-right = ipc clock
 modules-left   = powermenu-left powermenu powermenu-right dwm volume-left volume volume-right media-playing-left media-playing-change media-playing-prev media-playing-play-pause media-playing-next media-playing media-playing-right
 ; modules-center =
-modules-right  = kernel-left kernel kernel-right graphics-left graphics graphics-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right dunst-left dunst-status dunst-clear dunst-history-view dunst-history-clear dunst-history-length dunst-right
+modules-right  = kernel-left kernel kernel-right system76-power-left system76-power system76-power-right cpu-left cpu cpu-right memory-left memory memory-right filesystem-left filesystem filesystem-right date-left date date-right time-left time time-right dunst-left dunst-status dunst-clear dunst-history-view dunst-history-clear dunst-history-length dunst-right
 
 ; The separator will be inserted between the output of each module
 separator = ""
@@ -6803,36 +6803,36 @@ label-padding    = ${sizes.module-padding}
 ; scroll-down = echo scroll down %counter%
 #+END_SRC
 
-**** Graphics
+**** System76 Power
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
-[module/graphics-left]
+[module/system76-power-left]
 type = custom/text
 content = " "
-content-foreground = ${colors.graphics-background}
-content-underline  = ${colors.graphics-underline}
-content-overline   = ${colors.graphics-overline}
+content-foreground = ${colors.system76-power-background}
+content-underline  = ${colors.system76-power-underline}
+content-overline   = ${colors.system76-power-overline}
 content-padding    = ${sizes.module-padding}
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
-[module/graphics-right]
+[module/system76-power-right]
 type = custom/text
 content = " "
-content-foreground = ${colors.graphics-background}
-content-underline  = ${colors.graphics-underline}
-content-overline   = ${colors.graphics-overline}
+content-foreground = ${colors.system76-power-background}
+content-underline  = ${colors.system76-power-underline}
+content-overline   = ${colors.system76-power-overline}
 content-padding    = ${sizes.module-padding}
 #+END_SRC
 
 #+BEGIN_SRC conf :tangle polybar/config.ini
-[module/graphics]
+[module/system76-power]
 type = custom/script
 
 ; Available tokens:
 ;   %counter%
 ; Command to be executed (using "/bin/sh -c [command]")
-exec = echo "󰢮 $(modinfo nvidia | grep ^version | cut -d ' ' -f9)"
+exec = echo "󰢮 $(sudo system76-power graphics)"
 
 ; Conditional command that, if defined, needs to exit successfully
 ; before the main exec command is invoked.
@@ -6845,16 +6845,16 @@ tail = false
 
 ; Seconds to sleep between updates
 ; Default: 5 (0 if `tail = true`)
-interval = ${intervals.graphics}
+interval = ${intervals.system76-power}
 
 ; Available tags:
 ;   <output> - deprecated
 ;   <label> (default)
 format = <label>
-format-foreground = ${colors.graphics-foreground}
-format-background = ${colors.graphics-background}
-format-underline  = ${colors.graphics-underline}
-format-overline   = ${colors.graphics-overline}
+format-foreground = ${colors.system76-power-foreground}
+format-background = ${colors.system76-power-background}
+format-underline  = ${colors.system76-power-underline}
+format-overline   = ${colors.system76-power-overline}
 
 ; Available tokens:
 ;   %output%
