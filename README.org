@@ -19,6 +19,7 @@
     - [[#dwm-blocks][DWM Blocks]]
     - [[#fancy-bar][Fancy Bar]]
     - [[#flex-win-title][Flex Win Title]]
+    - [[#bar-launcher][Bar Launcher]]
     - [[#layout-menu][Layout Menu]]
     - [[#layout-symbol][Layout Symbol]]
     - [[#powerline][Powerline]]
@@ -198,6 +199,7 @@
   - [[#make-config][Make Config]]
   - [[#makefile][Makefile]]
 - [[#dwm-configuration][DWM Configuration]]
+  - [[#helper-macros-for-spawning-commands][Helper Macros for Spawning Commands]]
   - [[#appearance][Appearance]]
   - [[#indicators][Indicators]]
   - [[#colors][Colors]]
@@ -209,6 +211,7 @@
     - [[#set-colors][Set Colors]]
     - [[#powerline-1][Powerline]]
   - [[#layout-menu-1][Layout Menu]]
+  - [[#bar-launcher-1][Bar Launcher]]
   - [[#autostart][Autostart]]
   - [[#scratchpads][Scratchpads]]
   - [[#tags-1][Tags]]
@@ -308,6 +311,8 @@ If you are experiencing issues then you may want to check out the [[https://gith
 Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map of patches]] diagram which tries to organize patches into categories.
 
 ** Changelog
+
+2024-07-11 - Added variant of the launcher patch
 
 2024-01-31 - Added the placedir patch
 
@@ -771,6 +776,9 @@ Browsing patches? There is a [[https://coggle.it/diagram/X9IiSSM6PTWOM9Wz][map o
    - [[https://dwm.suckless.org/patches/killunsel/][killunsel]]
      - kills all visible clients that are not selected (only the selected client will remain)
 
+   - [[https://dwm.suckless.org/patches/launcher/][launcher]]
+     - adds buttons to the bar that can be used to launch applications
+
    - +[[http://dwm.suckless.org/patches/leftlayout/][leftlayout]]+
      - +moves the layout symbol in the status bar to the left hand side+
 
@@ -1208,6 +1216,16 @@ Being an evolution of the bartabgroups patch the flexwintitle patch specifically
 
 #+BEGIN_SRC c :tangle patches.def.h
 #define BAR_FLEXWINTITLE_PATCH 0
+#+END_SRC
+
+*** Bar Launcher
+
+Adds buttons to the bar that can be used to launch applications.
+
+https://dwm.suckless.org/patches/launcher/
+
+#+BEGIN_SRC c :tangle patches.def.h
+#define BAR_LAUNCHER_PATCH 0
 #+END_SRC
 
 *** Layout Menu
@@ -3677,6 +3695,13 @@ uninstall:
 
 * DWM Configuration
 
+** Helper Macros for Spawning Commands
+
+#+BEGIN_SRC c :tangle config.def.h
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define CMD(...)   { .v = (const char*[]){ __VA_ARGS__, NULL } }
+#+END_SRC
+
 ** Appearance
 
 #+BEGIN_SRC c :tangle config.def.h
@@ -4212,6 +4237,18 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 #endif
 #+END_SRC
 
+** Bar Launcher
+
+#+BEGIN_SRC c :tangle config.def.h
+#if BAR_LAUNCHER_PATCH
+static const Launcher launchers[] = {
+	/* icon to display      command        */
+	{ "surf",               CMD("surf", "duckduckgo.com") },
+};
+#endif // BAR_LAUNCHER_PATCH
+#+END_SRC
+
+
 ** Autostart
 
 #+BEGIN_SRC c :tangle config.def.h
@@ -4431,6 +4468,9 @@ static const BarRule barrules[] = {
         #if BAR_STATUSBUTTON_PATCH
         { -1,        0,     BAR_ALIGN_LEFT,   width_stbutton,           draw_stbutton,          click_stbutton,          NULL,                    "statusbutton" },
         #endif // BAR_STATUSBUTTON_PATCH
+        #if BAR_LAUNCHER_PATCH
+        { -1,        0,     BAR_ALIGN_LEFT,   width_launcher,           draw_launcher,          click_launcher,          NULL,                    "launcher" },
+        #endif // BAR_LAUNCHER_PATCH
         #if BAR_POWERLINE_TAGS_PATCH
         {  0,        0,     BAR_ALIGN_LEFT,   width_pwrl_tags,          draw_pwrl_tags,         click_pwrl_tags,         hover_pwrl_tags,         "powerline_tags" },
         #endif // BAR_POWERLINE_TAGS_PATCH
@@ -4765,11 +4805,6 @@ static const char *xkb_layouts[]  = {
 #if BAR_HOLDBAR_PATCH
 #define HOLDKEY 0 // replace 0 with the keysym to activate holdbar
 #endif // BAR_HOLDBAR_PATCH
-#+END_SRC
-
-#+BEGIN_SRC c :tangle config.def.h
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 #+END_SRC
 
 #+BEGIN_SRC c :tangle config.def.h
