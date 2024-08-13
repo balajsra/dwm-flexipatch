@@ -4401,6 +4401,7 @@ static const Rule rules[] = {
         RULE(.class = "PrismLauncher", .tags = 1 << 7)
         RULE(.class = "antimicrox", .tags = 1 << 7)
         RULE(.class = "ProtonUp-Qt", .tags = 1 << 7)
+        RULE(.class = "heroic", .tags = 1 << 7)
         RULE(.class = "Thunar", .tags = 1 << 8)
         RULE(.class = "Syncthing GTK", .tags = 1 << 8)
         RULE(.class = "Nyrna", .tags = 1 << 8)
